@@ -1,15 +1,18 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\OrdenController;
+use App\Http\Controllers\ProfileController;
 
 Route::get('/', function () {
-    return view('pdf/orden_servicio');
+    return view('welcome');
 });
 
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::get('/ordenes/{orden:orden_servicio}', [OrdenController::class, 'show'])->name('ordenes.show');
 
 
 
