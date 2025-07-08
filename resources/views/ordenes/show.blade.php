@@ -68,7 +68,12 @@
             background: #ddd;
         }
 
-        .folio,
+        .folio {
+            color: red;
+            font-size: small;
+            margin: 0;
+        }
+
         .fecha,
         .hora {
             color: black;
@@ -122,7 +127,7 @@
             <div class="header-right">
                 <p>Orden de Servicio:</p>
                 <div class="folio-container">
-                    <p class="folio">{{ $orden->orden_servicio }}</p>
+                    <p class="folio" style="color: red;">{{ $orden->orden_servicio }}</p>
                 </div>
 
                 <p>Fecha de Entrada:</p>
