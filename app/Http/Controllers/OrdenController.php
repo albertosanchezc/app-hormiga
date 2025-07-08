@@ -15,7 +15,7 @@ class OrdenController extends Controller
     {
         $orden = Orden::where('orden_servicio', $ordenServicio)->firstOrFail();
 
-        $pdf = Pdf::loadView('ordenes.show', compact('orden'))
+        $pdf = PDF::loadView('ordenes.show', ['orden' => $orden, 'esPdf' => true])
             ->setPaper('letter'); // o 'A4'
 
         return $pdf->download('orden_servicio_' . $orden->orden_servicio . '.pdf');
@@ -52,7 +52,8 @@ class OrdenController extends Controller
     public function show(Orden $orden)
     {
         //
-        return view('ordenes.show', compact('orden'));
+        return view('ordenes.show', ['orden' => $orden, 'esPdf' => false]);
+        // return view('ordenes.show', compact('orden'));
     }
 
     /**

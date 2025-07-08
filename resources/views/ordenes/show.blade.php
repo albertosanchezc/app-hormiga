@@ -92,7 +92,24 @@
 
         .footer {
             margin-top: 20px;
+            border: 1px solid;
             text-align: center;
+        }
+
+        .footer .parrafo-footer {
+            text-transform: uppercase;
+        }
+
+        .footer-logos {
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .footer-logos img {
+            width: 125px;
+            height: auto;
         }
 
         .datosLaHormiga {
@@ -109,7 +126,7 @@
     <div class="container">
         <div class="header">
             <div class="header-left">
-                <img src="{{ public_path('img/logo.png') }}" alt="Logo">
+                <img src="{{ $esPdf ? public_path('img/logo.png') : asset('img/logo.png') }}" alt="Logo">
             </div>
 
             <div class="header-center">
@@ -182,7 +199,19 @@
         </table>
 
         <div class="footer">
-            <p>Gracias por su preferencia</p>
+            <p class="parrafo-footer">-La Revisión tiene un costo Dependiendo del tipo de equipo y sus dimensiones ya
+                sea taller o domicilio</p>
+            <p class="parrafo-footer">-Después de 60 días de reparado el equipo no se responde por ningún trabajo y se
+                cobra almacenaje $5.00 diarios</p>
+            <p class="parrafo-footer">-No nos hacemos responsables por pérdida de información en su equipo electrónico
+                favor de realizar su respaldo correspondiente antes de que ingrese a servicio su equipo</p>
+            <div class="footer-logos">
+                <img src="{{ $esPdf ? public_path('img/logo-samsung.jpg') : asset('img/logo-samsung.jpg') }}" alt="Logo">
+                <img src="{{ $esPdf ? public_path('img/logo-daewoo.png') : asset('img/logo-daewoo.png') }}" alt="Logo">
+                <img src="{{ $esPdf ? public_path('img/logo-hisense.png') : asset('img/logo-hisense.png') }}" alt="Logo">
+                <img src="{{ $esPdf ? public_path('img/logo-elektra.png') : asset('img/logo-elektra.png') }}" alt="Logo">
+
+            </div>
         </div>
     </div>
 </body>
