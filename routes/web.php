@@ -13,7 +13,7 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('/ordenes/{orden:orden_servicio}', [OrdenController::class, 'show'])->name('ordenes.show');
-
+Route::get('/orden/pdf/{orden:orden_servicio}', [OrdenController::class, 'generarPDF'])->name('orden.pdf');
 
 
 Route::middleware('auth')->group(function () {

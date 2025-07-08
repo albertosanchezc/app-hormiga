@@ -4,9 +4,22 @@ namespace App\Http\Controllers;
 
 use App\Models\Orden;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
+
 
 class OrdenController extends Controller
 {
+
+
+    public function generarPDF($ordenServicio)
+    {
+        $orden = Orden::where('orden_servicio', $ordenServicio)->firstOrFail();
+
+        $pdf = Pdf::loadView('ordenes.show', compact('orden'))
+            ->setPaper('letter'); // o 'A4'
+
+        return $pdf->download('orden_servicio_' . $orden->orden_servicio . '.pdf');
+    }
     /**
      * Display a listing of the resource.
      */
