@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\OrdenController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\PantallaController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -14,6 +15,7 @@ Route::get('/dashboard', function () {
 
 Route::get('/ordenes/{orden:orden_servicio}', [OrdenController::class, 'show'])->name('ordenes.show');
 Route::get('/orden/pdf/{orden:orden_servicio}', [OrdenController::class, 'generarPDF'])->name('orden.pdf');
+Route::get('/pantallas', [PantallaController::class, 'index'])->name('pantallas.index');
 
 
 Route::middleware('auth')->group(function () {
