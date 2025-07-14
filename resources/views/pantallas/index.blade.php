@@ -1,8 +1,5 @@
 @extends('layouts.app')
 
-@section('titulo')
-    Servicio La Hormiga - Técnico en Pantallas
-@endsection
 
 @section('contenido')
     <div class="container">
@@ -14,9 +11,11 @@
         </div>
 
 
+
+
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
 
-            
+
             @foreach ($pantallas as $pantalla)
                 <div class="bg-white shadow-md rounded-xl p-4 border border-gray-200">
                     <div class="text-sm text-gray-500 mb-2">
@@ -36,6 +35,17 @@
                     <div class="text-sm text-gray-500">
                         <span class="font-semibold text-gray-700">Notas:</span> {{ $pantalla->notas ?? 'Sin notas' }}
                     </div>
+
+                    <div class="">
+                        <x-primary-button>
+                            <a href="/ordenes/{{ $pantalla->orden_servicio }}">{{ __('Hoja Entrada') }}</a>
+                        </x-primary-button>
+
+                        <x-secondary-button>
+                            <a href="/pantallas/{{ $pantalla->orden_servicio }}/edit">{{ __('Actualizar Estado') }}</a>
+                        </x-secondary-button>
+                    </div>
+
                 </div>
             @endforeach
         </div>

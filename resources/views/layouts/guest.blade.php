@@ -20,7 +20,7 @@
     <div class="min-h-screen sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100 dark:bg-gray-900 grid grid-cols-2">
         <div>
             <a href="/">
-                <x-application-logo class=" text-gray-500" />
+                <x-bigger-logo class=" text-gray-500" />
             </a>
         </div>
 

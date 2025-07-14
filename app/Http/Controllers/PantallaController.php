@@ -11,7 +11,7 @@ class PantallaController extends Controller
     //
     public function index()
     {
-        $pantallas = Pantalla::with('estado')->latest()->paginate(12);
+        $pantallas = Pantalla::with('estado')->paginate(9);
         return view('pantallas.index', compact('pantallas'));
     }
 }
