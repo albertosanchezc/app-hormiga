@@ -38,7 +38,7 @@ class OrdenController extends Controller
 
         // $pantallas = Pantalla::all();
         //
-        return view('dashboard');
+        return view('pantallas.index');
 
         // return view('dashboard',['pantallas' => $pantallas]);
     }

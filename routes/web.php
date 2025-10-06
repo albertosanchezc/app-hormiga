@@ -5,10 +5,9 @@ use App\Http\Controllers\NotificacionController;
 use App\Http\Controllers\OrdenController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PantallaController;
-
 Route::get('/', function () {
-    return view('welcome');
-});
+    return view('pantallas.index'); // o la vista que uses para index
+})->middleware('auth'); 
 
 Route::get('/dashboard', [OrdenController::class, 'dashboard'])->middleware(['auth', 'verified'])->name('dashboard');// Las rutas estáticas deben estar antes de las que utilizan route model binding
 Route::get('/ordenes/create', [OrdenController::class, 'create'])->name('ordenes.create');// Las rutas estáticas deben estar antes de las que utilizan route model binding
