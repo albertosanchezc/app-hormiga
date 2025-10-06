@@ -15,7 +15,7 @@
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/scss/app.scss', 'resources/js/app.js'])
 
-  @livewireStyles    
+    @livewireStyles
 </head>
 
 <body class="font-sans antialiased">
@@ -39,9 +39,10 @@
                 @yield('titulo')
             </h2>
             @yield('contenido')
-            @livewireScripts
         </main>
     </div>
+    @livewireScripts
+
 </body>
 
 </html>
