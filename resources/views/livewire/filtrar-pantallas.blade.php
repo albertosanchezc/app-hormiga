@@ -9,10 +9,17 @@
         </div>
 
         <div class="block">
-            <label class="block mb-1 text-sm text-gray-700 uppercase font-bold " for="orden_servicio">Cliente
+            <label class="block mb-1 text-sm text-gray-700 uppercase font-bold " for="cliente">Cliente
             </label>
             <input type="text" wire:model="cliente" placeholder="Buscar por Cliente"
                 id="cliente" class="border p-2 rounded w-full">
+        </div>
+
+        <div class="block">
+            <label class="block mb-1 text-sm text-gray-700 uppercase font-bold " for="equipo">Equipo
+            </label>
+            <input type="text" wire:model="equipo" placeholder="Buscar por Equipo" id="equipo"
+                class="border p-2 rounded w-full">
         </div>
 
         <div class="block">
