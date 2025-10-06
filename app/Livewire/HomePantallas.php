@@ -13,6 +13,8 @@ class HomePantallas extends Component
     public $modelo;
     public $numero_servicio;
     public $estatus;
+    public $cliente;
+
 
 
 
@@ -20,13 +22,14 @@ class HomePantallas extends Component
     protected $listeners = ['terminosBusqueda' => 'buscar']; // Escucha por el evento terminosBusqueda y ejecuta buscar de este componente
 
 
-    public function buscar($orden_servicio, $marca, $modelo, $numero_servicio, $estatus)
+    public function buscar($orden_servicio, $marca, $modelo, $numero_servicio, $estatus, $cliente)
     {
         $this->orden_servicio = $orden_servicio;
         $this->marca = $marca;
         $this->modelo = $modelo;
         $this->numero_servicio = $numero_servicio;
         $this->estatus = $estatus;
+        $this->cliente = $cliente;
     }
 
     public function render()

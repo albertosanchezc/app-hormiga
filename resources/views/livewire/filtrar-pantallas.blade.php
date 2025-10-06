@@ -1,11 +1,18 @@
 <div class=" p-8 mb-4">
-    <form wire:submit.prevent="leerDatosFormulario" class="flex gap-2">
+    <form wire:submit.prevent="leerDatosFormulario" class="grid grid-cols-3 gap-2">
 
         <div class="block">
             <label class="block mb-1 text-sm text-gray-700 uppercase font-bold " for="orden_servicio">Orden de Servicio
             </label>
             <input type="text" wire:model="orden_servicio" placeholder="Buscar por orden de servicio" id="orden_servicio"
                 class="border p-2 rounded w-full">
+        </div>
+
+        <div class="block">
+            <label class="block mb-1 text-sm text-gray-700 uppercase font-bold " for="orden_servicio">Cliente
+            </label>
+            <input type="text" wire:model="cliente" placeholder="Buscar por Cliente"
+                id="cliente" class="border p-2 rounded w-full">
         </div>
 
         <div class="block">
@@ -33,8 +40,8 @@
         <div class="block">
             <label class="block mb-1 text-sm text-gray-700 uppercase font-bold " for="numero_servicio">Estado
             </label>
-            <input type="text" wire:model="estatus" placeholder="Buscar por Estado"
-                class="border p-2 rounded w-full" id="estado">
+            <input type="text" wire:model="estatus" placeholder="Buscar por Estado" class="border p-2 rounded w-full"
+                id="estado">
         </div>
 
 
