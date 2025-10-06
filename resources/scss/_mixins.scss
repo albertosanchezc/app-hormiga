@@ -1,0 +1,87 @@
+@use 'variables' as v;
+/** Media Queries **/
+@mixin telefono {
+    @media (min-width: v.$telefono) {
+        @content;
+    }
+}
+
+@mixin tablet {
+    @media (min-width: v.$tablet) {
+        @content;
+    }
+}
+  
+@mixin desktop {
+    @media (min-width: v.$desktop) {
+        @content;
+    }
+}
+
+@mixin telefono-1 {
+    @media (min-width: v.$telefono-1) {
+        @content;
+    }
+}
+
+@mixin tablet-1 {
+    @media (min-width: v.$tablet-1) {
+        @content;
+    }
+}
+
+@mixin laptop-1 {
+    @media (min-width: v.$laptop-1) {
+        @content;
+    }
+}
+
+@mixin grid($columnas, $espaciado ) {
+    display: grid;
+    gap: $espaciado;
+    grid-template-columns: repeat($columnas, 1fr);
+}
+
+@mixin boton($bgColor, $display) {
+    background-color: $bgColor;
+    color: v.$blanco;
+    font-weight: v.$bold;
+    text-decoration: none;
+    padding: 1rem 3rem;
+    text-align: center;
+    margin-top: 2.5rem;
+    display: $display;
+    border: none;
+    border-radius: 0.75rem;
+
+    &:hover{
+        background-color: darken($bgColor, 5);
+        cursor: pointer;
+    }
+}
+
+@mixin fondo-radial($color-base) {
+    background-color: $color-base;
+    background-image:
+        radial-gradient(at 0% 18%, lighten($color-base, 20%) 0px, transparent 50%),
+        radial-gradient(at 28% 75%, $color-base 0px, transparent 50%),
+        radial-gradient(at 0% 47%, lighten($color-base, 20%) 0px, transparent 50%),
+        radial-gradient(at 74% 27%, $color-base 0px, transparent 50%),
+        radial-gradient(at 70% 71%, lighten($color-base, 20%) 0px, transparent 50%),
+        radial-gradient(at 30% 64%, $color-base 0px, transparent 50%);
+    background-size: cover; // Ajusta si quieres modificar cómo se escala
+}
+
+// _alertas.scss
+@mixin alerta($bg-color, $border-color, $text-color) {
+  background-color: $bg-color;
+  border-left-width: 4px;
+  border-left-style: solid;
+  border-color: $border-color;
+  color: $text-color;
+  font-weight: 700;
+  padding: 0.75rem;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  text-transform: capitalize;
+}
