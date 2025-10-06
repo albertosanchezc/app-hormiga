@@ -58,6 +58,11 @@ class HomePantallas extends Component
                     $q->where('estatus', 'LIKE', "%" . $this->estatus . "%");
                 });
             })
+            ->when($this->cliente, function ($query) {
+                $query->whereHas('orden', function ($q) {
+                    $q->where('cliente', 'LIKE', "%" . $this->cliente . "%");
+                });
+            })
             ->orderBy('id', 'desc')
             ->paginate(12);
 
