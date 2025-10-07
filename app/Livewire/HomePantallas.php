@@ -15,6 +15,8 @@ class HomePantallas extends Component
     public $estatus;
     public $cliente;
     public $equipo;
+    public $telefono;
+
 
 
 
@@ -24,7 +26,7 @@ class HomePantallas extends Component
     protected $listeners = ['terminosBusqueda' => 'buscar']; // Escucha por el evento terminosBusqueda y ejecuta buscar de este componente
 
 
-    public function buscar($orden_servicio, $marca, $modelo, $numero_servicio, $estatus, $cliente, $equipo)
+    public function buscar($orden_servicio, $marca, $modelo, $numero_servicio, $estatus, $cliente, $equipo, $telefono)
     {
         $this->orden_servicio = $orden_servicio;
         $this->marca = $marca;
@@ -33,6 +35,8 @@ class HomePantallas extends Component
         $this->estatus = $estatus;
         $this->cliente = $cliente;
         $this->equipo = $equipo;
+        $this->telefono = $telefono;
+
     }
 
     public function render()
@@ -69,6 +73,11 @@ class HomePantallas extends Component
             ->when($this->equipo, function ($query) {
                 $query->whereHas('orden', function ($q) {
                     $q->where('equipo', 'LIKE', "%" . $this->equipo . "%");
+                });
+            })
+            ->when($this->telefono, function ($query) {
+                $query->whereHas('orden', function ($q) {
+                    $q->where('telefono', 'LIKE', "%" . $this->telefono . "%");
                 });
             })
             ->orderBy('id', 'desc')

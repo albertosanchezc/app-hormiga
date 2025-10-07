@@ -11,8 +11,15 @@
         <div class="block">
             <label class="block mb-1 text-sm text-gray-700 uppercase font-bold " for="cliente">Cliente
             </label>
-            <input type="text" wire:model="cliente" placeholder="Buscar por Cliente"
-                id="cliente" class="border p-2 rounded w-full">
+            <input type="text" wire:model="cliente" placeholder="Buscar por Cliente" id="cliente"
+                class="border p-2 rounded w-full">
+        </div>
+
+        <div class="block">
+            <label class="block mb-1 text-sm text-gray-700 uppercase font-bold " for="telefono">Teléfono
+            </label>
+            <input type="text" wire:model="telefono" placeholder="Buscar por telefono" id="telefono"
+                class="border p-2 rounded w-full">
         </div>
 
         <div class="block">
