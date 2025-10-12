@@ -4,9 +4,12 @@ namespace App\Livewire;
 
 use Livewire\Component;
 use App\Models\Pantalla;
+use Livewire\WithPagination;
 
 class HomePantallas extends Component
 {
+
+    use WithPagination;
 
     public $orden_servicio;
     public $marca;
@@ -37,6 +40,7 @@ class HomePantallas extends Component
         $this->equipo = $equipo;
         $this->telefono = $telefono;
 
+        $this->resetPage();
     }
 
     public function render()
