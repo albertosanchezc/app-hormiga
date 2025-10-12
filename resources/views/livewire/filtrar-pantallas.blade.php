@@ -21,7 +21,7 @@
             <input type="text" wire:model="domicilio" placeholder="Buscar por Domicilio" id="domicilio"
                 class="border p-2 rounded w-full">
         </div>
-        
+
         <div class="block">
             <label class="block mb-1 text-sm text-gray-700 uppercase font-bold " for="telefono">Teléfono
             </label>
@@ -56,6 +56,13 @@
             </label>
             <input type="text" wire:model="numero_servicio" placeholder="Buscar por Número de Serie"
                 class="border p-2 rounded w-full" id="numero_servicio">
+        </div>
+
+        <div class="block">
+            <label class="block mb-1 text-sm text-gray-700 uppercase font-bold " for="tipo_servicio">Tipo de Servicio
+            </label>
+            <input type="text" wire:model="tipo_servicio" placeholder="Buscar por Tipo de Servicio"
+                class="border p-2 rounded w-full" id="tipo_servicio">
         </div>
 
         <div class="block">

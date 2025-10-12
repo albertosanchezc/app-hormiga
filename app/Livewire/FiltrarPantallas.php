@@ -15,6 +15,7 @@ class FiltrarPantallas extends Component
     public $equipo;
     public $telefono;
     public $domicilio;
+    public $tipo_servicio;
 
     
 
@@ -25,7 +26,7 @@ class FiltrarPantallas extends Component
     public function leerDatosFormulario()
     {
         // En Livewire 3 se usa dispatch (no emit)
-        $this->dispatch('terminosBusqueda', $this->orden_servicio, $this->marca, $this->modelo, $this->numero_servicio, $this->estatus, $this->cliente, $this->equipo, $this->telefono, $this->domicilio);
+        $this->dispatch('terminosBusqueda', $this->orden_servicio, $this->marca, $this->modelo, $this->numero_servicio, $this->estatus, $this->cliente, $this->equipo, $this->telefono, $this->domicilio, $this->tipo_servicio);
     }
 
     public function render()
