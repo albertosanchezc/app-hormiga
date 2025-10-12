@@ -16,6 +16,13 @@
         </div>
 
         <div class="block">
+            <label class="block mb-1 text-sm text-gray-700 uppercase font-bold " for="domicilio">Domicilio
+            </label>
+            <input type="text" wire:model="domicilio" placeholder="Buscar por Domicilio" id="domicilio"
+                class="border p-2 rounded w-full">
+        </div>
+        
+        <div class="block">
             <label class="block mb-1 text-sm text-gray-700 uppercase font-bold " for="telefono">Teléfono
             </label>
             <input type="text" wire:model="telefono" placeholder="Buscar por telefono" id="telefono"
