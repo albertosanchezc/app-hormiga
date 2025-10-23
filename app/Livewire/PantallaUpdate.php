@@ -67,6 +67,11 @@ class PantallaUpdate extends Component
             'estatus' => 'nullable|string|max:100',
         ]);
 
+        // Convertir cadenas vacías en null
+        $this->entregado = $this->entregado ?: null;
+        $this->fecha_revision = $this->fecha_revision ?: null;
+        $this->fecha_trabajo = $this->fecha_trabajo ?: null;
+        
         $orden->update([
             'diagnostico' => $this->diagnostico,
             'entregado' => $this->entregado,
@@ -99,10 +104,8 @@ class PantallaUpdate extends Component
         foreach ($usuarios as $usuario) {
             $usuario->notify(new NuevoDiagnostico($orden));
         }
-
-        return redirect()->route('pantallas.index');
-
         session()->flash('success', 'Pantalla actualizada correctamente.');
+        return redirect()->route('pantallas.index');
     }
 
     public function render()
