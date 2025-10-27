@@ -17,11 +17,6 @@ class FiltrarPantallas extends Component
     public $domicilio;
     public $tipo_servicio;
 
-    
-
-    
-
-
 
     public function leerDatosFormulario()
     {

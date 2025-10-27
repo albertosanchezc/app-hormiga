@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Orden de Servicio</title>
+    <title>Orden de Servicio - {{ $orden->orden_servicio }}</title>
     <style>
         body {
             font-family: 'Courier New', monospace;
@@ -153,7 +153,8 @@
 
         .comprado_por,
         .fecha_compra,
-        .lugar_compra{
+        .lugar_compra,
+        .domicilio-container .domicilio{
             border: 2px solid;
             padding: 0.5rem 1rem;
         }

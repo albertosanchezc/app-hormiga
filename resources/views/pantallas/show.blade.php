@@ -1,9 +1,291 @@
-@extends('layouts.app')
+<!DOCTYPE html>
+<html lang="es">
 
-@section('title', 'Actualizar Folio interno - ' . $pantalla->orden_servicio)
+<head>
+    <meta charset="UTF-8">
+    <title>Orden de Servicio - {{ $orden->orden_servicio }}</title>
+    <style>
+        body {
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            margin: 20px;
+        }
 
-@section('contenido')
-    <div class="container principal-container">
+        .container {
+            border: 1px solid #000;
+            padding: 10px;
+            max-width: 75%;
+
+        }
+
+        .container-principal {
+            max-width: 66.6%;
+            margin: 0 auto;
+        }
+
+        .header {
+            width: 100%;
+            border-bottom: 2px solid #000;
+            padding-bottom: 10px;
+            margin-bottom: 10px;
+        }
+
+        .header-left,
+        .header-center,
+        .header-right {
+            display: inline-block;
+            vertical-align: top;
+        }
+
+        .header-left {
+            width: 25%;
+        }
+
+        .header-center {
+            width: 45%;
+            text-align: center;
+            font-size: 10px;
+        }
+
+        .fecha_revision-container,
+        .fecha_trabajo-container,
+        .tecnico-container,
+        .comprado_por-container,
+        .fecha_compra-container,
+        .costo_reparacion-container,
+        .estatus-container{
+            margin: 5px auto;
+        }
+
+        .header-right {
+            width: 25%;
+            text-align: right;
+            font-size: 10px;
+        }
+
+        .header img {
+            width: 180px;
+        }
+
+        .info-table,
+        .equipment-table,
+        .observaciones-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        td {
+            border: 1px solid #000;
+            padding: 4px;
+        }
+
+        .title {
+            font-weight: bold;
+            background: #ddd;
+        }
+
+        .folio {
+            color: red;
+            font-size: small;
+            margin: 0;
+        }
+
+        .fecha,
+        .hora {
+            color: black;
+            font-size: 10px;
+            margin: 0;
+            text-align: center;
+        }
+
+        .hora {
+            font-weight: bold;
+        }
+
+
+
+        .cliente-telefono-contenedor,
+        .diagnostico-container p,
+         {
+            display: grid;
+            grid-template-columns: 3fr 1fr;
+            gap: 20px;
+            font-size: 15px;
+            margin: 5px auto;
+        }
+
+        .cliente,
+        .telefono,
+        .domicilio,
+        .equipo,
+        .marca,
+        .modelo,
+        .numero_servicio,
+        .tipo_servicio,
+        .observaciones,
+        .diagnostico,
+        .numero_csa,
+        .entregado,
+        .accion_correctiva,
+        .costo_reparacion,
+        .estatus {
+            border: 2px solid;
+        }
+
+
+        .cliente-container p,
+        .telefono-container p,
+        .domicilio-container p,
+        .equipo-container p,
+        .marca-container p,
+        .modelo-container p,
+        .numero_servicio-container p,
+        .tipo_servicio-container p,
+        .observaciones-container p {
+            padding: 0;
+            margin: 0;
+            font-weight: bold;
+        }
+
+        .observaciones-container {
+            font-size: 15px;
+        }
+
+
+
+        .domicilio-container {
+            font-size: 15px;
+        }
+
+        .contenedor-datos-equipo,
+        .datos-compra-container,
+        .diagnostico-container,
+        .revision-termino-container,
+        .entrega-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            font-size: 15px;
+            font-weight: bold;
+        }
+
+
+        .comprado_por,
+        .fecha_compra,
+        .lugar_compra,
+        .domicilio-container .domicilio,
+        .numero_csa,
+        .entregado,
+        .fecha_revision,
+        .fecha_trabajo,
+        .tecnico,
+        .costo_reparacion,
+        .firma-container {
+            border: 2px solid;
+            padding: 0.5rem 1rem;
+        }
+        .firma-container{
+            display: grid;
+            grid-template-rows: repeat(2,1fr);
+        }
+
+        .entrega-container {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+        }
+
+        .costo_estado-container {
+            display: grid;
+            grid-template-columns: repeat(2,1fr);
+            gap: 20px;
+        }
+
+        .revision-termino-container {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+        }
+
+
+        .folio-container,
+        .fecha-container,
+        .hora-container {
+            border: 2px solid;
+            padding: 0.10px 0.30px;
+            display: inline-block;
+            margin-bottom: 5px;
+        }
+
+        .folio-container {
+            width: 50%;
+        }
+
+        .folio {
+            font-size: 15px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .fecha {
+            font-size: 15px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .hora-container {
+            width: 25%;
+        }
+
+        .folio-texto,
+        .fecha-texto,
+        .hora-texto {
+            font-weight: bold;
+            font-size: 15px;
+            text-transform: uppercase;
+            margin-bottom: 0;
+        }
+
+        .fecha-texto {
+            text-align: center;
+        }
+
+        .footer {
+            margin-top: 20px;
+            border: 1px solid;
+            text-align: center;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .footer .parrafo-footer {
+            text-transform: uppercase;
+        }
+
+        .footer-logos {
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .footer-logos img {
+            width: 125px;
+            height: auto;
+        }
+
+        .datosLaHormiga {
+            font-size: 15px;
+        }
+
+        .datosLaHormiga span {
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container container-principal">
         <div class="header">
             <div class="header-left">
                 <img src="{{ $esPdf ? public_path('img/logo.png') : asset('img/logo.png') }}" alt="Logo">
@@ -18,7 +300,7 @@
                     Whatsapp Garantías: 442 474 47 04<br>
                     www.serviciolahormiga.com.mx<br>
                     Horario L. a V. 9:00 a 18:00hrs Sab. 10:00 a 13:00 hrs<br>
-                    
+
                 </p>
             </div>
 
@@ -31,17 +313,6 @@
 
                 <p><strong>Fecha Revisión:</strong></p>
                 <p>{{ $orden->fecha_trabajo?->translatedFormat('l d \\d\\e F \\d\\e Y') ?? '' }}</p>
-            </div>
-        </div>
-
-        <div class="cliente-observacion-container">
-            <div class="cliente-container">
-                <p>Cliente</p>
-                <p class="cliente">{{ $orden->cliente }}</p>
-            </div>
-            <div class="observacion_extra-container">
-                <p>Observaciones</p>
-                <p class="observacion_extra">{{ $orden->observacion }}</p>
             </div>
         </div>
 
@@ -84,16 +355,20 @@
                 <p class="entregado">{{ $pantalla->entregado }}</p>
             </div>
         </div>
+        {{-- Equipo, Marca, Modelo, Num. De Serie, tipo de servicio deben estar en un grid de 3 LOS 5 --}}
+        {{-- falta añadir Comprado por Fecha de compra y lugar de compra --}}
 
         <div class="revision-termino-container">
             <div class="fecha_revision-container">
                 <p>Fecha de Revisión</p>
-                <p class="fecha_revision">{{ $orden->fecha_trabajo?->translatedFormat('l d \\d\\e F \\d\\e Y') ?? '' }}</p>
+                <p class="fecha_revision">{{ $orden->fecha_trabajo?->translatedFormat('l d \\d\\e F \\d\\e Y') ?? '' }}
+                </p>
             </div>
 
             <div class="fecha_trabajo-container">
                 <p>Fecha de Término</p>
-                <p class="fecha_trabajo">{{ $orden->fecha_reparacion?->translatedFormat('l d \\d\\e F \\d\\e Y') ?? '' }}</p>
+                <p class="fecha_trabajo">
+                    {{ $orden->fecha_reparacion?->translatedFormat('l d \\d\\e F \\d\\e Y') ?? '' }}</p>
             </div>
 
             <div class="tecnico-container">
@@ -108,7 +383,8 @@
 
             <div class="fecha_compra-container">
                 <p>Fecha de Compra</p>
-                <p class="fecha_compra">{{ $orden->fecha_compra?->translatedFormat('l d \\d\\e F \\d\\e Y') ?? '' }}</p>
+                <p class="fecha_compra">{{ $orden->fecha_compra?->translatedFormat('l d \\d\\e F \\d\\e Y') ?? '' }}
+                </p>
             </div>
         </div>
 
@@ -141,8 +417,18 @@
             </div>
         </div>
 
+        <div class="observaciones-container">
+            <div>
+                <p>Observaciones:</p>
+                <p class="observaciones">{{ $orden->observacion }}</p>
+            </div>
+        </div>
+
         <div class="footer">
-            <p class="parrafo-footer">Reparación de T.V., Minicomponentes,Pantallas de Plasma, Proyección, LCD y LED, Hornos de Microondas, DVD, Refrigeradores, Lavadoras, Aire Acondicionado, Etc. Todas Las Marcas y Modelos, Centro de servicio autorizado en garantías Daewoo, Samsung, Elektra, Garanplus, Venta, Armado, Reparación y Mantenimiento de Computadoras, Monitores, ETC.
+            <p class="parrafo-footer">Reparación de T.V., Minicomponentes,Pantallas de Plasma, Proyección, LCD y LED,
+                Hornos de Microondas, DVD, Refrigeradores, Lavadoras, Aire Acondicionado, Etc. Todas Las Marcas y
+                Modelos, Centro de servicio autorizado en garantías Daewoo, Samsung, Elektra, Garanplus, Venta, Armado,
+                Reparación y Mantenimiento de Computadoras, Monitores, ETC.
             </p>
 
             <div class="footer-logos">
@@ -154,4 +440,6 @@
             </div>
         </div>
     </div>
-@endsection
+</body>
+
+</html>

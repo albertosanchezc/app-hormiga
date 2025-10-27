@@ -15,7 +15,7 @@
                     <x-nav-link :href="route('ordenes.create')" :active="request()->routeIs('ordenes.create')">
                         {{ __('Nueva Orden') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('pantallas.index')" :active="request()->routeIs('pantallas.index')">
+                    <x-nav-link :href="route('pantallas.index')" :active="request()->routeIs('pantallas')">
                         {{ __('Equipos') }}
                     </x-nav-link>
 
@@ -49,19 +49,9 @@
                     </x-slot>
 
                     <x-slot name="content">
-                        <x-dropdown-link :href="route('ordenes.create')">
-                            {{ __('Nueva Orden') }}
-                        </x-dropdown-link>
-
-
-                        <x-dropdown-link :href="route('pantallas.index')">
-                            {{ __('Equipos') }}
-                        </x-dropdown-link>
-
                         <x-dropdown-link :href="route('profile.edit')">
                             {{ __('Perfil') }}
                         </x-dropdown-link>
-
 
                         <!-- Authentication -->
                         <form method="POST" action="{{ route('logout') }}">
@@ -104,13 +94,6 @@
             </div>
 
             <div class="mt-3 space-y-1">
-                <x-responsive-nav-link :href="route('ordenes.create')">
-                    {{ __('Nueva Orden') }}
-                </x-responsive-nav-link>
-
-                <x-responsive-nav-link :href="route('pantallas.index')">
-                    {{ __('Equipos') }}
-                </x-responsive-nav-link>
                 <x-responsive-nav-link :href="route('profile.edit')">
                     {{ __('Profile') }}
                 </x-responsive-nav-link>

@@ -22,11 +22,6 @@ class HomePantallas extends Component
     public $domicilio;
     public $tipo_servicio;
 
-
-
-
-
-
     // Listener
     protected $listeners = ['terminosBusqueda' => 'buscar']; // Escucha por el evento terminosBusqueda y ejecuta buscar de este componente
 
@@ -43,7 +38,6 @@ class HomePantallas extends Component
         $this->telefono = $telefono;
         $this->domicilio = $domicilio;
         $this->tipo_servicio = $tipo_servicio;
-
 
         $this->resetPage();
     }

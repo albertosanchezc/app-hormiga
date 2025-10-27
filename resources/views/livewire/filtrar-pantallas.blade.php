@@ -23,7 +23,7 @@
         </div>
 
         <div class="block">
-            <label class="block mb-1 text-sm text-gray-700 uppercase font-bold " for="telefono">Teléfono
+            <label class="block mb-1 text-sm text-gray-700 uppercase font-bold " for="telefono">Telefono
             </label>
             <input type="text" wire:model="telefono" placeholder="Buscar por telefono" id="telefono"
                 class="border p-2 rounded w-full">
@@ -66,7 +66,7 @@
         </div>
 
         <div class="block">
-            <label class="block mb-1 text-sm text-gray-700 uppercase font-bold " for="numero_servicio">Estado
+            <label class="block mb-1 text-sm text-gray-700 uppercase font-bold " for="estado">Estado
             </label>
             <input type="text" wire:model="estatus" placeholder="Buscar por Estado" class="border p-2 rounded w-full"
                 id="estado">

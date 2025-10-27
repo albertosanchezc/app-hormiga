@@ -18,10 +18,10 @@ class PantallaController extends Controller
 
     public function show(Pantalla $pantalla)
     {
-        $esPdf = false;
+        // $esPdf = false;
         $orden = $pantalla->orden;
         // dd($orden);
-        return view('pantallas.show', compact('pantalla', 'orden', 'esPdf'));
+        return view('pantallas.show', ['orden' => $orden,'pantalla' => $pantalla, 'esPdf' => false]);
     }
 
     public function edit(Pantalla $pantalla)
