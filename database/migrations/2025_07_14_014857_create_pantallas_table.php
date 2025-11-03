@@ -12,7 +12,7 @@ return new class extends Migration {
             $table->string('orden_servicio')->unique()->nullable(); // Puede haber folios nulos
             $table->string('marca')->nullable();
             $table->string('pulgadas')->nullable();
-            $table->foreignId('estado_id')->nullable()->constrained()->onDelete('cascade');
+            $table->foreignId('estado_id')->constrained()->onDelete('cascade');
             $table->string('recibido_con')->nullable();
             $table->text('notas')->nullable();
             $table->text('detectado')->nullable();
