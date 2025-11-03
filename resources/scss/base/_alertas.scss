@@ -1,0 +1,9 @@
+@use '../mixins' as m;
+
+.exito {
+    @include m.alerta(#d1fae5, #10b981, #065f46);
+}
+
+.error {
+    @include m.alerta(#fee2e2, #dc2626, #dc2626);
+}

@@ -1,0 +1,19 @@
+@use 'variables';
+@use 'mixins';
+
+// Ordenes
+@use 'ordenes/orden.scss';
+
+// Pantallas
+@use 'pantallas/edit.scss';
+@use 'pantallas/show.scss';
+@use 'pantallas/index.scss';
+
+
+
+// Base
+@use 'base/botones';
+@use 'base/alertas';
+
+
+

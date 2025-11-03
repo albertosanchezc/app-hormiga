@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Orden de Servicio</title>
+    <title>Orden de Servicio - {{ $orden->orden_servicio }}</title>
     <style>
         body {
             font-family: 'Courier New', monospace;
@@ -14,6 +14,13 @@
         .container {
             border: 1px solid #000;
             padding: 10px;
+            max-width: 75%;
+
+        }
+
+        .container-principal {
+            max-width: 66.6%;
+            margin: 0 auto;
         }
 
         .header {
@@ -77,23 +84,132 @@
         .fecha,
         .hora {
             color: black;
-            font-size: small;
+            font-size: 10px;
             margin: 0;
+            text-align: center;
         }
+
+        .hora {
+            font-weight: bold;
+        }
+
+
+
+        .cliente-telefono-contenedor {
+            display: grid;
+            grid-template-columns: 3fr 1fr;
+            gap: 20px;
+            font-size: 15px;
+        }
+
+        .cliente,
+        .telefono,
+        .domicilio,
+        .equipo,
+        .marca,
+        .modelo,
+        .numero_servicio,
+        .tipo_servicio,
+        .observaciones {
+            border: 2px solid;
+        }
+
+
+        .cliente-container p,
+        .telefono-container p,
+        .domicilio-container p,
+        .equipo-container p,
+        .marca-container p,
+        .modelo-container p,
+        .numero_servicio-container p,
+        .tipo_servicio-container p,
+        .observaciones-container p {
+            padding: 0;
+            margin: 0;
+            font-weight: bold;
+        }
+
+        .observaciones-container {
+            font-size: 15px;
+        }
+
+
+
+        .domicilio-container {
+            font-size: 15px;
+        }
+
+        .contenedor-datos-equipo,
+        .datos-compra-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            font-size: 15px;
+            font-weight: bold;
+
+
+        }
+
+
+        .comprado_por,
+        .fecha_compra,
+        .lugar_compra,
+        .domicilio-container .domicilio{
+            border: 2px solid;
+            padding: 0.5rem 1rem;
+        }
+
+
+
 
         .folio-container,
         .fecha-container,
         .hora-container {
-            border: 1px solid;
-            padding: 0.1rem 0.3rem;
+            border: 2px solid;
+            padding: 0.10px 0.30px;
             display: inline-block;
             margin-bottom: 5px;
+        }
+
+        .folio-container {
+            width: 50%;
+        }
+
+        .folio {
+            font-size: 15px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .fecha {
+            font-size: 15px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .hora-container {
+            width: 25%;
+        }
+
+        .folio-texto,
+        .fecha-texto,
+        .hora-texto {
+            font-weight: bold;
+            font-size: 15px;
+            text-transform: uppercase;
+            margin-bottom: 0;
+        }
+
+        .fecha-texto {
+            text-align: center;
         }
 
         .footer {
             margin-top: 20px;
             border: 1px solid;
             text-align: center;
+            font-size: 12px;
+            font-weight: bold;
         }
 
         .footer .parrafo-footer {
@@ -114,7 +230,7 @@
         }
 
         .datosLaHormiga {
-            font-size: small;
+            font-size: 15px;
         }
 
         .datosLaHormiga span {
@@ -124,7 +240,7 @@
 </head>
 
 <body>
-    <div class="container">
+    <div class="container container-principal">
         <div class="header">
             <div class="header-left">
                 <img src="{{ $esPdf ? public_path('img/logo.png') : asset('img/logo.png') }}" alt="Logo">
@@ -143,61 +259,95 @@
             </div>
 
             <div class="header-right">
-                <p>Orden de Servicio:</p>
+                <p class="folio-texto">Orden de Servicio:</p>
                 <div class="folio-container">
                     <p class="folio" style="color: red;">{{ $orden->orden_servicio }}</p>
                 </div>
 
-                <p>Fecha de Entrada:</p>
+                <p class="fecha-texto">Fecha de Entrada:</p>
                 <div class="fecha-container">
                     <p class="fecha">{{ formatoFechaExtendida($orden->fecha_entrada) }}</p>
                 </div>
 
-                <p>Hora:</p>
+                <p class="hora-texto">Hora:</p>
                 <div class="hora-container">
                     <p class="hora">{{ formatoNumericoToHora($orden->hora) }}</p>
                 </div>
             </div>
         </div>
 
-        <table class="info-table">
-            <tr>
-                <td class="title">Cliente</td>
-                <td colspan="3">{{ $orden->cliente }}</td>
-                <td class="title">Teléfono</td>
-                <td>{{ $orden->telefono }}</td>
-            </tr>
-            <tr>
-                <td class="title">Domicilio</td>
-                <td colspan="5">{{ $orden->domicilio }}</td>
-            </tr>
-        </table>
+        <div class="cliente-telefono-contenedor">
+            <div class="cliente-container">
+                <p>Cliente:</p>
+                <p class="cliente">{{ $orden->cliente }}</p>
+            </div>
+            <div class="telefono-container">
+                <p>Telefono:</p>
+                <p class="telefono">{{ $orden->telefono }}</p>
+            </div>
+        </div>
 
-        <table class="equipment-table">
-            <tr>
-                <td class="title">Equipo</td>
-                <td>{{ $orden->equipo }}</td>
-                <td class="title">Marca</td>
-                <td>{{ $orden->marca }}</td>
-                <td class="title">Modelo</td>
-                <td>{{ $orden->modelo }}</td>
-            </tr>
-            <tr>
-                <td class="title">Número de Serie</td>
-                <td colspan="2">{{ $orden->numero_servicio }}</td>
-                <td class="title">Tipo de Servicio</td>
-                <td colspan="2">{{ $orden->tipo_servicio }}</td>
-            </tr>
-        </table>
+        <div class="domicilio-container">
+            <div>
+                <p>Domicilio:</p>
+                <p class="domicilio">{{ $orden->domicilio ?? 'N/A' }}</p>
+            </div>
+        </div>
+        {{-- Equipo, Marca, Modelo, Num. De Serie, tipo de servicio deben estar en un grid de 3 LOS 5 --}}
+        {{-- falta añadir Comprado por Fecha de compra y lugar de compra --}}
 
-        <table class="observaciones-table">
-            <tr>
-                <td class="title">Observaciones</td>
-            </tr>
-            <tr>
-                <td style="height: 80px;">{{ $orden->observacion }}</td>
-            </tr>
-        </table>
+        <div class="contenedor-datos-equipo">
+            <div class="equipo-container">
+                <p>Equipo:</p>
+                <p class="equipo">{{ $orden->equipo }}</p>
+            </div>
+            <div class="marca-container">
+                <p>Marca:</p>
+                <p class="marca">{{ $orden->marca }}</p>
+            </div>
+
+            <div class="modelo-container">
+                <p>Modelo:</p>
+                <p class="modelo">{{ $orden->modelo }}</p>
+            </div>
+
+            <div class="numero_servicio-container">
+                <p>Núm. De Serie:</p>
+                <p class="numero_servicio">{{ $orden->numero_servicio }}</p>
+            </div>
+            <div class="tipo_servicio-container">
+                <p>Tipo de Servicio:</p>
+                <p class="tipo_servicio">{{ $orden->tipo_servicio }}</p>
+            </div>
+        </div>
+
+        <div class="datos-compra-container">
+            <div class="comprado_por-container">
+                <p>Comprado Por:</p>
+                <p class="comprado_por">{{ $orden->comprado_por }}</p>
+            </div>
+
+            <div class="fecha_compra-container">
+                <p>Fecha de Compra:</p>
+                <p class="fecha_compra">{{ $orden->fecha_compra }}</p>
+            </div>
+
+            <div class="lugar_compra-container">
+                <p>Lugar de Compra:</p>
+                <p class="lugar_compra">{{ $orden->lugar_compra }}</p>
+            </div>
+
+
+
+
+        </div>
+
+        <div class="observaciones-container">
+            <div>
+                <p>Observaciones:</p>
+                <p class="observaciones">{{ $orden->observacion }}</p>
+            </div>
+        </div>
 
         <div class="footer">
             <p class="parrafo-footer">-La Revisión tiene un costo Dependiendo del tipo de equipo y sus dimensiones ya
@@ -207,10 +357,14 @@
             <p class="parrafo-footer">-No nos hacemos responsables por pérdida de información en su equipo electrónico
                 favor de realizar su respaldo correspondiente antes de que ingrese a servicio su equipo</p>
             <div class="footer-logos">
-                <img src="{{ $esPdf ? public_path('img/logo-samsung.jpg') : asset('img/logo-samsung.jpg') }}" alt="Logo">
-                <img src="{{ $esPdf ? public_path('img/logo-daewoo.png') : asset('img/logo-daewoo.png') }}" alt="Logo">
-                <img src="{{ $esPdf ? public_path('img/logo-hisense.png') : asset('img/logo-hisense.png') }}" alt="Logo">
-                <img src="{{ $esPdf ? public_path('img/logo-elektra.png') : asset('img/logo-elektra.png') }}" alt="Logo">
+                <img src="{{ $esPdf ? public_path('img/logo-samsung.jpg') : asset('img/logo-samsung.jpg') }}"
+                    alt="Logo">
+                <img src="{{ $esPdf ? public_path('img/logo-daewoo.png') : asset('img/logo-daewoo.png') }}"
+                    alt="Logo">
+                <img src="{{ $esPdf ? public_path('img/logo-hisense.png') : asset('img/logo-hisense.png') }}"
+                    alt="Logo">
+                <img src="{{ $esPdf ? public_path('img/logo-elektra.png') : asset('img/logo-elektra.png') }}"
+                    alt="Logo">
 
             </div>
         </div>

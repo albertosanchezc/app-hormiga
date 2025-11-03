@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Orden;
+use App\Models\Pantalla;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
+
 
 
 class OrdenController extends Controller
@@ -29,13 +31,31 @@ class OrdenController extends Controller
     }
 
     /**
+     * Display a listing of the resource.
+     */
+    public function dashboard()
+    {
+
+        // $pantallas = Pantalla::all();
+        //
+        return view('pantallas.index');
+
+        // return view('dashboard',['pantallas' => $pantallas]);
+    }
+
+    /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        //
-        // $this->authorize('create', Orden::class);
-        // return view('ordenes.create');
+        $lastOrden = Orden::latest('id')->first();
+        $nuevoFolio = $lastOrden ? $lastOrden->orden_servicio + 1 : 1;
+
+        return view('ordenes.create', [
+            'folio' => $nuevoFolio,
+            'fecha' => now()->format('Y-m-d'),
+            'hora'  => now()->format('H:i')
+        ]);
     }
 
     /**
@@ -43,7 +63,10 @@ class OrdenController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        dd('Desde store');
+        $orden = Orden::create($request->all());
+
+        return redirect()->route('ordenes.show', $orden);
     }
 
     /**
@@ -61,7 +84,7 @@ class OrdenController extends Controller
      */
     public function edit(Orden $orden)
     {
-        //
+        return view('ordenes.edit', compact('orden'));
     }
 
     /**
