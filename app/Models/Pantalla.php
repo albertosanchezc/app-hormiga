@@ -16,11 +16,17 @@ class Pantalla extends Model
         'notas',
         'detectado',
         'fecha_registro',
-        'fecha_revision'
+        'fecha_revision',
+        'tecnico'
     ];
 
     public function estado()
     {
         return $this->belongsTo(Estado::class);
+    }
+
+    public function orden()
+    {
+        return $this->belongsTo(Orden::class, 'orden_servicio', 'orden_servicio');
     }
 }

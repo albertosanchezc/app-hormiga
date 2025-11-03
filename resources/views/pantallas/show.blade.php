@@ -294,7 +294,8 @@
             <div class="header-center">
                 <p class="datosLaHormiga">
                     <span class="titulo-header">Reporte Técnico</span><br>
-                    <span>Prol. Tecnológico No. 96-A esq. Orlando Col. La Florida CP. 76150</span><br>
+                    <span>Prol. Tecnológico No. 96-A casi esq. Orlando Col. La Florida CP. 76150</span><br>
+                    <span>Santiago de Querétaro, Qro.</span><br>
                     <span>Tels: (442) 215-95-99 y (442) 419 -27-45</span><br>
                     <span>Whatsapp Mostrador: 442 215 95 99</span><br>
                     <span>Whatsapp Garantías: 442 474 47 04</span><br>

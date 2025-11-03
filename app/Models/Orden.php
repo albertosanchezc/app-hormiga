@@ -13,6 +13,14 @@ class Orden extends Model
     
     protected $table = 'ordenes';
 
+    protected $casts = [
+        'fecha_entrada'    => 'date',
+        'fecha_trabajo'    => 'date',
+        'fecha_reparacion' => 'date',
+        'fecha_compra'     => 'date',
+        'entregado'        => 'date',
+    ];
+    
     protected $fillable = [
         'orden_servicio',
         'fecha_entrada',
@@ -45,4 +53,6 @@ class Orden extends Model
         'created_at',
         'updated_at'
     ];
+
+    
 }

@@ -18,6 +18,19 @@
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
 
+        <!-- Rol -->
+        <div class="mt-4">
+            <x-input-label for="email" :value="__('¿Qué tipo de Cuenta deseas en DevJobs?')" />
+
+            <select name="rol" id="rol"
+                class="rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:fing-opacity-50 w-full uppercase">
+                <option value="">-- Selecciona un Rol --</option>
+                <option value="1">-- Técnico --</option>
+                <option value="2">-- Administrativo --</option>
+                <option value="3">-- Tracker/Recepción --</option>
+            </select>
+        </div>
+
         <!-- Password -->
         <div class="mt-4">
             <x-input-label for="password" :value="__('Password')" />
