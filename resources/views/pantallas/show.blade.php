@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Orden de Servicio - {{ $orden->orden_servicio }}</title>
+    <title>Reporte Técnico - {{ $orden->orden_servicio }}</title>
     <style>
         body {
             font-family: 'Courier New', monospace;
@@ -47,15 +47,15 @@
             font-size: 10px;
         }
 
-        .fecha_revision-container,
+        /* .fecha_revision-container,
         .fecha_trabajo-container,
         .tecnico-container,
         .comprado_por-container,
         .fecha_compra-container,
         .costo_reparacion-container,
-        .estatus-container{
+        .estatus-container {
             margin: 5px auto;
-        }
+        } */
 
         .header-right {
             width: 25%;
@@ -106,13 +106,13 @@
 
 
         .cliente-telefono-contenedor,
-        .diagnostico-container p,
-         {
-            display: grid;
-            grid-template-columns: 3fr 1fr;
-            gap: 20px;
-            font-size: 15px;
-            margin: 5px auto;
+        .diagnostico-container p
+        {
+        display: grid;
+        grid-template-columns: 3fr 1fr;
+        gap: 20px;
+        font-size: 15px;
+        margin: 5px auto;
         }
 
         .cliente,
@@ -142,7 +142,17 @@
         .modelo-container p,
         .numero_servicio-container p,
         .tipo_servicio-container p,
-        .observaciones-container p {
+        .observaciones-container p,
+        .diagnostico-container p,
+        .fecha_revision-container p,
+        .fecha_trabajo-container p,
+        .tecnico-container p,
+        .comprado_por-container p,
+        .fecha_compra-container p,
+        .numero_csa,
+        .accion_correctiva-container p,
+        .costo_reparacion-container p,
+        .estatus-container p {
             padding: 0;
             margin: 0;
             font-weight: bold;
@@ -158,13 +168,12 @@
             font-size: 15px;
         }
 
-        .contenedor-datos-equipo,
         .datos-compra-container,
         .diagnostico-container,
         .revision-termino-container,
         .entrega-container {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: 2fr 1fr 1fr;
             gap: 10px;
             font-size: 15px;
             font-weight: bold;
@@ -181,13 +190,25 @@
         .fecha_trabajo,
         .tecnico,
         .costo_reparacion,
-        .firma-container {
+        .firma-container,
+        .diagnostico-container .diagnostico,
+        .diagnostico-container .numero_csa,
+        .diagnostico-container .entregado,
+        .accion_correctiva-container .accion_correctiva,
+        .estatus-container .estatus,
+        .fecha_revision-container .fecha_revision,
+        .fecha_trabajo-container .fecha_trabajo,
+        .tecnico-container .tecnico,
+        .comprado_por-container .comprado_por,
+        .fecha_compra-container .fecha_compra,
+        .costo_estado-container .costo_reparacion {
             border: 2px solid;
             padding: 0.5rem 1rem;
         }
-        .firma-container{
+
+        .firma-container {
             display: grid;
-            grid-template-rows: repeat(2,1fr);
+            grid-template-rows: repeat(2, 1fr);
         }
 
         .entrega-container {
@@ -197,13 +218,14 @@
 
         .costo_estado-container {
             display: grid;
-            grid-template-columns: repeat(2,1fr);
+            grid-template-columns: repeat(2, 1fr);
             gap: 20px;
         }
 
         .revision-termino-container {
             display: grid;
             grid-template-columns: repeat(5, 1fr);
+            margin: 0;
         }
 
 
@@ -276,10 +298,28 @@
 
         .datosLaHormiga {
             font-size: 15px;
+
+            .titulo-header {
+                font-size: 2rem;
+            }
         }
 
         .datosLaHormiga span {
             font-weight: bold;
+        }
+
+        .cliente-observaciones-contenedor {
+            display: grid;
+            grid-template-columns: 2fr 2fr;
+            gap: 1rem;
+            font-size: 1rem;
+        }
+
+        .contenedor-datos-equipo{
+            display: grid;
+            grid-template-columns: repeat(5,1fr);
+            gap: 1rem;
+            font-size: 1rem;
         }
     </style>
 </head>
@@ -293,65 +333,79 @@
 
             <div class="header-center">
                 <p class="datosLaHormiga">
-                    <strong>Reporte Técnico</strong><br>
-                    Prol. Tecnológico No. 96-A esq. Orlando Col. La Florida CP. 76150<br>
-                    Tels: (442) 215-95-99 y (442) 419 -27-45<br>
-                    Whatsapp Mostrador: 442 215 95 99<br>
-                    Whatsapp Garantías: 442 474 47 04<br>
-                    www.serviciolahormiga.com.mx<br>
-                    Horario L. a V. 9:00 a 18:00hrs Sab. 10:00 a 13:00 hrs<br>
-
+                    <span class="titulo-header">Reporte Técnico</span><br>
+                    <span>Prol. Tecnológico No. 96-A casi esq. Orlando Col. La Florida CP. 76150</span><br>
+                    <span>Santiago de Querétaro, Qro.</span><br>
+                    <span>Tels: (442) 215-95-99 y (442) 419 -27-45</span><br>
+                    <span>Whatsapp Mostrador: 442 215 95 99</span><br>
+                    <span>Whatsapp Garantías: 442 474 47 04</span><br>
+                    <span>www.serviciolahormiga.com.mx</span><br>
+                    <span>Horario L. a V. 9:00 a 18:00hrs Sab. 10:00 a 13:00 hrs</span><br>
                 </p>
             </div>
 
             <div class="header-right">
-                <p>Orden de Servicio:</p>
-                <p style="color: red; font-weight: bold;">{{ $pantalla->orden_servicio }}</p>
+                <p class="folio-texto">Orden de Servicio:</p>
+                <div class="folio-container">
+                    <p class="folio" style="color: red; font-weight: bold;">{{ $pantalla->orden_servicio }}</p>
+                </div>
 
-                <p><strong>Fecha Registro:</strong></p>
-                <p>{{ $orden->fecha_entrada?->translatedFormat('l d \\d\\e F \\d\\e Y') ?? '' }}</p>
-
-                <p><strong>Fecha Revisión:</strong></p>
-                <p>{{ $orden->fecha_trabajo?->translatedFormat('l d \\d\\e F \\d\\e Y') ?? '' }}</p>
+                <p class="fecha-texto">Fecha Registro:</p>
+                <div class="fecha-container">
+                    <p class="fecha">{{ $orden->fecha_entrada?->translatedFormat('l d \\d\\e F \\d\\e Y') ?? '' }}</p>
+                </div>
             </div>
         </div>
 
-        <div class="contenedor-datos-equipo">
-            <div class="tipo_servicio-container">
-                <p>Tipo de Servicio</p>
-                <p class="tipo_servicio">{{ $orden->tipo_servicio }}</p>
+        <div class="contenedor-datos-cliente">
+            <div class="cliente-observaciones-contenedor">
+                <div class="cliente-container">
+                    <p>Cliente:</p>
+                    <p class="cliente">{{ $orden->cliente }}</p>
+                </div>
+                <div class="observaciones-container">
+                    <p>Observaciones:</p>
+                    <p class="observaciones">{{ $orden->observacion }}</p>
+                </div>
             </div>
-            <div class="equipo-container">
-                <p>Equipo</p>
-                <p class="equipo">{{ $orden->equipo }}</p>
-            </div>
-            <div class="marca-container">
-                <p>Marca</p>
-                <p class="marca">{{ $pantalla->marca }}</p>
-            </div>
-            <div class="modelo-container">
-                <p>Modelo</p>
-                <p class="modelo">{{ $orden->modelo }}</p>
-            </div>
-            <div class="numero_servicio-container">
-                <p>Número De Servicio</p>
-                <p class="numero_servicio">{{ $orden->numero_servicio }}</p>
+
+            <div class="contenedor-datos-equipo">
+                <div class="tipo_servicio-container">
+                    <p>Tipo de Servicio</p>
+                    <p class="tipo_servicio">{{ $orden->tipo_servicio }}</p>
+                </div>
+                <div class="equipo-container">
+                    <p>Equipo</p>
+                    <p class="equipo">{{ $orden->equipo }}</p>
+                </div>
+                <div class="marca-container">
+                    <p>Marca</p>
+                    <p class="marca">{{ $pantalla->marca }}</p>
+                </div>
+                <div class="modelo-container">
+                    <p>Modelo</p>
+                    <p class="modelo">{{ $orden->modelo }}</p>
+                </div>
+                <div class="numero_servicio-container">
+                    <p>Número De Serie</p>
+                    <p class="numero_servicio">{{ $orden->numero_servicio }}</p>
+                </div>
             </div>
         </div>
 
         <div class="diagnostico-container">
             <div>
-                <p>Diagnóstico Técnico</p>
+                <p class="diagnostico-texto">Diagnóstico Técnico</p>
                 <p class="diagnostico">{{ $orden->diagnostico }}</p>
             </div>
 
             <div>
-                <p># De Orden C.S.A.</p>
+                <p class="numero_csa-texto"># De Orden C.S.A.</p>
                 <p class="numero_csa">{{ $pantalla->numero_orden }}</p>
             </div>
 
             <div>
-                <p>Entregado El</p>
+                <p class="entregado-texto">Entregado El</p>
                 <p class="entregado">{{ $pantalla->entregado }}</p>
             </div>
         </div>
@@ -368,7 +422,8 @@
             <div class="fecha_trabajo-container">
                 <p>Fecha de Término</p>
                 <p class="fecha_trabajo">
-                    {{ $orden->fecha_reparacion?->translatedFormat('l d \\d\\e F \\d\\e Y') ?? '' }}</p>
+                    {{ $orden->fecha_reparacion?->translatedFormat('l d \\d\\e F \\d\\e Y') ?? '' }}
+                </p>
             </div>
 
             <div class="tecnico-container">
@@ -417,12 +472,7 @@
             </div>
         </div>
 
-        <div class="observaciones-container">
-            <div>
-                <p>Observaciones:</p>
-                <p class="observaciones">{{ $orden->observacion }}</p>
-            </div>
-        </div>
+
 
         <div class="footer">
             <p class="parrafo-footer">Reparación de T.V., Minicomponentes,Pantallas de Plasma, Proyección, LCD y LED,

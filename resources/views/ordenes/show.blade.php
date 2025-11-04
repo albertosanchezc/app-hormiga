@@ -154,7 +154,8 @@
         .comprado_por,
         .fecha_compra,
         .lugar_compra,
-        .domicilio-container .domicilio{
+        .domicilio-container .domicilio,
+        .telefono-container .telefono{
             border: 2px solid;
             padding: 0.5rem 1rem;
         }
@@ -231,6 +232,9 @@
 
         .datosLaHormiga {
             font-size: 15px;
+            .titulo-header{
+                font-size: 2rem;
+            }
         }
 
         .datosLaHormiga span {
@@ -248,12 +252,13 @@
 
             <div class="header-center">
                 <p class="datosLaHormiga">
-                    <span>Prol. Tecnológico No. 96-A esq. Orlando Col. La Florida CP. 76150<br>
-                        Tels: (442) 215-95-99 y (442) 419 -27-45</span><br>
-                    Whatsapp Mostrador: <span>442 215 95 99</span><br>
-                    Whatsapp Garantías: <span>442 474 47 04</span><br>
-                    Santiago de Querétaro, Qro.<br>
-                    www.serviciolahormiga.com.mx<br>
+                    <span class="titulo-header">Hoja de Entrada</span><br>
+                    <span>Prol. Tecnológico No. 96-A esq. Orlando Col. La Florida CP. 76150</span><br>
+                    <span>Santiago de Querétaro, Qro.</span><br>
+                    <span>Tels: (442) 215-95-99 y (442) 419 -27-45</span><br>
+                    <span>Whatsapp Mostrador: 442 215 95 99</span><br>
+                    <span>Whatsapp Garantías: 442 474 47 04</span><br>
+                    <span>www.serviciolahormiga.com.mx</span><br>
                     <span>Horario L. a V. 9:00 a 18:00 hrs Sab 10:00 a 13:00 hrs</span>
                 </p>
             </div>
@@ -266,7 +271,7 @@
 
                 <p class="fecha-texto">Fecha de Entrada:</p>
                 <div class="fecha-container">
-                    <p class="fecha">{{ formatoFechaExtendida($orden->fecha_entrada) }}</p>
+                    <p class="fecha">{{ $orden->fecha_entrada?->translatedFormat('l d \\d\\e F \\d\\e Y') ?? '' }}</p>
                 </div>
 
                 <p class="hora-texto">Hora:</p>
