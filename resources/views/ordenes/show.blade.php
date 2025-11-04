@@ -154,7 +154,8 @@
         .comprado_por,
         .fecha_compra,
         .lugar_compra,
-        .domicilio-container .domicilio{
+        .domicilio-container .domicilio,
+        .telefono-container .telefono{
             border: 2px solid;
             padding: 0.5rem 1rem;
         }
@@ -231,6 +232,9 @@
 
         .datosLaHormiga {
             font-size: 15px;
+            .titulo-header{
+                font-size: 2rem;
+            }
         }
 
         .datosLaHormiga span {
@@ -267,7 +271,7 @@
 
                 <p class="fecha-texto">Fecha de Entrada:</p>
                 <div class="fecha-container">
-                    <p class="fecha">{{ formatoFechaExtendida($orden->fecha_entrada) }}</p>
+                    <p class="fecha">{{ $orden->fecha_entrada?->translatedFormat('l d \\d\\e F \\d\\e Y') ?? '' }}</p>
                 </div>
 
                 <p class="hora-texto">Hora:</p>
