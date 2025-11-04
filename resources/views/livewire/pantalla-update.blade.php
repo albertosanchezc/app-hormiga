@@ -7,7 +7,11 @@
             </div>
 
             <div class="header-center">
+<<<<<<< HEAD
                 <p class="datosLaHormiga">
+=======
+                <p>
+>>>>>>> f4677146066421716d549e1c102b2b83243ec8eb
                     <strong>Reporte Técnico</strong><br>
                     Prol. Tecnológico No. 96-A esq. Orlando Col. La Florida CP. 76150<br>
                     Tels: (442) 215-95-99 y (442) 419 -27-45<br>

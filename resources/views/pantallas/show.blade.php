@@ -144,7 +144,15 @@
         .tipo_servicio-container p,
         .observaciones-container p,
         .diagnostico-container p,
-        .numero_csa {
+        .fecha_revision-container p,
+        .fecha_trabajo-container p,
+        .tecnico-container p,
+        .comprado_por-container p,
+        .fecha_compra-container p,
+        .numero_csa,
+        .accion_correctiva-container p,
+        .costo_reparacion-container p,
+        .estatus-container p {
             padding: 0;
             margin: 0;
             font-weight: bold;
@@ -165,7 +173,7 @@
         .revision-termino-container,
         .entrega-container {
             display: grid;
-            grid-template-columns: 3fr 1fr 1fr;
+            grid-template-columns: 2fr 1fr 1fr;
             gap: 10px;
             font-size: 15px;
             font-weight: bold;
@@ -187,7 +195,13 @@
         .diagnostico-container .numero_csa,
         .diagnostico-container .entregado,
         .accion_correctiva-container .accion_correctiva,
-        .estatus-container .estatus {
+        .estatus-container .estatus,
+        .fecha_revision-container .fecha_revision,
+        .fecha_trabajo-container .fecha_trabajo,
+        .tecnico-container .tecnico,
+        .comprado_por-container .comprado_por,
+        .fecha_compra-container .fecha_compra,
+        .costo_estado-container .costo_reparacion {
             border: 2px solid;
             padding: 0.5rem 1rem;
         }
@@ -298,12 +312,14 @@
             display: grid;
             grid-template-columns: 2fr 2fr;
             gap: 1rem;
+            font-size: 1rem;
         }
 
         .contenedor-datos-equipo{
             display: grid;
             grid-template-columns: repeat(5,1fr);
             gap: 1rem;
+            font-size: 1rem;
         }
     </style>
 </head>
