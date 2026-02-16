@@ -106,13 +106,12 @@
 
 
         .cliente-telefono-contenedor,
-        .diagnostico-container p
-        {
-        display: grid;
-        grid-template-columns: 3fr 1fr;
-        gap: 20px;
-        font-size: 15px;
-        margin: 5px auto;
+        .diagnostico-container p {
+            display: grid;
+            grid-template-columns: 3fr 1fr;
+            gap: 20px;
+            font-size: 15px;
+            margin: 5px auto;
         }
 
         .cliente,
@@ -315,9 +314,9 @@
             font-size: 1rem;
         }
 
-        .contenedor-datos-equipo{
+        .contenedor-datos-equipo {
             display: grid;
-            grid-template-columns: repeat(5,1fr);
+            grid-template-columns: repeat(5, 1fr);
             gap: 1rem;
             font-size: 1rem;
         }
@@ -482,10 +481,10 @@
             </p>
 
             <div class="footer-logos">
-                <img src="http://localhost/img/logo-samsung.jpg" alt="Logo">
-                <img src="http://localhost/img/logo-daewoo.png" alt="Logo">
-                <img src="http://localhost/img/logo-hisense.png" alt="Logo">
-                <img src="http://localhost/img/logo-elektra.png" alt="Logo">
+                <img src="{{ asset('img/logo-samsung.jpg') }}" alt="Samsung">
+                <img src="{{ asset('img/logo-daewoo.png') }}" alt="Daewoo">
+                <img src="{{ asset('img/logo-hisense.png') }}" alt="Hisense">
+                <img src="{{ asset('img/logo-elektra.png') }}" alt="Elektra">
 
             </div>
         </div>
