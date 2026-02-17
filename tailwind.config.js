@@ -9,11 +9,11 @@ export default {
         './resources/views/**/*.blade.php',
     ],
 
-  safelist: [
-    {
-      pattern: /(bg|text)-(yellow|blue|green|red|orange|purple|indigo|gray)-(100|300|200|500|800|900)/,
-    },
-  ],
+    safelist: [
+        {
+            pattern: /(bg|text|border)-(orange|yellow|blue|purple|green|emerald|red|indigo|gray)-(100|200|300|400|800|900)/,
+        },
+    ],
   
 
     theme: {
