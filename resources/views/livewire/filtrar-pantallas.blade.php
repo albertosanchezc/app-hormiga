@@ -72,8 +72,12 @@
                 id="estado">
         </div>
 
-
-
+        <div class="block">
+            <label class="block mb-1 text-sm text-gray-700 uppercase font-bold " for="detectado">Diagnostico
+            </label>
+            <input type="text" wire:model="detectado" placeholder="Buscar por Diagnostico" class="border p-2 rounded w-full"
+                id="detectado">
+        </div>
 
 
         <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded">
