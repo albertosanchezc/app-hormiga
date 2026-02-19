@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('orden_servicio', 10)->nullable();
             $table->string('fecha_entrada', 10)->nullable();
             $table->string('cliente', 99)->nullable();
-            $table->string('equipo', 29)->nullable();
+            $table->string('equipo', 50)->nullable();
             $table->string('marca', 21)->nullable();
             $table->string('modelo', 25)->nullable();
             $table->string('tipo_servicio', 23)->nullable();
@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('valor_estimado', 255)->nullable();
             $table->text('diagnostico')->nullable();
             $table->string('accion_correctiva', 254)->nullable();
-            $table->string('tecnico', 15)->nullable();
+            $table->string('tecnico', 30)->nullable();
             $table->string('fecha_trabajo', 10)->nullable();
             $table->string('fecha_reparacion', 10)->nullable();
             $table->float('costo_reparacion')->nullable();
