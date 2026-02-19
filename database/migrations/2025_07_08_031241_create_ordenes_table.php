@@ -22,13 +22,13 @@ return new class extends Migration
             $table->string('tipo_servicio', 23)->nullable();
             $table->string('observacion', 254)->nullable();
             $table->string('valor_estimado', 255)->nullable();
-            $table->string('diagnostico', 248)->nullable();
+            $table->text('diagnostico')->nullable();
             $table->string('accion_correctiva', 254)->nullable();
             $table->string('tecnico', 15)->nullable();
             $table->string('fecha_trabajo', 10)->nullable();
             $table->string('fecha_reparacion', 10)->nullable();
             $table->float('costo_reparacion')->nullable();
-            $table->string('numero_servicio', 29)->nullable();
+            $table->string('numero_servicio', 100)->nullable();
             $table->string('comprado_por', 45)->nullable();
             $table->string('fecha_compra', 10)->nullable();
             $table->string('estatus', 40)->nullable();
