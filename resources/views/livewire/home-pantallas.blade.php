@@ -22,7 +22,9 @@
 
                         <span class="px-3 py-1 text-xs font-medium rounded-full  {{ $pantalla->estado?->color_clase ?? 'bg-red-100 text-red-800' }}">
 
-                            {{ $pantalla->estado?->nombre ?? 'Pendiente de Actualizar Estado' }}
+                            {{ empty($pantalla->orden?->estatus) 
+    ? 'Pendiente de Actualizar Estado' 
+    : $pantalla->orden->estatus }}
                         </span>
                     </div>
 

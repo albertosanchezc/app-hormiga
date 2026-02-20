@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use App\Models\User;
 use App\Models\Orden;
+use App\Models\Estado;
 use Livewire\Component;
 use App\Models\Pantalla;
 use App\Notifications\NuevoDiagnostico;
@@ -71,7 +72,7 @@ class PantallaUpdate extends Component
         $this->entregado = $this->entregado ?: null;
         $this->fecha_revision = $this->fecha_revision ?: null;
         $this->fecha_trabajo = $this->fecha_trabajo ?: null;
-        
+
         $orden->update([
             'diagnostico' => $this->diagnostico,
             'entregado' => $this->entregado,
@@ -83,6 +84,16 @@ class PantallaUpdate extends Component
             'estatus' => $this->estatus,
             'observacion' => $this->observacion,
         ]);
+
+        // Resolver estado automáticamente
+        if (!empty($this->estatus)) {
+
+            $estado = Estado::firstOrCreate([
+                'nombre' => strtoupper(trim($this->estatus))
+            ]);
+
+            $pantalla->estado_id = $estado->id;
+        }
 
         $pantalla->update([
             'detectado' => $this->diagnostico,
