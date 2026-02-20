@@ -111,7 +111,7 @@
                             </x-boton-indigo>
                         </a>
 
-                        <a href="{{ route('pantallas.edit', $pantalla->orden_servicio) }}" target="_blank">
+                        <a href="{{ route('pantallas.edit', $pantalla->orden_servicio) }}" >
                             <x-primary-button class="w-full">
                                 Actualizar RT
                             </x-primary-button>
