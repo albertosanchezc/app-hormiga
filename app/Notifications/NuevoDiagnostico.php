@@ -32,7 +32,7 @@ class NuevoDiagnostico extends Notification
             ->line('Cliente: ' . $this->orden->cliente)
             ->line('Diagnóstico: ' . $this->orden->diagnostico)
             ->line('Estado: ' . $this->orden->estatus)
-            ->action('Ver Orden', url('/ordenes/' . $this->orden->orden_servicio))
+            ->action('Ver Orden', url('/ordenes/' . $this->orden->orden_servicio . '/show'))
             ->line('Gracias por usar nuestro sistema.');
     }
 
