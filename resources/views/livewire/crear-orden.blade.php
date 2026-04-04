@@ -77,7 +77,7 @@
 
             <div class="fecha_compra-container">
                 <label for="fecha_compra">Fecha de Compra</label>
-                <input id="fecha_compra" type="text" name="fecha_compra" class="fecha_compra" wire:model="fecha_compra">
+                <input id="fecha_compra" type="date" name="fecha_compra" class="fecha_compra" wire:model="fecha_compra">
                 @error('fecha_compra')
                     <span class="error">{{ $message }}</span>
                 @enderror

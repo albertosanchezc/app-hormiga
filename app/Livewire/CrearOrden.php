@@ -41,7 +41,7 @@ class CrearOrden extends Component
         'numero_servicio' => 'required|string|max:100',
         'tipo_servicio' => 'required|string|max:100',
         'comprado_por' => 'nullable|string|max:100',
-        'fecha_compra' => 'nullable|date',
+        'fecha_compra' => 'nullable|date_format:Y-m-d',
         'lugar_compra' => 'nullable|string|max:100',
         'observacion' => 'required|string',
     ];
@@ -57,16 +57,43 @@ class CrearOrden extends Component
         $this->hora  = $now->format('H:i');
     }
 
+
     public function crearOrden()
     {
+        // Validación estricta
+        $this->validate([
+            'cliente' => 'required|string|max:255',
+            'telefono' => 'required|string|max:20',
+            'domicilio' => 'nullable|string|max:255',
+            'equipo' => 'required|string|max:100',
+            'marca' => 'required|string|max:100',
+            'modelo' => 'required|string|max:100',
+            'numero_servicio' => 'required|string|max:100',
+            'tipo_servicio' => 'required|string|max:100',
+            'comprado_por' => 'nullable|string|max:100',
+            'fecha_compra' => 'nullable|date_format:Y-m-d', // 🔥 clave
+            'lugar_compra' => 'nullable|string|max:100',
+            'observacion' => 'required|string',
+            'hora' => 'nullable|date_format:H:i',
+        ]);
 
-        
-        $this->validate();
+        // Normalizar fecha_compra
+        $fechaCompra = $this->fecha_compra
+            ? Carbon::parse($this->fecha_compra)->format('Y-m-d')
+            : null;
 
+        // Fecha y hora actual (consistente)
+        $now = Carbon::now(config('app.timezone'));
+
+        if (Orden::where('orden_servicio', $this->folio)->exists()) {
+            return;
+        }
+
+        // Crear orden
         $orden = Orden::create([
             'orden_servicio' => $this->folio,
-            'fecha_entrada'  => $this->fecha,
-            'hora' => horaToFormatoNumerico($this->hora),
+            'fecha_entrada'  => $now, // ✅ ahora sí datetime real
+            'hora'           => $now->format('H:i:s'), // opcional
             'cliente'        => $this->cliente,
             'telefono'       => $this->telefono,
             'domicilio'      => $this->domicilio,
@@ -76,27 +103,32 @@ class CrearOrden extends Component
             'numero_servicio' => $this->numero_servicio,
             'tipo_servicio'  => $this->tipo_servicio,
             'comprado_por'   => $this->comprado_por,
-            'fecha_compra'   => $this->fecha_compra,
+            'fecha_compra'   => $fechaCompra, // 🔥 ya normalizado
             'lugar_compra'   => $this->lugar_compra,
             'observacion'    => $this->observacion,
         ]);
 
+        // Crear pantalla relacionada
         Pantalla::create([
-            'orden_servicio' => $this->folio, // Relación
+            'orden_servicio' => $this->folio,
             'marca' => $this->marca,
             'pulgadas' => $this->modelo,
-            'estado_id' => 153, // En revisión"
+            'estado_id' => 153,
             'recibido_con' => $this->observacion,
             'detectado' => null,
             'fecha_registro' => now(),
             'fecha_revision' => null,
             'tecnico' => null,
         ]);
-        // session()->flash('mensaje', 'Orden creada correctamente');
 
-        $tecnicos = User::where('rol', 1)->get();// Rol técnico
-        Notification::send($tecnicos, new OrdenCreadaNotification($orden));
-
+        // Notificar técnicos
+        $tecnicos = User::where('rol', 1)->get();
+        try {
+            Notification::send($tecnicos, new OrdenCreadaNotification($orden));
+        } catch (\Exception $e) {
+            \Log::error('Error enviando notificación: ' . $e->getMessage());
+        }
+        // Redirigir
         return redirect()->route('pantallas.index');
     }
 

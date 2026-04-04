@@ -12,6 +12,7 @@ test('new users can register', function () {
         'email' => 'test@example.com',
         'password' => 'password',
         'password_confirmation' => 'password',
+        'rol' => 1, // o el valor que uses para usuarios normales
     ]);
 
     $this->assertAuthenticated();
