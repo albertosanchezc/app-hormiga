@@ -1,4 +1,4 @@
-<form  method="POST">
+<form method="POST">
     @csrf
     @method('PUT')
 
@@ -23,19 +23,19 @@
             <p class="folio-texto">Orden de Servicio:</p>
             <div class="folio-container">
                 <input type="text" name="orden_servicio" class="folio"
-                       value="{{ old('orden_servicio', $orden->orden_servicio) }}" required>
+                    value="{{ old('orden_servicio', $orden->orden_servicio) }}" required>
             </div>
 
             <p class="fecha-texto">Fecha de Entrada:</p>
             <div class="fecha-container">
                 <input type="date" name="fecha_entrada" class="fecha"
-                       value="{{ old('fecha_entrada', $orden->fecha_entrada ? $orden->fecha_entrada->format('Y-m-d') : '') }}" required>
+                    value="{{ old('fecha_entrada', $orden->fecha_entrada ? $orden->fecha_entrada->format('Y-m-d') : '') }}"
+                    required>
             </div>
 
             <p class="hora-texto">Hora:</p>
             <div class="hora-container">
-                <input type="time" name="hora" class="hora"
-                       value="{{ old('hora', $orden->hora) }}" required>
+                <input type="time" name="hora" class="hora" value="{{ old('hora', $orden->hora) }}" required>
             </div>
         </div>
     </div>
@@ -43,13 +43,11 @@
     <div class="cliente-telefono-contenedor">
         <div class="cliente-container">
             <p>Cliente:</p>
-            <input type="text" name="cliente" class="cliente"
-                   value="{{ old('cliente', $orden->cliente) }}" required>
+            <input type="text" name="cliente" class="cliente" value="{{ old('cliente', $orden->cliente) }}" required>
         </div>
         <div class="telefono-container">
             <p>Teléfono:</p>
-            <input type="text" name="telefono" class="telefono"
-                   value="{{ old('telefono', $orden->telefono) }}">
+            <input type="text" name="telefono" class="telefono" value="{{ old('telefono', $orden->telefono) }}">
         </div>
     </div>
 
@@ -61,34 +59,51 @@
     <div class="contenedor-datos-equipo">
         <div class="equipo-container">
             <p>Equipo:</p>
-            <input type="text" name="equipo" class="equipo"
-                   value="{{ old('equipo', $orden->equipo) }}">
+            <input type="text" name="equipo" class="equipo" value="{{ old('equipo', $orden->equipo) }}">
         </div>
         <div class="marca-container">
             <p>Marca:</p>
-            <input type="text" name="marca" class="marca"
-                   value="{{ old('marca', $orden->marca) }}">
+            <input type="text" name="marca" class="marca" value="{{ old('marca', $orden->marca) }}">
         </div>
         <div class="modelo-container">
             <p>Modelo:</p>
-            <input type="text" name="modelo" class="modelo"
-                   value="{{ old('modelo', $orden->modelo) }}">
+            <input type="text" name="modelo" class="modelo" value="{{ old('modelo', $orden->modelo) }}">
         </div>
         <div class="numero_servicio-container">
             <p>Núm. De Serie:</p>
             <input type="text" name="numero_servicio" class="numero_servicio"
-                   value="{{ old('numero_servicio', $orden->numero_servicio) }}">
+                value="{{ old('numero_servicio', $orden->numero_servicio) }}">
         </div>
         <div class="tipo_servicio-container">
             <p>Tipo de Servicio:</p>
             <input type="text" name="tipo_servicio" class="tipo_servicio"
-                   value="{{ old('tipo_servicio', $orden->tipo_servicio) }}">
+                value="{{ old('tipo_servicio', $orden->tipo_servicio) }}">
         </div>
     </div>
 
     <div class="observaciones-container">
         <p>Observaciones:</p>
         <textarea name="observacion" class="observaciones">{{ old('observacion', $orden->observacion) }}</textarea>
+    </div>
+
+    <div class="datos-compra-container">
+        <div class="comprado_por-container">
+            <label for="comprado_por">Comprado Por</label>
+            <input id="comprado_por" type="text" name="comprado_por" class="comprado_por"
+                wire:model.defer="comprado_por">
+        </div>
+
+        <div class="fecha_compra-container">
+            <label for="fecha_compra">Fecha de Compra</label>
+            <input id="fecha_compra" type="date" name="fecha_compra" class="fecha_compra"
+                wire:model.defer="fecha_compra">
+        </div>
+
+        <div class="lugar_compra-container">
+            <label for="lugar_compra">Lugar de Compra</label>
+            <input id="lugar_compra" type="text" name="lugar_compra" class="lugar_compra"
+                wire:model.defer="lugar_compra">
+        </div>
     </div>
 
     <div class="footer">
