@@ -72,7 +72,8 @@ class OrdenUpdate extends Component
             'hora' => 'required|date_format:H:i',
         ]);
 
-        $this->orden->update([
+        $orden = Orden::findOrFail($this->orden->id);
+        $orden->update([
             'cliente' => $this->cliente,
             'telefono' => $this->telefono,
             'domicilio' => $this->domicilio,
@@ -82,13 +83,15 @@ class OrdenUpdate extends Component
             'numero_servicio' => $this->numero_servicio,
             'tipo_servicio' => $this->tipo_servicio,
             'comprado_por' => $this->comprado_por,
-            'fecha_compra' => $this->fecha_compra ? \Carbon\Carbon::parse($this->fecha_compra)->format('Y-m-d') : null,
+            'fecha_compra' => $this->fecha_compra
+                ? \Carbon\Carbon::parse($this->fecha_compra)->format('Y-m-d')
+                : null,
             'lugar_compra' => $this->lugar_compra,
             'observacion' => $this->observacion,
             'hora' => $this->hora,
         ]);
 
-        $this->orden->refresh(); // Muy importante
+        $this->orden = $orden->fresh();
     }
 
     public function render()

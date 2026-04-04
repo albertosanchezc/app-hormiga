@@ -46,7 +46,6 @@ class Orden extends Model
         'entregado',
         'telefono',
         'domicilio',
-        'telefono',
         'hora',
         'lugar_compra',
         'costo_adicional',
