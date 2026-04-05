@@ -17,7 +17,7 @@ class Orden extends Model
         'fecha_entrada'    => 'date',
         'fecha_trabajo'    => 'date',
         'fecha_reparacion' => 'date',
-        'fecha_compra'     => 'date',
+        'fecha_compra'     => 'date:Y-m-d',
         'entregado'        => 'date',
     ];
     

@@ -47,7 +47,7 @@ class OrdenUpdateTest extends TestCase
         Livewire::test(\App\Livewire\OrdenUpdate::class, ['orden' => $this->orden->id])
             ->set('cliente', 'Cliente Actualizado')
             ->set('fecha_compra', '2025-12-16')
-            ->call('ordenUpdate');
+            ->call('save');
 
         $this->assertDatabaseHas('ordenes', [
             'id' => $this->orden->id,
@@ -60,7 +60,7 @@ class OrdenUpdateTest extends TestCase
     {
         Livewire::test(\App\Livewire\OrdenUpdate::class, ['orden' => $this->orden->id])
             ->set('fecha_compra', '16/12/2025')
-            ->call('ordenUpdate')
+            ->call('save')
             ->assertHasErrors(['fecha_compra']);
     }
 
@@ -68,7 +68,7 @@ class OrdenUpdateTest extends TestCase
     {
         Livewire::test(\App\Livewire\OrdenUpdate::class, ['orden' => $this->orden->id])
             ->set('hora', '25:99')
-            ->call('ordenUpdate')
+            ->call('save')
             ->assertHasErrors(['hora']);
     }
 
@@ -78,7 +78,7 @@ class OrdenUpdateTest extends TestCase
             ->set('cliente', '')
             ->set('telefono', '')
             ->set('equipo', '')
-            ->call('ordenUpdate')
+            ->call('save')
             ->assertHasErrors(['cliente', 'telefono', 'equipo']);
     }
 }

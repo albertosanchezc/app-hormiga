@@ -54,9 +54,9 @@ class OrdenUpdate extends Component
         }
     }
 
-    public function ordenUpdate()
+    public function save()
     {
-        $this->validate([
+        $rules = [
             'cliente' => 'required|string|max:255',
             'telefono' => 'required|string|max:20',
             'domicilio' => 'nullable|string|max:255',
@@ -66,32 +66,36 @@ class OrdenUpdate extends Component
             'numero_servicio' => 'required|string|max:100',
             'tipo_servicio' => 'required|string|max:100',
             'comprado_por' => 'nullable|string|max:100',
-            'fecha_compra' => 'nullable|date_format:Y-m-d',
+            'fecha_compra' => 'nullable|date',
             'lugar_compra' => 'nullable|string|max:100',
             'observacion' => 'required|string',
-            'hora' => 'required|date_format:H:i',
-        ]);
+        ];
 
-        $orden = Orden::findOrFail($this->orden->id);
-        $orden->update([
-            'cliente' => $this->cliente,
-            'telefono' => $this->telefono,
-            'domicilio' => $this->domicilio,
-            'equipo' => $this->equipo,
-            'marca' => $this->marca,
-            'modelo' => $this->modelo,
-            'numero_servicio' => $this->numero_servicio,
-            'tipo_servicio' => $this->tipo_servicio,
-            'comprado_por' => $this->comprado_por,
-            'fecha_compra' => $this->fecha_compra
-                ? \Carbon\Carbon::parse($this->fecha_compra)->format('Y-m-d')
-                : null,
-            'lugar_compra' => $this->lugar_compra,
-            'observacion' => $this->observacion,
+        // 🔥 SOLO valida hora si el usuario la cambió
+        if ($this->hora !== $this->orden->hora) {
+            $rules['hora'] = 'nullable|date_format:H:i';
+        }
+
+        $validated = $this->validate($rules);
+
+        $this->orden->update([
+            'cliente' => $validated['cliente'],
+            'telefono' => $validated['telefono'],
+            'domicilio' => $validated['domicilio'] ?? null,
+            'equipo' => $validated['equipo'],
+            'marca' => $validated['marca'],
+            'modelo' => $validated['modelo'],
+            'numero_servicio' => $validated['numero_servicio'],
+            'tipo_servicio' => $validated['tipo_servicio'],
+            'comprado_por' => $validated['comprado_por'] ?? null,
+            'fecha_compra' => $validated['fecha_compra'] ?? null,
+            'lugar_compra' => $validated['lugar_compra'] ?? null,
+            'observacion' => $validated['observacion'],
+
+            // 🔥 importante
             'hora' => $this->hora,
         ]);
-
-        $this->orden = $orden->fresh();
+        // return redirect()->route('pantallas.index');
     }
 
     public function render()

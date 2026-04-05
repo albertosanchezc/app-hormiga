@@ -1,8 +1,5 @@
-<!-- <form method="POST"> -->
-<!-- @csrf
-    @method('PUT') -->
 <div>
-    <form wire:submit.prevent="ordenUpdate">
+    <form wire:submit.prevent="save">
         <div class="header">
             <div class="header-left">
                 <img src="{{ asset('img/logo.png') }}" alt="Logo">
@@ -24,21 +21,19 @@
                 <p class="folio-texto">Orden de Servicio:</p>
                 <div class="folio-container">
                     <input type="text" name="orden_servicio" class="folio"
-                        value="{{ old('orden_servicio', $orden->orden_servicio) }}" required>
+                        value="{{ old('orden_servicio', $orden->orden_servicio) }}" disabled>
                 </div>
 
                 <p class="fecha-texto">Fecha de Entrada:</p>
                 <div class="fecha-container">
                     <input type="date" name="fecha_entrada" class="fecha"
                         value="{{ old('fecha_entrada', $orden->fecha_entrada ? $orden->fecha_entrada->format('Y-m-d') : '') }}"
-                        required>
+                        disabled>
                 </div>
 
                 <p class="hora-texto">Hora:</p>
                 <div class="hora-container">
-                    <input type="time"
-                        name="hora"
-                        value="{{ old('hora', $orden->hora ? \Carbon\Carbon::parse($orden->hora)->format('H:i') : '') }}">
+                    <input id="hora" type="time" value="{{ formatoNumericoToHora($orden->hora) }}">
                 </div>
             </div>
         </div>
@@ -46,11 +41,11 @@
         <div class="cliente-telefono-contenedor">
             <div class="cliente-container">
                 <p>Cliente:</p>
-                <input type="text" name="cliente" class="cliente" value="{{ old('cliente', $orden->cliente) }}" required>
+                <input type="text" wire:model="cliente" class="cliente" required>
             </div>
             <div class="telefono-container">
                 <p>Teléfono:</p>
-                <input type="text" name="telefono" class="telefono" value="{{ old('telefono', $orden->telefono) }}">
+                <input type="text" wire:model="telefono" class="telefono">
             </div>
         </div>
 
@@ -62,31 +57,29 @@
         <div class="contenedor-datos-equipo">
             <div class="equipo-container">
                 <p>Equipo:</p>
-                <input type="text" name="equipo" class="equipo" value="{{ old('equipo', $orden->equipo) }}">
+                <input type="text" wire:model="equipo" class="equipo">
             </div>
             <div class="marca-container">
                 <p>Marca:</p>
-                <input type="text" name="marca" class="marca" value="{{ old('marca', $orden->marca) }}">
+                <input type="text" wire:model="marca" class="marca">
             </div>
             <div class="modelo-container">
                 <p>Modelo:</p>
-                <input type="text" name="modelo" class="modelo" value="{{ old('modelo', $orden->modelo) }}">
+                <input type="text" wire:model="modelo" class="modelo">
             </div>
             <div class="numero_servicio-container">
                 <p>Núm. De Serie:</p>
-                <input type="text" name="numero_servicio" class="numero_servicio"
-                    value="{{ old('numero_servicio', $orden->numero_servicio) }}">
+                <input type="text" wire:model="numero_servicio" class="numero_servicio">
             </div>
             <div class="tipo_servicio-container">
                 <p>Tipo de Servicio:</p>
-                <input type="text" name="tipo_servicio" class="tipo_servicio"
-                    value="{{ old('tipo_servicio', $orden->tipo_servicio) }}">
+                <input type="text" wire:model="tipo_servicio" class="tipo_servicio">
             </div>
         </div>
 
         <div class="observaciones-container">
             <p>Observaciones:</p>
-            <textarea name="observacion" class="observaciones">{{ old('observacion', $orden->observacion) }}</textarea>
+            <textarea wire:model='observacion' class="observaciones"></textarea>
         </div>
 
         <div class="datos-compra-container">
@@ -98,8 +91,10 @@
 
             <div class="fecha_compra-container">
                 <label for="fecha_compra">Fecha de Compra</label>
-                <input id="fecha_compra" type="date" name="fecha_compra" class="fecha_compra"
-                    wire:model="fecha_compra">
+                <input id="fecha_compra" type="date" class="fecha_compra" wire:model="fecha_compra">
+                @error('lugar_compra')
+                    <span class="error">{{ $message }}</span>
+                @enderror
             </div>
 
             <div class="lugar_compra-container">
@@ -119,7 +114,7 @@
             </p>
         </div>
 
-        <button class="boton-azul" type="submit">Guardar</button>
+        <input class="boton-azul" type="submit" value="Guardar">
 
         <!-- </form> -->
     </form>
