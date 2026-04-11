@@ -10,9 +10,11 @@
                 <p class="datosLaHormiga">
                     <strong>Reporte Técnico</strong><br>
                     Prol. Tecnológico No. 96-A esq. Orlando Col. La Florida CP. 76150<br>
-                    Tels: (442) 215-95-99 y (442) 419 -27-45<br>
-                    Santiago de Querétaro, Qro.<br>
-                    www.serviciolahormiga.com.mx
+                    Tels: (442) 215-95-99 y (442) 419-27-45<br/>
+                    WhatsApp Mostrador 442 215 95 99<br/>
+                    WhatsApp Garantias 442 474 47 04<br/>
+                    www.serviciolahormiga.com.mx<br/>
+                    Horario L. a V. 9:00 a.m. a 6:00 p.m. Sab. 10:00 a.m. a 1:00 p.m. 
                 </p>
             </div>
 
@@ -21,10 +23,7 @@
                 <input id="orden_servicio" type="text" value="{{ $pantalla->orden_servicio }}" readonly disabled style="color: red; font-weight: bold;">
 
                 <label for="fecha_entrada"><strong>Fecha Registro:</strong></label>
-                <input id="fecha_entrada" type="date" wire:model="fecha_entrada">
-
-                <label for="fecha_revision"><strong>Fecha Revisión:</strong></label>
-                <input id="fecha_revision" type="date" wire:model="fecha_revision">
+                <input id="fecha_entrada" type="date" wire:model="fecha_entrada" readonly disabled>
             </div>
         </div>
 

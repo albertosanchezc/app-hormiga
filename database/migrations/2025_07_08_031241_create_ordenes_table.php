@@ -48,7 +48,8 @@ return new class extends Migration
             $table->string('domicilio', 100)->nullable();
 
             // ⚠️ Opcional (puedes eliminar en el futuro)
-            $table->time('hora')->nullable();
+            $table->time('hora')->nullable();//esta será la versión final una vez que no se requieran seeders
+            // $table->string('hora', 8)->nullable();// Esto es necesario al cargar seeders
 
             $table->string('lugar_compra', 57)->nullable();
             $table->string('costo_adicional', 4)->nullable();
