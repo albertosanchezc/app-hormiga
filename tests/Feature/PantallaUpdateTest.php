@@ -8,6 +8,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
 use App\Models\Orden;
 use App\Models\Pantalla;
+use App\Models\Estado;
 
 class PantallaUpdateTest extends TestCase
 {
@@ -20,13 +21,13 @@ class PantallaUpdateTest extends TestCase
     {
         parent::setUp();
 
-        // Estado necesario
+        // Estado base
         DB::table('estados')->insert([
             'id' => 1,
             'nombre' => 'PENDIENTE'
         ]);
 
-        // Crear orden
+        // Orden
         $this->orden = Orden::create([
             'orden_servicio' => 12345,
             'fecha_entrada' => now(),
@@ -42,7 +43,7 @@ class PantallaUpdateTest extends TestCase
             'observacion' => 'Observación inicial',
         ]);
 
-        // Crear pantalla relacionada
+        // Pantalla
         $this->pantalla = Pantalla::create([
             'orden_id' => $this->orden->id,
             'orden_servicio' => 12345,
@@ -53,7 +54,7 @@ class PantallaUpdateTest extends TestCase
     public function test_actualiza_diagnostico_y_estatus()
     {
         Livewire::test(\App\Livewire\PantallaUpdate::class, [
-            'pantalla' => $this->pantalla->orden_servicio
+            'pantalla' => $this->pantalla // 🔥 objeto completo
         ])
             ->set('diagnostico', 'Falla en backlight')
             ->set('estatus', 'reparado')
@@ -61,37 +62,39 @@ class PantallaUpdateTest extends TestCase
             ->call('save')
             ->assertRedirect(route('pantallas.index'));
 
-        // 🔹 Validar ORDEN
+        // 🔹 ORDEN
         $this->assertDatabaseHas('ordenes', [
             'id' => $this->orden->id,
             'diagnostico' => 'Falla en backlight',
             'estatus' => 'reparado',
         ]);
 
-        // 🔹 Validar PANTALLA (sin estatus porque no existe ahí)
+        // 🔹 PANTALLA
         $this->assertDatabaseHas('pantallas', [
             'id' => $this->pantalla->id,
             'detectado' => 'Falla en backlight',
         ]);
 
-        // 🔥 VALIDAR ESTADO CREADO
+        // 🔹 ESTADO creado
         $this->assertDatabaseHas('estados', [
             'nombre' => 'REPARADO'
         ]);
 
-        // 🔥 VALIDAR RELACIÓN estado_id en pantalla
-        $estadoId = \App\Models\Estado::where('nombre', 'REPARADO')->first()->id;
+        // 🔹 RELACIÓN estado_id
+        $estado = Estado::where('nombre', 'REPARADO')->first();
 
-        $this->assertDatabaseHas('pantallas', [
-            'id' => $this->pantalla->id,
-            'estado_id' => $estadoId
-        ]);
+        $this->assertNotNull($estado);
+
+        $this->assertEquals(
+            $estado->id,
+            $this->pantalla->fresh()->estado_id
+        );
     }
-    
+
     public function test_costo_no_numerico_falla()
     {
         Livewire::test(\App\Livewire\PantallaUpdate::class, [
-            'pantalla' => $this->pantalla->orden_servicio
+            'pantalla' => $this->pantalla // objeto completo
         ])
             ->set('costo_reparacion', 'no_numero')
             ->call('save')
@@ -101,7 +104,7 @@ class PantallaUpdateTest extends TestCase
     public function test_fechas_vacias_se_guardan_como_null()
     {
         Livewire::test(\App\Livewire\PantallaUpdate::class, [
-            'pantalla' => $this->pantalla->orden_servicio
+            'pantalla' => $this->pantalla // objeto completo
         ])
             ->set('entregado', '')
             ->set('fecha_revision', '')

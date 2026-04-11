@@ -11,7 +11,8 @@ use App\Notifications\NuevoDiagnostico;
 
 class PantallaUpdate extends Component
 {
-    public $pantalla;
+    public Pantalla $pantalla;
+    // public $pantalla;
 
     // Campos editables
     public $orden_servicio;
@@ -30,25 +31,24 @@ class PantallaUpdate extends Component
 
 
 
-    public function mount($pantalla)
+    public function mount(Pantalla $pantalla)
     {
-        $this->pantalla = Pantalla::where('orden_servicio', $pantalla)->firstOrFail();
+        $this->pantalla = $pantalla;
 
-        $this->orden_servicio = $this->pantalla->orden_servicio;
-        $this->diagnostico = $this->pantalla->orden->diagnostico;
-        $this->entregado = $this->pantalla->orden->entregado;
-        $this->fecha_entrada = $this->pantalla->orden->fecha_entrada?->format('Y-m-d') ?? '';
-        $this->fecha_revision = $this->pantalla->orden->fecha_trabajo?->format('Y-m-d') ?? '';
-        $this->fecha_trabajo  = $this->pantalla->orden->fecha_reparacion?->format('Y-m-d') ?? '';
-        $this->tecnico = $this->pantalla->orden->tecnico;
+        $this->orden_servicio = $pantalla->orden_servicio;
+        $this->diagnostico = $pantalla->orden->diagnostico;
+        $this->entregado = $pantalla->orden->entregado;
+        $this->fecha_entrada = $pantalla->orden->fecha_entrada?->format('Y-m-d') ?? '';
+        $this->fecha_revision = $pantalla->orden->fecha_trabajo?->format('Y-m-d') ?? '';
+        $this->fecha_trabajo  = $pantalla->orden->fecha_reparacion?->format('Y-m-d') ?? '';
+        $this->tecnico = $pantalla->orden->tecnico;
         $this->detectado = $this->diagnostico;
-        $this->notas = $this->pantalla->notas;
-        $this->accion_correctiva = $this->pantalla->orden->accion_correctiva;
-        $this->costo_reparacion = $this->pantalla->orden->costo_reparacion;
-        $this->estatus = $this->pantalla->orden->estatus;
-        $this->observacion = $this->pantalla->orden->observacion;
+        $this->notas = $pantalla->notas;
+        $this->accion_correctiva = $pantalla->orden->accion_correctiva;
+        $this->costo_reparacion = $pantalla->orden->costo_reparacion;
+        $this->estatus = $pantalla->orden->estatus;
+        $this->observacion = $pantalla->orden->observacion;
     }
-
 
     public function save()
     {
