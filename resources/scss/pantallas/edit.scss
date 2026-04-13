@@ -180,7 +180,13 @@ a.btn-secondary:hover {
     font-size: x-large;
 }
 
-#orden_servicio,
+#orden_servicio{
+    font-size: 1.3em;
+    font-weight: bold;
+    color: #b91c1c;
+}
+
+#numero_servicio,
 #telefono,
 #modelo,
 #estado,
@@ -190,13 +196,7 @@ a.btn-secondary:hover {
 #domicilio,
 #marca,
 #tipo_servicio,
-#recibido_con{
-    font-size: 1.3em;
-    font-weight: bold;
-    color: #b91c1c;
-}
-
-#numero_servicio {
+#recibido_con {
     font-size: 1.1em;
     font-weight: 600;
     letter-spacing: 1px;
