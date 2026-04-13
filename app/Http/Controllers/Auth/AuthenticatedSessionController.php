@@ -14,8 +14,15 @@ class AuthenticatedSessionController extends Controller
     /**
      * Display the login view.
      */
-    public function create(): View
+    public function create(): View|RedirectResponse
     {
+
+        if(auth()->check()){
+            return redirect()->route('pantallas.index');
+        }
+
+        request()->session()->regenerateToken();
+
         return view('auth.login');
     }
 
