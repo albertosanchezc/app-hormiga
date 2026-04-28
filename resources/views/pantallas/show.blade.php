@@ -400,12 +400,12 @@
 
             <div>
                 <p class="numero_csa-texto"># De Orden C.S.A.</p>
-                <p class="numero_csa">{{ $pantalla->numero_orden }}</p>
+                <p class="numero_csa">{{ $pantalla->orden->numero_orden }}</p>
             </div>
 
             <div>
                 <p class="entregado-texto">Entregado El</p>
-                <p class="entregado">{{ $pantalla->entregado }}</p>
+                <p class="entregado">{{ $pantalla->orden->entregado?->translatedFormat('l d \\d\\e F \\d\\e Y') ?? '' }}</p>
             </div>
         </div>
         {{-- Equipo, Marca, Modelo, Num. De Serie, tipo de servicio deben estar en un grid de 3 LOS 5 --}}
