@@ -16,6 +16,92 @@
                         {{ $pantalla->orden_servicio }}
                     </div>
 
+                    {{-- Tiempo --}}
+                    <div class="space-y-1 mb-3">
+
+                        {{-- Ingresó a taller hace --}}
+                        <div class="text-xs text-gray-500">
+                            Ingresó {{ $pantalla->orden->fecha_entrada?->diffForHumans() }}
+                        </div>
+
+                        {{-- Revisado --}}
+                        @if($pantalla->orden?->fecha_trabajo)
+                        <div class="text-xs text-amber-600 font-medium">
+                            Diagnosticado {{ $pantalla->orden->fecha_trabajo->diffForHumans() }}
+                        </div>
+                        @endif
+
+                        {{-- Reparado --}}
+                        @if($pantalla->orden?->fecha_reparacion)
+                        <div class="text-xs text-blue-600 font-medium">
+                            Reparado {{ $pantalla->orden->fecha_reparacion->diffForHumans() }}
+                        </div>
+                        @endif
+
+                        {{-- Entregado --}}
+                        @if($pantalla->orden?->entregado)
+                        <div class="text-xs text-green-600 font-semibold">
+                            Entregado {{ $pantalla->orden->entregado->diffForHumans() }}
+                        </div>
+                        @endif
+
+
+
+                        {{-- ================================================ --}}
+                        {{-- ALERTA SIN MOVIMIENTO (FORMATO HUMANO) --}}
+                        {{-- ================================================ --}}
+
+                        @php
+
+                        // Fechas importantes del proceso
+                        $fechas = collect([
+                        $pantalla->orden?->fecha_entrada,
+                        $pantalla->orden?->fecha_trabajo,
+                        $pantalla->orden?->fecha_reparacion,
+                        $pantalla->orden?->entregado,
+                        ])->filter();
+
+                        // Último avance real
+                        $ultimaFecha = $fechas->sortDesc()->first();
+
+                        // Días sin movimiento
+                        $dias = $ultimaFecha
+                        ? $ultimaFecha->copy()->startOfDay()->diffInDays(now()->startOfDay())
+                        : 0;
+
+                        // ¿Ya fue entregado?
+                        $entregado = !empty($pantalla->orden?->entregado);
+
+
+                        // ============================================
+                        // TEXTO MÁS HUMANO
+                        // ============================================
+                        // 3 días
+                        // 2 semanas
+                        // 3 meses
+                        // 1 año
+                        // ============================================
+
+                        if ($dias >= 365) {
+                        $tiempo = floor($dias / 365) . ' año' . (floor($dias / 365) > 1 ? 's' : '');
+                        } elseif ($dias >= 30) {
+                        $tiempo = floor($dias / 30) . ' mes' . (floor($dias / 30) > 1 ? 'es' : '');
+                        } elseif ($dias >= 7) {
+                        $tiempo = floor($dias / 7) . ' semana' . (floor($dias / 7) > 1 ? 's' : '');
+                        } else {
+                        $tiempo = $dias . ' día' . ($dias > 1 ? 's' : '');
+                        }
+
+                        @endphp
+
+
+                        @if(!$entregado && $dias >= 3)
+                        <div class="text-xs text-red-600 font-semibold">
+                            ⏳ Sin movimiento hace {{ $tiempo }}
+                        </div>
+                        @endif
+                    </div>
+
                     {{-- Estado con color dinámico --}}
                     <div class="text-sm mb-2">
                         <span class="font-semibold text-gray-700">Estado:</span>
@@ -90,6 +176,8 @@
                     </div>
                     @endif
 
+
+
                     {{-- Botones --}}
                     <div class="mt-4 grid grid-cols-2 gap-2">
 
@@ -111,7 +199,7 @@
                             </x-boton-indigo>
                         </a>
 
-                        <a href="{{ route('pantallas.edit', $pantalla->orden_servicio) }}" >
+                        <a href="{{ route('pantallas.edit', $pantalla->orden_servicio) }}">
                             <x-primary-button class="w-full">
                                 Actualizar RT
                             </x-primary-button>
