@@ -84,7 +84,7 @@
         .fecha,
         .hora {
             color: black;
-            font-size: 10px;
+            font-size: 20px;
             margin: 0;
             text-align: center;
         }
@@ -334,7 +334,7 @@
 
             <div class="fecha_compra-container">
                 <p>Fecha de Compra:</p>
-                <p class="fecha_compra">{{ $orden->fecha_compra }}</p>
+                <p class="fecha_compra">{{ $orden->fecha_compra?->translatedFormat('l d \\d\\e F \\d\\e Y') ?? '' }}</p>
             </div>
 
             <div class="lugar_compra-container">
