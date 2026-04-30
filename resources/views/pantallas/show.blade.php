@@ -3,6 +3,8 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Reporte Técnico - {{ $orden->orden_servicio }}</title>
     <style>
         body {
@@ -19,7 +21,7 @@
         }
 
         .container-principal {
-            max-width: 66.6%;
+            max-width: 90%;
             margin: 0 auto;
         }
 

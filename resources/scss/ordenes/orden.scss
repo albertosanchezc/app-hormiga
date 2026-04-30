@@ -2,7 +2,7 @@
 
 body {
   font-family: 'Courier New', monospace;
-  font-size: 12px;
+  font-size: 1.2rem;
   margin: 20px;
 }
 
@@ -31,17 +31,17 @@ body {
   .header-center {
     width: 45%;
     text-align: center;
-    font-size: 10px;
+    font-size: 1.0rem;
   }
 
   .header-right {
     width: 25%;
     text-align: right;
-    font-size: 10px;
+    font-size: 1.0rem;
   }
 
   img {
-    width: 180px;
+    width: 18.0rem;
   }
 }
 
@@ -72,7 +72,7 @@ td {
 .fecha,
 .hora {
   color: black;
-  font-size: 10px;
+  font-size: 1.0rem;
   margin: 0;
   text-align: center;
 }
@@ -85,7 +85,7 @@ td {
   display: grid;
   grid-template-columns: 3fr 1fr;
   gap: 20px;
-  font-size: 10px;
+  font-size: 1.0rem;
 }
 
 .datos-compra-container {
@@ -107,23 +107,23 @@ td {
   display: inherit;
 
   label {
-    font-size: 20px;
+    font-size: 2.0rem;
     font-weight: bold;
   }
 }
 
 .container-principal {
-  max-width: 66.6%;
+  max-width: 90%;
   margin: 0 auto;
 }
 
 .domicilio-container,
 .observaciones-container {
   display: grid;
-  font-size: 20px;
+  font-size: 2.0rem;
   font-weight: bold;
   p{
-    font-size: 15px;
+    font-size: 1.5rem;
   }
 }
 
@@ -133,14 +133,14 @@ td {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 10px;
-  font-size: 10px;
+  font-size: 1.0rem;
 }
 
 .footer {
   margin-top: 20px;
   border: 1px solid;
   text-align: center;
-  font-size: 12px;
+  font-size: 1.2rem;
   font-weight: bold;
 
   .parrafo-footer {
@@ -156,13 +156,13 @@ td {
   gap: 10px;
 
   img {
-    width: 125px;
+    width: 12.5rem;
     height: auto;
   }
 }
 
 .datosLaHormiga {
-  font-size: 20px;
+  font-size: 2.0rem;
 
   span {
     font-weight: bold;
