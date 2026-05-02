@@ -8,7 +8,7 @@
     <title>Orden de Servicio - {{ $orden->orden_servicio }}</title>
     <style>
         body {
-            font-family: 'Courier New', monospace;
+            font-family: Arial, sans-serif;
             font-size: 12px;
             margin: 20px;
         }

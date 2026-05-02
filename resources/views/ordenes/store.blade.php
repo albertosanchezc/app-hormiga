@@ -9,7 +9,7 @@
     <style>
         /* Puedes reutilizar exactamente los estilos de tu vista original */
         body {
-            font-family: 'Courier New', monospace;
+            font-family: Arial, sans-serif;
             font-size: 12px;
             margin: 20px;
         }

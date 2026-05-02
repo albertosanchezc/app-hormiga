@@ -1,5 +1,5 @@
 body {
-    font-family: 'Courier New', monospace;
+    font-family: Arial, sans-serif;
     font-size: clamp(14px, 1vw, 16px);
     margin: 20px;
 }
@@ -82,7 +82,7 @@ select,
 textarea {
     width: 100%;
     padding: 6px 8px;
-    font-family: 'Courier New', monospace;
+    font-family: Arial, sans-serif;
     font-size: 1.05em;
     border: 1px solid #999;
     border-radius: 3px;
