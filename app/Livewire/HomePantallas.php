@@ -110,7 +110,7 @@ class HomePantallas extends Component
                 });
             })
             ->orderBy('id', 'desc')
-            ->paginate(12);
+            ->paginate(24);
 
         return view('livewire.home-pantallas', compact('pantallas'));
     }
