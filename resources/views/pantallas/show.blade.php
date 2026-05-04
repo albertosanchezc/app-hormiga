@@ -269,7 +269,7 @@
         }
 
         .fecha-texto {
-            text-align: center;
+            text-align: right;
         }
 
         .footer {
