@@ -86,6 +86,20 @@
                 id="recibido_con">
         </div>
 
+        <div class="block">
+            <label class="block mb-1 text-sm text-gray-700 uppercase font-bold " for="desde">Desde:
+            </label>
+            <input type="date" wire:model="desde"  class="border p-2 rounded w-full"
+                id="desde">
+        </div>
+
+        <div class="block">
+            <label class="block mb-1 text-sm text-gray-700 uppercase font-bold " for="hasta">Hasta:
+            </label>
+            <input type="date" wire:model="hasta"  class="border p-2 rounded w-full"
+                id="hasta">
+        </div>
+
 
         <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded">
             Buscar

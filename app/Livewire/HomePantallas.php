@@ -23,13 +23,15 @@ class HomePantallas extends Component
     public $tipo_servicio;
     public $detectado;
     public $recibido_con;
+    public $desde;
+    public $hasta;
 
 
     // Listener
     protected $listeners = ['terminosBusqueda' => 'buscar']; // Escucha por el evento terminosBusqueda y ejecuta buscar de este componente
 
 
-    public function buscar($orden_servicio, $marca, $modelo, $numero_servicio, $estatus, $cliente, $equipo, $telefono, $domicilio, $tipo_servicio, $detectado, $recibido_con)
+    public function buscar($orden_servicio, $marca, $modelo, $numero_servicio, $estatus, $cliente, $equipo, $telefono, $domicilio, $tipo_servicio, $detectado, $recibido_con, $desde, $hasta)
     {
         $this->orden_servicio = $orden_servicio;
         $this->marca = $marca;
@@ -43,7 +45,8 @@ class HomePantallas extends Component
         $this->tipo_servicio = $tipo_servicio;
         $this->detectado = $detectado;
         $this->recibido_con = $recibido_con;
-
+        $this->desde = $desde;
+        $this->hasta = $hasta;
 
         $this->resetPage();
     }
@@ -109,8 +112,24 @@ class HomePantallas extends Component
                     $q->where('recibido_con', 'LIKE', "%" . $this->recibido_con . "%");
                 });
             })
+            ->when($this->desde, function ($query) {
+                $query->whereHas('orden', function ($q) {
+                    $q->where('fecha_entrada', '>=', $this->desde);
+                });
+            })
+            ->when($this->hasta, function ($query) {
+
+                $hastaMasUno = date(
+                    'Y-m-d',
+                    strtotime($this->hasta . ' +1 day')
+                );
+
+                $query->whereHas('orden', function ($q) use ($hastaMasUno) {
+                    $q->where('fecha_entrada', '<', $hastaMasUno);
+                });
+            })
             ->orderBy('id', 'desc')
-            ->paginate(24);
+            ->paginate(48);
 
         return view('livewire.home-pantallas', compact('pantallas'));
     }
