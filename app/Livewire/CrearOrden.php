@@ -55,6 +55,38 @@ class CrearOrden extends Component
         $now = Carbon::now(config('app.timezone'));
         $this->fecha = $now->format('Y-m-d');
         $this->hora  = $now->format('H:i');
+
+        // =========================================
+        // REINCIDENCIA / DUPLICAR DATOS
+        // =========================================
+
+        if (request()->has('duplicar')) {
+
+            $ordenOriginal = Orden::where(
+                'orden_servicio',
+                request('duplicar')
+            )->first();
+
+            if ($ordenOriginal) {
+
+                $this->cliente = $ordenOriginal->cliente;
+                $this->telefono = $ordenOriginal->telefono;
+                $this->domicilio = $ordenOriginal->domicilio;
+                $this->equipo = $ordenOriginal->equipo;
+                $this->marca = $ordenOriginal->marca;
+                $this->modelo = $ordenOriginal->modelo;
+                $this->numero_servicio = $ordenOriginal->numero_servicio;
+                $this->tipo_servicio = $ordenOriginal->tipo_servicio;
+                $this->comprado_por = $ordenOriginal->comprado_por;
+                $this->fecha_compra = $ordenOriginal->fecha_compra;
+                $this->lugar_compra = $ordenOriginal->lugar_compra;
+
+                // Opcional
+                $this->observacion =
+                    'Reincidencia de folio #' .
+                    $ordenOriginal->orden_servicio;
+            }
+        }
     }
 
 
