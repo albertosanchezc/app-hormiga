@@ -208,7 +208,7 @@
 
                         <a
                             href="{{ route('ordenes.create', ['duplicar' => $pantalla->orden_servicio]) }}"
-                            class="bg-amber-500 hover:bg-amber-600 inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest duration-150 w-full">
+                            class="bg-indigo-200 hover:bg-indigo-300 inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md font-semibold text-xs text-indigo-900 uppercase tracking-widest duration-150 w-full">
 
                             Crear Reincidencia
                         </a>
