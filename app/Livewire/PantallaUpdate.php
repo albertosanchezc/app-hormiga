@@ -77,8 +77,8 @@ class PantallaUpdate extends Component
         $orden->update([
             'diagnostico' => $this->diagnostico,
             'entregado' => $this->entregado,
-            'fecha_reparacion' => $this->fecha_revision,
-            'fecha_trabajo' => $this->fecha_trabajo,
+            'fecha_reparacion' => $this->fecha_trabajo,
+            'fecha_trabajo' => $this->fecha_revision,
             'tecnico' => $this->tecnico,
             'accion_correctiva' => $this->accion_correctiva,
             'costo_reparacion' => $this->costo_reparacion,
@@ -99,8 +99,8 @@ class PantallaUpdate extends Component
         $pantalla->update([
             'detectado' => $this->diagnostico,
             'entregado' => $this->entregado,
-            'fecha_reparacion' => $this->fecha_revision,
-            'fecha_trabajo' => $this->fecha_trabajo,
+            'fecha_reparacion' => $this->fecha_trabajo,
+            'fecha_trabajo' => $this->fecha_revision,
             'tecnico' => $this->tecnico,
             'accion_correctiva' => $this->accion_correctiva,
             'costo_reparacion' => $this->costo_reparacion,
