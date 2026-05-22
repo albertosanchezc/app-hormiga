@@ -10,7 +10,7 @@ class Orden extends Model
 {
     //
     use HasFactory;
-    
+
     protected $table = 'ordenes';
 
     protected $casts = [
@@ -20,7 +20,7 @@ class Orden extends Model
         'fecha_compra'     => 'date:Y-m-d',
         'entregado'        => 'date',
     ];
-    
+
     protected $fillable = [
         'orden_servicio',
         'fecha_entrada',
@@ -53,5 +53,32 @@ class Orden extends Model
         'updated_at'
     ];
 
-    
+    public function ingresosPrevios()
+    {
+        // Si tiene número de serie, usarlo como prioridad
+        if (!empty($this->numero_servicio)) {
+            return self::where('numero_servicio', $this->numero_servicio)
+                ->where('id', '!=', $this->id)
+                ->latest()
+                ->get();
+        }
+
+        // Fallback cuando no hay número de serie
+        return self::where('cliente', $this->cliente)
+            ->where('marca', $this->marca)
+            ->where('modelo', $this->modelo)
+            ->where('id', '!=', $this->id)
+            ->latest()
+            ->get();
+    }
+
+    public function tieneHistorial()
+    {
+        return $this->ingresosPrevios()->isNotEmpty();
+    }
+
+    public function cantidadIngresosPrevios()
+    {
+        return $this->ingresosPrevios()->count();
+    }
 }
