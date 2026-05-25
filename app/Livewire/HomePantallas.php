@@ -57,7 +57,17 @@ class HomePantallas extends Component
         // $pantallas = Pantalla::paginate(12);
         $pantallas = Pantalla::when($this->orden_servicio, function ($query) {
             // $query->where('orden_servicio', 'LIKE', "%" . $this->orden_servicio . "%"); // hace una búsqueda por registros similares en donde aparezca en cualquier parte nuestro término
-            $query->where('orden_servicio', $this->orden_servicio);
+            $query->where(function ($q) {
+
+                // Busca en orden_servicio
+                $q->where('orden_servicio', $this->orden_servicio)
+
+                    // O busca dentro del cliente
+                    ->orWhereHas('orden', function ($sub) {
+
+                        $sub->where('cliente', 'LIKE', '%' . $this->orden_servicio . '%');
+                    });
+            });
         })
             ->when($this->marca, function ($query) {
                 $query->where('marca', 'LIKE', "%" . $this->marca . "%");
