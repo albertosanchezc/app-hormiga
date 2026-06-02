@@ -120,11 +120,15 @@ td {
 .domicilio-container,
 .observaciones-container {
   display: grid;
-  font-size: 2.0rem;
   font-weight: bold;
   p{
     font-size: 1.5rem;
   }
+}
+
+.observaciones {
+  font-size: 1rem;
+  font-weight: bold;
 }
 
 
