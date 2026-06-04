@@ -18,7 +18,7 @@ class Estado extends Model
     {
         return match ($this->nombre) {
 
-            'TERMINADO / LISTO PARA ENTREGA',
+            'TERMINADO / LISTO PARA ENTREGA ',
             'ENTREGADO'
             => 'terminado',
 
@@ -134,18 +134,50 @@ class Estado extends Model
     {
         return match ($this->grupo()) {
 
-            'revision'      => 'border-t-4 border-blue-400',
-            'garantia'      => 'border-t-4 border-purple-400',
-            'aseguradora'   => 'border-t-4 border-yellow-400',
-            'autorizacion'  => 'border-t-4 border-orange-400',
-            'refaccion'     => 'border-t-4 border-amber-400',
-            'proceso'       => 'border-t-4 border-indigo-400',
-            'pruebas'       => 'border-t-4 border-cyan-400',
-            'sin_falla'     => 'border-t-4 border-emerald-400',
-            'negativo'      => 'border-t-4 border-red-400',
-            'entregado'     => 'border-t-4 border-green-400',
+            'terminado'
+            => 'border-t-4 border-green-400',
 
-            default         => 'border-t-4 border-gray-300',
+            'pendiente_autorizar'
+            => 'border-t-4 border-sky-400',
+
+            'no_reparado'
+            => 'border-t-4 border-yellow-400',
+
+            'revision'
+            => 'border-t-4 border-gray-400',
+
+            'pendiente_refaccion'
+            => 'border-t-4 border-indigo-500',
+
+            'pendiente_cotizacion'
+            => 'border-t-4 border-orange-500',
+
+            'pruebas'
+            => 'border-t-4 border-cyan-400',
+
+            'en_reparacion'
+            => 'border-t-4 border-blue-500',
+
+            'reparado_venta'
+            => 'border-t-4 border-emerald-500',
+
+            'reemplazo'
+            => 'border-t-4 border-purple-500',
+
+            'administrativo'
+            => 'border-t-4 border-stone-400',
+
+            'sin_falla'
+            => 'border-t-4 border-lime-500',
+
+            'garantia'
+            => 'border-t-4 border-pink-500',
+
+            'resolucion'
+            => 'border-t-4 border-amber-500',
+
+            default
+            => 'border-t-4 border-gray-300',
         };
     }
 }
