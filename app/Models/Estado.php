@@ -14,60 +14,58 @@ class Estado extends Model
     |--------------------------------------------------------------------------
     */
 
-private function grupo()
-{
-    $nombre = strtoupper($this->nombre);
+    private function grupo()
+    {
+        return match ($this->nombre) {
 
-    return match (true) {
+            'TERMINADO / LISTO PARA ENTREGA',
+            'ENTREGADO'
+            => 'terminado',
 
-        str_contains($nombre, 'NO REVISADO')
-            => 'no_revisado',
+            'REVISADO / PENDIENTE POR AUTORIZAR'
+            => 'pendiente_autorizar',
 
-        str_contains($nombre, 'REVISION')
-            => 'en_revision',
+            'NO REPARADO',
+            'NO AUTORIZ REPARACION'
+            => 'no_reparado',
 
-        str_contains($nombre, 'DIAGNOSTICADO')
-            => 'diagnosticado',
+            'PENDIENTE DE REVISIN'
+            => 'revision',
 
-        str_contains($nombre, 'GARANTIA')
-            => 'garantia',
+            'PENDIENTE POR REFACCIN'
+            => 'pendiente_refaccion',
 
-        str_contains($nombre, 'ASEGURADORA') ||
-        str_contains($nombre, 'AXA')
-            => 'aseguradora',
+            'PENDIENTE POR COTIZACIN'
+            => 'pendiente_cotizacion',
 
-        str_contains($nombre, 'AUTORIZ')
-            => 'autorizacion',
-
-        str_contains($nombre, 'REFACC') ||
-        str_contains($nombre, 'COTIZ') ||
-        str_contains($nombre, 'COSTO')
-            => 'refaccion',
-
-        str_contains($nombre, 'PRUEBA')
+            'EN PRUEBAS'
             => 'pruebas',
 
-        str_contains($nombre, 'PROCESO') ||
-        str_contains($nombre, 'REPAR')
-            => 'proceso',
+            'AUTORIZADO / EN REPARACIN'
+            => 'en_reparacion',
 
-        str_contains($nombre, 'SIN FALLA') ||
-        str_contains($nombre, 'NO PRESENTA FALLA')
+            'REPARADO PARA VENTA'
+            => 'reparado_venta',
+
+            'CAMBIO FSICO / REESGUARDO'
+            => 'reemplazo',
+
+            'ADMINISTRATIVO'
+            => 'administrativo',
+
+            'REVISADO / NO PRESENT LA FALLA'
             => 'sin_falla',
 
-        str_contains($nombre, 'NO REPARADO') ||
-        str_contains($nombre, 'CANCEL') ||
-        str_contains($nombre, 'DECLIN') ||
-        str_contains($nombre, 'IRRECUPERABLE')
-            => 'negativo',
+            'PROCESO GARANTA / ASEGURADORA'
+            => 'garantia',
 
-        str_contains($nombre, 'ENTREG') ||
-        str_contains($nombre, 'TERMIN')
-            => 'entregado',
+            'PENDIENTE POR  RESOLUCION'
+            => 'resolucion',
 
-        default => 'default',
-    };
-}
+            default
+            => 'default',
+        };
+    }
 
     /*
     |--------------------------------------------------------------------------
@@ -75,45 +73,56 @@ private function grupo()
     |--------------------------------------------------------------------------
     */
 
-public function getColorClaseAttribute()
-{
-    return match ($this->grupo()) {
+    public function getColorClaseAttribute()
+    {
+        return match ($this->grupo()) {
 
-        // 🔵 DIAGNÓSTICO PROGRESIVO
-        'no_revisado'   => 'bg-blue-100 text-blue-800',
-        'en_revision'   => 'bg-blue-300 text-blue-900',
-        'diagnosticado' => 'bg-blue-600 text-white',
+            'terminado'
+            => 'bg-green-200 text-green-900',
 
-        // 🟣 GARANTÍA
-        'garantia'      => 'bg-purple-200 text-purple-900',
+            'pendiente_autorizar'
+            => 'bg-sky-200 text-sky-900',
 
-        // 🟡 ASEGURADORA
-        'aseguradora'   => 'bg-yellow-200 text-yellow-900',
+            'no_reparado'
+            => 'bg-yellow-200 text-yellow-900',
 
-        // 🟠 AUTORIZACIÓN
-        'autorizacion'  => 'bg-orange-200 text-orange-900',
+            'revision'
+            => 'bg-gray-200 text-gray-900',
 
-        // 🟡 REFACCIÓN
-        'refaccion'     => 'bg-amber-200 text-amber-900',
+            'pendiente_refaccion'
+            => 'bg-indigo-700 text-white',
 
-        // 🟦 REPARACIÓN
-        'proceso'       => 'bg-indigo-200 text-indigo-900',
+            'pendiente_cotizacion'
+            => 'bg-orange-700 text-white',
 
-        // 🧪 PRUEBAS
-        'pruebas'       => 'bg-cyan-200 text-cyan-900',
+            'pruebas'
+            => 'bg-cyan-200 text-cyan-900',
 
-        // 🟢 SIN FALLA
-        'sin_falla'     => 'bg-emerald-200 text-emerald-900',
+            'en_reparacion'
+            => 'bg-blue-600 text-white',
 
-        // 🔴 NEGATIVO
-        'negativo'      => 'bg-red-200 text-red-900',
+            'reparado_venta'
+            => 'bg-emerald-300 text-emerald-950',
 
-        // 🟢 ENTREGADO
-        'entregado'     => 'bg-green-200 text-green-900',
+            'reemplazo'
+            => 'bg-purple-300 text-purple-950',
 
-        default         => 'bg-gray-100 text-gray-800',
-    };
-}
+            'administrativo'
+            => 'bg-stone-300 text-stone-950',
+
+            'sin_falla'
+            => 'bg-lime-200 text-lime-900',
+
+            'garantia'
+            => 'bg-pink-300 text-pink-950',
+
+            'resolucion'
+            => 'bg-amber-300 text-amber-950',
+
+            default
+            => 'bg-gray-100 text-gray-800',
+        };
+    }
 
     /*
     |--------------------------------------------------------------------------

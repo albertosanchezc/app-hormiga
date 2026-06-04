@@ -41,6 +41,7 @@ return new class extends Migration
             $table->string('comprado_por', 45)->nullable();
 
             $table->string('estatus', 40)->nullable();
+            $table->foreignId('estado_tecnico_id')->nullable()->constrained('estados_tecnicos');
             $table->string('observacion_extra', 255)->nullable();
             $table->string('numero_orden', 20)->nullable();
 
@@ -49,7 +50,7 @@ return new class extends Migration
 
             // ⚠️ Opcional (puedes eliminar en el futuro)
             // $table->time('hora')->nullable();//esta será la versión final una vez que no se requieran seeders
-            $table->string('hora', 8)->nullable();// Esto es necesario al cargar seeders
+            $table->string('hora', 8)->nullable(); // Esto es necesario al cargar seeders
 
             $table->string('lugar_compra', 57)->nullable();
             $table->string('costo_adicional', 4)->nullable();
