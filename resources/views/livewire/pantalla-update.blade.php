@@ -10,11 +10,11 @@
                 <p class="datosLaHormiga">
                     <strong>Reporte Técnico</strong><br>
                     Prol. Tecnológico No. 96-A esq. Orlando Col. La Florida CP. 76150<br>
-                    Tels: (442) 215-95-99 y (442) 419-27-45<br/>
-                    WhatsApp Mostrador 442 215 95 99<br/>
-                    WhatsApp Garantias 442 474 47 04<br/>
-                    www.serviciolahormiga.com.mx<br/>
-                    Horario L. a V. 9:00 a.m. a 6:00 p.m. Sab. 10:00 a.m. a 1:00 p.m. 
+                    Tels: (442) 215-95-99 y (442) 419-27-45<br />
+                    WhatsApp Mostrador 442 215 95 99<br />
+                    WhatsApp Garantias 442 474 47 04<br />
+                    www.serviciolahormiga.com.mx<br />
+                    Horario L. a V. 9:00 a.m. a 6:00 p.m. Sab. 10:00 a.m. a 1:00 p.m.
                 </p>
             </div>
 
@@ -124,9 +124,23 @@
                         <input id="costo_reparacion" type="text" wire:model="costo_reparacion">
                     </div>
 
-                    <div class="estatus-container">
+                    <!-- <div class="estatus-container">
                         <label for="estatus">Estado</label>
                         <input id="estatus" type="text" wire:model="estatus">
+                    </div> -->
+
+                    <div class="estatus-container">
+                        <label for="estatus">Estado</label>
+
+                        <select id="estatus" wire:model="estatus">
+                            <option value="">Seleccione un estado</option>
+
+                            @foreach($estadosDisponibles as $estado)
+                            <option value="{{ $estado->nombre }}">
+                                {{ $estado->nombre }}
+                            </option>
+                            @endforeach
+                        </select>
                     </div>
                 </div>
             </div>
@@ -144,6 +158,6 @@
     </form>
 
     @if (session()->has('success'))
-        <div class="alerta-exito">{{ session('success') }}</div>
+    <div class="alerta-exito">{{ session('success') }}</div>
     @endif
 </div>

@@ -23,13 +23,16 @@ class PantallaUpdate extends Component
     public $tecnico;
     public $accion_correctiva;
     public $costo_reparacion;
-    public $estatus;
+    // public $estatus;
+    public $estatus = '';
+
     public $detectado;
     public $observacion;
     public $notas;
     public $fecha_entrada;
 
 
+    public $estadosDisponibles = [];
 
     public function mount(Pantalla $pantalla)
     {
@@ -48,6 +51,12 @@ class PantallaUpdate extends Component
         $this->costo_reparacion = $pantalla->orden->costo_reparacion;
         $this->estatus = $pantalla->orden->estatus;
         $this->observacion = $pantalla->orden->observacion;
+
+        // CARGAR ESTADOS DISPONIBLES
+        $this->estadosDisponibles = Estado::select('nombre')
+            ->distinct()
+            ->orderBy('nombre')
+            ->get();
     }
 
     public function save()
@@ -87,13 +96,22 @@ class PantallaUpdate extends Component
         ]);
 
         // Resolver estado automáticamente
+        // if (!empty($this->estatus)) {
+
+        //     $estado = Estado::firstOrCreate([
+        //         'nombre' => strtoupper(trim($this->estatus))
+        //     ]);
+
+        //     $pantalla->estado_id = $estado->id;
+        // }
+
         if (!empty($this->estatus)) {
 
-            $estado = Estado::firstOrCreate([
-                'nombre' => strtoupper(trim($this->estatus))
-            ]);
+            $estado = Estado::where('nombre', $this->estatus)->first();
 
-            $pantalla->estado_id = $estado->id;
+            if ($estado) {
+                $pantalla->estado_id = $estado->id;
+            }
         }
 
         $pantalla->update([
