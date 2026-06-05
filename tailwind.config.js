@@ -13,8 +13,11 @@ export default {
 
     safelist: [
         {
-            pattern: /(bg|text|border)-(orange|yellow|blue|purple|green|emerald|red|indigo|gray|slate|violet)-(100|200|300|400|500|600|700|800|900)/,
+            pattern: /(bg|text|border)-(orange|yellow|blue|purple|green|emerald|red|indigo|gray|slate|violet|sky|cyan|stone|lime|pink|amber|rose)-(100|200|300|400|500|600|700|800|900|950)/,
         },
+
+        'text-white',
+        'border-t-4',
     ],
 
     theme: {

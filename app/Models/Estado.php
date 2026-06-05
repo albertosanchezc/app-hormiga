@@ -14,15 +14,21 @@ class Estado extends Model
     |--------------------------------------------------------------------------
     */
 
+    private ?string $grupoCache = null;
+
     private function grupo()
     {
-        return match ($this->nombre) {
+        if ($this->grupoCache !== null) {
+            return $this->grupoCache;
+        }
 
-            'TERMINADO / LISTO PARA ENTREGA ',
+        $this->grupoCache = match (trim($this->nombre)) {
+
+            'TERMINADO  LISTO PARA ENTREGA',
             'ENTREGADO'
             => 'terminado',
 
-            'REVISADO / PENDIENTE POR AUTORIZAR'
+            'REVISADO  PENDIENTE POR AUTORIZAR'
             => 'pendiente_autorizar',
 
             'NO REPARADO',
@@ -41,22 +47,22 @@ class Estado extends Model
             'EN PRUEBAS'
             => 'pruebas',
 
-            'AUTORIZADO / EN REPARACIN'
+            'AUTORIZADO  EN REPARACIN'
             => 'en_reparacion',
 
             'REPARADO PARA VENTA'
             => 'reparado_venta',
 
-            'CAMBIO FSICO / REESGUARDO'
+            'CAMBIO FSICO  REESGUARDO'
             => 'reemplazo',
 
             'ADMINISTRATIVO'
             => 'administrativo',
 
-            'REVISADO / NO PRESENT LA FALLA'
+            'REVISADO  NO PRESENTÓ LA FALLA'
             => 'sin_falla',
 
-            'PROCESO GARANTA / ASEGURADORA'
+            'PROCESO GARANTA  ASEGURADORA'
             => 'garantia',
 
             'PENDIENTE POR  RESOLUCION'
@@ -65,6 +71,8 @@ class Estado extends Model
             default
             => 'default',
         };
+
+        return $this->grupoCache;
     }
 
     /*
@@ -77,47 +85,137 @@ class Estado extends Model
     {
         return match ($this->grupo()) {
 
+            /*
+        |--------------------------------------------------------------------------
+        | VERDE CLARO
+        | TERMINADO / ENTREGADO
+        |--------------------------------------------------------------------------
+        */
+
             'terminado'
-            => 'bg-green-200 text-green-900',
+            => 'bg-green-100 text-green-900',
+
+            /*
+        |--------------------------------------------------------------------------
+        | AZUL CIELO
+        | PENDIENTE AUTORIZACIÓN
+        |--------------------------------------------------------------------------
+        */
 
             'pendiente_autorizar'
-            => 'bg-sky-200 text-sky-900',
+            => 'bg-sky-100 text-sky-900',
+
+            /*
+        |--------------------------------------------------------------------------
+        | AMARILLO CLARO
+        | NO REPARADO / NO AUTORIZÓ
+        |--------------------------------------------------------------------------
+        */
 
             'no_reparado'
-            => 'bg-yellow-200 text-yellow-900',
+            => 'bg-yellow-100 text-yellow-900',
+
+            /*
+        |--------------------------------------------------------------------------
+        | GRIS
+        | RECICLAJE / ADMIN / REVISIÓN
+        |--------------------------------------------------------------------------
+        */
 
             'revision'
             => 'bg-gray-200 text-gray-900',
 
-            'pendiente_refaccion'
-            => 'bg-indigo-700 text-white',
+            'administrativo'
+            => 'bg-gray-300 text-gray-950',
 
-            'pendiente_cotizacion'
-            => 'bg-orange-700 text-white',
+            /*
+        |--------------------------------------------------------------------------
+        | ROSA / BEIGE
+        | EN ESPERA
+        |--------------------------------------------------------------------------
+        */
+
+            'resolucion'
+            => 'bg-rose-100 text-rose-900',
+
+            /*
+        |--------------------------------------------------------------------------
+        | AZUL MEDIO
+        | EN ESPERA DE RECOLECCIÓN / PRUEBAS
+        |--------------------------------------------------------------------------
+        */
 
             'pruebas'
-            => 'bg-cyan-200 text-cyan-900',
+            => 'bg-blue-300 text-blue-950',
 
-            'en_reparacion'
-            => 'bg-blue-600 text-white',
+            /*
+        |--------------------------------------------------------------------------
+        | NARANJA
+        | REFACCIÓN PEDIDA
+        |--------------------------------------------------------------------------
+        */
+
+            'pendiente_cotizacion'
+            => 'bg-orange-300 text-orange-950',
+
+            /*
+        |--------------------------------------------------------------------------
+        | AMARILLO INTENSO
+        | REFACCIÓN EN TALLER
+        |--------------------------------------------------------------------------
+        */
 
             'reparado_venta'
-            => 'bg-emerald-300 text-emerald-950',
+            => 'bg-amber-200 text-amber-950',
+
+            /*
+        |--------------------------------------------------------------------------
+        | AZUL OSCURO
+        | PENDIENTE REFACCIÓN
+        |--------------------------------------------------------------------------
+        */
+
+            'pendiente_refaccion'
+            => 'bg-blue-800 text-white',
+
+            /*
+        |--------------------------------------------------------------------------
+        | MARRÓN / ROJO QUEMADO
+        | EN REPARACIÓN / COTIZACIÓN CRÍTICA
+        |--------------------------------------------------------------------------
+        */
+
+            'en_reparacion'
+            => 'bg-orange-700 text-white',
+
+            /*
+        |--------------------------------------------------------------------------
+        | AZUL REY
+        | GARANTÍA / NO HAY REFACCIÓN
+        |--------------------------------------------------------------------------
+        */
+
+            'garantia'
+            => 'bg-sky-500 text-white',
+
+            /*
+        |--------------------------------------------------------------------------
+        | MORADO
+        | CAMBIO FÍSICO
+        |--------------------------------------------------------------------------
+        */
 
             'reemplazo'
             => 'bg-purple-300 text-purple-950',
 
-            'administrativo'
-            => 'bg-stone-300 text-stone-950',
+            /*
+        |--------------------------------------------------------------------------
+        | NEUTRO
+        |--------------------------------------------------------------------------
+        */
 
             'sin_falla'
-            => 'bg-lime-200 text-lime-900',
-
-            'garantia'
-            => 'bg-pink-300 text-pink-950',
-
-            'resolucion'
-            => 'bg-amber-300 text-amber-950',
+            => 'bg-stone-200 text-stone-900',
 
             default
             => 'bg-gray-100 text-gray-800',
@@ -135,46 +233,46 @@ class Estado extends Model
         return match ($this->grupo()) {
 
             'terminado'
-            => 'border-t-4 border-green-400',
+            => 'border-t-4 border-green-200',
 
             'pendiente_autorizar'
-            => 'border-t-4 border-sky-400',
+            => 'border-t-4 border-sky-200',
 
             'no_reparado'
-            => 'border-t-4 border-yellow-400',
+            => 'border-t-4 border-yellow-200',
 
             'revision'
-            => 'border-t-4 border-gray-400',
-
-            'pendiente_refaccion'
-            => 'border-t-4 border-indigo-500',
-
-            'pendiente_cotizacion'
-            => 'border-t-4 border-orange-500',
-
-            'pruebas'
-            => 'border-t-4 border-cyan-400',
-
-            'en_reparacion'
-            => 'border-t-4 border-blue-500',
-
-            'reparado_venta'
-            => 'border-t-4 border-emerald-500',
-
-            'reemplazo'
-            => 'border-t-4 border-purple-500',
+            => 'border-t-4 border-gray-300',
 
             'administrativo'
-            => 'border-t-4 border-stone-400',
-
-            'sin_falla'
-            => 'border-t-4 border-lime-500',
-
-            'garantia'
-            => 'border-t-4 border-pink-500',
+            => 'border-t-4 border-gray-400',
 
             'resolucion'
-            => 'border-t-4 border-amber-500',
+            => 'border-t-4 border-rose-200',
+
+            'pruebas'
+            => 'border-t-4 border-blue-400',
+
+            'pendiente_cotizacion'
+            => 'border-t-4 border-orange-300',
+
+            'reparado_venta'
+            => 'border-t-4 border-amber-300',
+
+            'pendiente_refaccion'
+            => 'border-t-4 border-blue-900',
+
+            'en_reparacion'
+            => 'border-t-4 border-orange-800',
+
+            'garantia'
+            => 'border-t-4 border-sky-600',
+
+            'reemplazo'
+            => 'border-t-4 border-purple-400',
+
+            'sin_falla'
+            => 'border-t-4 border-stone-300',
 
             default
             => 'border-t-4 border-gray-300',
