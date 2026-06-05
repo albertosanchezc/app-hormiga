@@ -32,9 +32,9 @@ class MigratePantallas extends Command
             ->distinct()
             ->pluck('estatus')
             ->map(function ($estatus) {
-                return trim(strtoupper(preg_replace('/[^A-Z0-9 ]/', '', (string)$estatus)));
+                return trim(mb_strtoupper((string)$estatus, 'UTF-8'));
             })
-            ->filter()
+            ->filter(fn($estatus) => !empty(trim($estatus)))
             ->unique();
 
         foreach ($estatusUnicos as $estatus) {
@@ -43,7 +43,7 @@ class MigratePantallas extends Command
 
         // Obtener estados normalizados en memoria para referencia rápida
         $estados = Estado::all()->keyBy(function ($estado) {
-            return trim(strtoupper($estado->nombre));
+            return trim(mb_strtoupper($estado->nombre, 'UTF-8'));
         });
 
         $this->info('Migrando registros a pantallas...');
@@ -52,7 +52,9 @@ class MigratePantallas extends Command
         $registros = DB::table('ordenes')->get();
 
         foreach ($registros as $orden) {
-            $estatusLimpio = trim(strtoupper(preg_replace('/[^A-Z0-9 ]/', '', (string)$orden->estatus)));
+            $estatusLimpio = trim(
+                mb_strtoupper((string)$orden->estatus, 'UTF-8')
+            );
             $estado_id = $estados->has($estatusLimpio) ? $estados[$estatusLimpio]->id : null;
 
             Pantalla::create([

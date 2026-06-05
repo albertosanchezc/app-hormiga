@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use Livewire\Component;
+use App\Models\Estado;
 
 class FiltrarPantallas extends Component
 {
@@ -23,12 +24,32 @@ class FiltrarPantallas extends Component
 
     public function leerDatosFormulario()
     {
-        // En Livewire 3 se usa dispatch (no emit)
-        $this->dispatch('terminosBusqueda', $this->orden_servicio, $this->marca, $this->modelo, $this->numero_servicio, $this->estatus, $this->cliente, $this->equipo, $this->telefono, $this->domicilio, $this->tipo_servicio, $this->detectado, $this->recibido_con, $this->desde, $this->hasta);
+        $this->dispatch(
+            'terminosBusqueda',
+            $this->orden_servicio,
+            $this->marca,
+            $this->modelo,
+            $this->numero_servicio,
+            $this->estatus,
+            $this->cliente,
+            $this->equipo,
+            $this->telefono,
+            $this->domicilio,
+            $this->tipo_servicio,
+            $this->detectado,
+            $this->recibido_con,
+            $this->desde,
+            $this->hasta
+        );
     }
 
     public function render()
     {
-        return view('livewire.filtrar-pantallas');
+        $estados = Estado::select('nombre')
+            ->distinct()
+            ->orderBy('nombre')
+            ->get();
+
+        return view('livewire.filtrar-pantallas', compact('estados'));
     }
 }

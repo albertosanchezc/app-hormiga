@@ -84,7 +84,8 @@ class HomePantallas extends Component
             })
             ->when($this->estatus, function ($query) {
                 $query->whereHas('orden', function ($q) {
-                    $q->where('estatus', 'LIKE', "%" . $this->estatus . "%");
+                    // $q->where('estatus', 'LIKE', "%" . $this->estatus . "%");
+                    $q->where('estatus', $this->estatus);//Busqueda exacta
                 });
             })
             ->when($this->cliente, function ($query) {

@@ -65,12 +65,27 @@
                 class="border p-2 rounded w-full" id="tipo_servicio">
         </div>
 
-        <div class="block">
+        <!-- <div class="block">
             <label class="block mb-1 text-sm text-gray-700 uppercase font-bold " for="estado">Estado
             </label>
             <input type="text" wire:model="estatus" placeholder="Buscar por Estado" class="border p-2 rounded w-full"
                 id="estado">
-        </div>
+        </div> -->
+
+        <select
+            wire:model="estatus"
+            id="estado"
+            class="border p-2 rounded w-full">
+            <option value="">-- Todos los estados --</option>
+
+            @foreach($estados as $estado)
+
+            <option value="{{ $estado->nombre }}">
+                {{ $estado->nombre }}
+            </option>
+
+            @endforeach
+        </select>
 
         <div class="block">
             <label class="block mb-1 text-sm text-gray-700 uppercase font-bold " for="detectado">Diagnostico
@@ -89,14 +104,14 @@
         <div class="block">
             <label class="block mb-1 text-sm text-gray-700 uppercase font-bold " for="desde">Desde:
             </label>
-            <input type="date" wire:model="desde"  class="border p-2 rounded w-full"
+            <input type="date" wire:model="desde" class="border p-2 rounded w-full"
                 id="desde">
         </div>
 
         <div class="block">
             <label class="block mb-1 text-sm text-gray-700 uppercase font-bold " for="hasta">Hasta:
             </label>
-            <input type="date" wire:model="hasta"  class="border p-2 rounded w-full"
+            <input type="date" wire:model="hasta" class="border p-2 rounded w-full"
                 id="hasta">
         </div>
 
