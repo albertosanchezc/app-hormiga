@@ -24,45 +24,45 @@ class Estado extends Model
 
         $this->grupoCache = match (trim($this->nombre)) {
 
-            'TERMINADO  LISTO PARA ENTREGA',
+            'TERMINADO / LISTO PARA ENTREGA',
             'ENTREGADO'
             => 'terminado',
 
-            'REVISADO  PENDIENTE POR AUTORIZAR'
+            'REVISADO / PENDIENTE POR AUTORIZAR'
             => 'pendiente_autorizar',
 
             'NO REPARADO',
-            'NO AUTORIZ REPARACION'
+            'NO AUTORIZÓ REPARACION'
             => 'no_reparado',
 
-            'PENDIENTE DE REVISIN'
+            'PENDIENTE DE REVISIÓN'
             => 'revision',
 
-            'PENDIENTE POR REFACCIN'
+            'PENDIENTE POR REFACCIÓN'
             => 'pendiente_refaccion',
 
-            'PENDIENTE POR COTIZACIN'
+            'PENDIENTE POR COTIZACIÓN'
             => 'pendiente_cotizacion',
 
             'EN PRUEBAS'
             => 'pruebas',
 
-            'AUTORIZADO  EN REPARACIN'
+            'AUTORIZADO / EN REPARACIÓN'
             => 'en_reparacion',
 
             'REPARADO PARA VENTA'
             => 'reparado_venta',
 
-            'CAMBIO FSICO  REESGUARDO'
+            'CAMBIO FÍSICO / REESGUARDO'
             => 'reemplazo',
 
             'ADMINISTRATIVO'
             => 'administrativo',
 
-            'REVISADO  NO PRESENTÓ LA FALLA'
+            'REVISADO / NO PRESENTÓ LA FALLA'
             => 'sin_falla',
 
-            'PROCESO GARANTA  ASEGURADORA'
+            'PROCESO GARANTÍA / ASEGURADORA'
             => 'garantia',
 
             'PENDIENTE POR  RESOLUCION'
@@ -74,7 +74,6 @@ class Estado extends Model
 
         return $this->grupoCache;
     }
-
     /*
     |--------------------------------------------------------------------------
     | Color Badge
