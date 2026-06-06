@@ -83,11 +83,23 @@ class HomePantallas extends Component
                 });
             })
             ->when($this->estatus, function ($query) {
+
                 $query->whereHas('orden', function ($q) {
-                    // $q->where('estatus', 'LIKE', "%" . $this->estatus . "%");
-                    $q->where('estatus', $this->estatus);//Busqueda exacta
+
+                    if ($this->estatus === 'sin_estado') {
+
+                        $q->where(function ($sub) {
+
+                            $sub->whereNull('estatus')
+                                ->orWhere('estatus', '');
+                        });
+                    } else {
+
+                        $q->where('estatus', $this->estatus);
+                    }
                 });
             })
+
             ->when($this->cliente, function ($query) {
                 $query->whereHas('orden', function ($q) {
                     $q->where('cliente', 'LIKE', "%" . $this->cliente . "%");

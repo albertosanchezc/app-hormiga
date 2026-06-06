@@ -132,7 +132,7 @@
                     <div class="estatus-container">
                         <label for="estatus">Estado</label>
 
-                        <select id="estatus" wire:model="estatus">
+                        <select id="estatus" class="text-center" wire:model="estatus">
                             <option value="">Seleccione un estado</option>
 
                             @foreach($estadosDisponibles as $estado)

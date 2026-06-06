@@ -75,9 +75,12 @@
         <select
             wire:model="estatus"
             id="estado"
-            class="border p-2 rounded w-full">
+            class="border p-2 rounded w-full text-center">
             <option value="">-- Todos los estados --</option>
 
+            <option value="sin_estado">
+                PENDIENTE DE ACTUALIZAR ESTADO
+            </option>
             @foreach($estados as $estado)
 
             <option value="{{ $estado->nombre }}">
