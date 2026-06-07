@@ -174,7 +174,7 @@ class CrearOrden extends Component
                     'fecha_compra'   => $fechaCompra,
                     'lugar_compra'   => $this->lugar_compra,
                     'observacion'    => $this->observacion,
-                    'estatus' => 'PENDIENTE DE REVISIÓN',
+                    // 'estatus' => 'PENDIENTE DE REVISIÓN',
                 ]);
 
                 \Log::info('Intentando crear pantalla', [
