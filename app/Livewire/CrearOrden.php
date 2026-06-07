@@ -180,7 +180,7 @@ class CrearOrden extends Component
                     'orden_servicio' => $this->folio,
                     'marca'          => $this->marca,
                     'pulgadas'       => $this->modelo,
-                    'estado_id'      => 153,
+                    'estado_id'      => 8,// anteriormente 153 por eso marcaba error
                     'recibido_con'   => $this->observacion,
                 ]);
 
@@ -188,7 +188,7 @@ class CrearOrden extends Component
                     'orden_servicio' => $this->folio,
                     'marca'          => $this->marca,
                     'pulgadas'       => $this->modelo,
-                    'estado_id'      => 153,
+                    'estado_id'      => 8,//anteriormente 153
                     'recibido_con'   => $this->observacion,
                     'detectado'      => null,
                     'fecha_registro' => now(),
