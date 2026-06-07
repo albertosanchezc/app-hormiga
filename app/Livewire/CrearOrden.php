@@ -174,13 +174,14 @@ class CrearOrden extends Component
                     'fecha_compra'   => $fechaCompra,
                     'lugar_compra'   => $this->lugar_compra,
                     'observacion'    => $this->observacion,
+                    'estatus' => 'PENDIENTE DE REVISIÓN',
                 ]);
 
                 \Log::info('Intentando crear pantalla', [
                     'orden_servicio' => $this->folio,
                     'marca'          => $this->marca,
                     'pulgadas'       => $this->modelo,
-                    'estado_id'      => 8,// anteriormente 153 por eso marcaba error
+                    'estado_id'      => 8, // anteriormente 153 por eso marcaba error
                     'recibido_con'   => $this->observacion,
                 ]);
 
@@ -188,7 +189,7 @@ class CrearOrden extends Component
                     'orden_servicio' => $this->folio,
                     'marca'          => $this->marca,
                     'pulgadas'       => $this->modelo,
-                    'estado_id'      => 8,//anteriormente 153
+                    'estado_id'      => 8, //anteriormente 153
                     'recibido_con'   => $this->observacion,
                     'detectado'      => null,
                     'fecha_registro' => now(),
@@ -207,7 +208,10 @@ class CrearOrden extends Component
                 'trace'   => $e->getTraceAsString(),
             ]);
 
-            dd($e);
+            session()->flash('error', 'Ocurrió un error al crear la orden.');
+
+            return;
+            // dd($e);
         }
 
         // Notificar técnicos
