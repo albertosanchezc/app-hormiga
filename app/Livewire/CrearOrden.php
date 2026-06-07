@@ -9,6 +9,7 @@ use Livewire\Component;
 use App\Models\Pantalla;
 use App\Notifications\OrdenCreadaNotification;
 use Illuminate\Support\Facades\Notification;
+use Illuminate\Support\Facades\DB;
 
 class CrearOrden extends Component
 {
@@ -122,36 +123,92 @@ class CrearOrden extends Component
         }
 
         // Crear orden
-        $orden = Orden::create([
-            'orden_servicio' => $this->folio,
-            'fecha_entrada'  => $now, // ✅ ahora sí datetime real
-            'hora'           => $now->format('H:i:s'), // opcional
-            'cliente'        => $this->cliente,
-            'telefono'       => $this->telefono,
-            'domicilio'      => $this->domicilio,
-            'equipo'         => $this->equipo,
-            'marca'          => $this->marca,
-            'modelo'         => $this->modelo,
-            'numero_servicio' => $this->numero_servicio,
-            'tipo_servicio'  => $this->tipo_servicio,
-            'comprado_por'   => $this->comprado_por,
-            'fecha_compra'   => $fechaCompra, // 🔥 ya normalizado
-            'lugar_compra'   => $this->lugar_compra,
-            'observacion'    => $this->observacion,
-        ]);
+        // $orden = Orden::create([
+        //     'orden_servicio' => $this->folio,
+        //     'fecha_entrada'  => $now, // ✅ ahora sí datetime real
+        //     'hora'           => $now->format('H:i:s'), // opcional
+        //     'cliente'        => $this->cliente,
+        //     'telefono'       => $this->telefono,
+        //     'domicilio'      => $this->domicilio,
+        //     'equipo'         => $this->equipo,
+        //     'marca'          => $this->marca,
+        //     'modelo'         => $this->modelo,
+        //     'numero_servicio' => $this->numero_servicio,
+        //     'tipo_servicio'  => $this->tipo_servicio,
+        //     'comprado_por'   => $this->comprado_por,
+        //     'fecha_compra'   => $fechaCompra, // 🔥 ya normalizado
+        //     'lugar_compra'   => $this->lugar_compra,
+        //     'observacion'    => $this->observacion,
+        // ]);
 
-        // Crear pantalla relacionada
-        Pantalla::create([
-            'orden_servicio' => $this->folio,
-            'marca' => $this->marca,
-            'pulgadas' => $this->modelo,
-            'estado_id' => 153,
-            'recibido_con' => $this->observacion,
-            'detectado' => null,
-            'fecha_registro' => now(),
-            'fecha_revision' => null,
-            'tecnico' => null,
-        ]);
+
+        // // Crear pantalla relacionada
+        // Pantalla::create([
+        //     'orden_servicio' => $this->folio,
+        //     'marca' => $this->marca,
+        //     'pulgadas' => $this->modelo,
+        //     'estado_id' => 153,
+        //     'recibido_con' => $this->observacion,
+        //     'detectado' => null,
+        //     'fecha_registro' => now(),
+        //     'fecha_revision' => null,
+        //     'tecnico' => null,
+        // ]);
+        try {
+
+            $orden = DB::transaction(function () use ($fechaCompra, $now) {
+
+                $orden = Orden::create([
+                    'orden_servicio' => $this->folio,
+                    'fecha_entrada'  => $now,
+                    'hora'           => $now->format('H:i:s'),
+                    'cliente'        => $this->cliente,
+                    'telefono'       => $this->telefono,
+                    'domicilio'      => $this->domicilio,
+                    'equipo'         => $this->equipo,
+                    'marca'          => $this->marca,
+                    'modelo'         => $this->modelo,
+                    'numero_servicio' => $this->numero_servicio,
+                    'tipo_servicio'  => $this->tipo_servicio,
+                    'comprado_por'   => $this->comprado_por,
+                    'fecha_compra'   => $fechaCompra,
+                    'lugar_compra'   => $this->lugar_compra,
+                    'observacion'    => $this->observacion,
+                ]);
+
+                \Log::info('Intentando crear pantalla', [
+                    'orden_servicio' => $this->folio,
+                    'marca'          => $this->marca,
+                    'pulgadas'       => $this->modelo,
+                    'estado_id'      => 153,
+                    'recibido_con'   => $this->observacion,
+                ]);
+
+                Pantalla::create([
+                    'orden_servicio' => $this->folio,
+                    'marca'          => $this->marca,
+                    'pulgadas'       => $this->modelo,
+                    'estado_id'      => 153,
+                    'recibido_con'   => $this->observacion,
+                    'detectado'      => null,
+                    'fecha_registro' => now(),
+                    'fecha_revision' => null,
+                    'tecnico'        => null,
+                ]);
+
+                return $orden;
+            });
+        } catch (\Throwable $e) {
+
+            \Log::error('Error creando orden/pantalla', [
+                'message' => $e->getMessage(),
+                'file'    => $e->getFile(),
+                'line'    => $e->getLine(),
+                'trace'   => $e->getTraceAsString(),
+            ]);
+
+            dd($e);
+        }
 
         // Notificar técnicos
         $tecnicos = User::where('rol', 1)->get();
