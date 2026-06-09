@@ -271,7 +271,7 @@ class Estado extends Model
             => 'border-t-4 border-blue-400',
 
             'pendiente_refaccion'
-            => 'border-t-4 border-blue-900',
+            => 'border-t-4 border-blue-800',
 
             'pendiente_cotizacion'
             => 'border-t-4 border-orange-800',

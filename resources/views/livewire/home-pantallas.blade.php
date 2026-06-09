@@ -8,7 +8,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 @foreach ($pantallas as $pantalla)
                     <div
-                        class="bg-white shadow-md rounded-xl p-4 border border-gray-200 {{ $pantalla->estado?->border_clase ?? 'border-t-4 border-red-400' }} ">
+                        class="bg-white shadow-md rounded-xl p-4 border {{ $pantalla->estado?->border_clase ?? 'border-t-4 border-red-400' }} ">
 
                         {{-- Folio --}}
                         <div class="text-base text-gray-500 mb-2">
