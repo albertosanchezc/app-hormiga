@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 use Illuminate\Database\Eloquent\Model;
-
+use App\Models\EstadosTecnicos;
 class Orden extends Model
 {
     //
@@ -80,5 +80,10 @@ class Orden extends Model
     public function cantidadIngresosPrevios()
     {
         return $this->ingresosPrevios()->count();
+    }
+
+    public function estadoTecnico()
+    {
+        return $this->belongsTo(EstadosTecnicos::class, 'estado_tecnico_id');
     }
 }

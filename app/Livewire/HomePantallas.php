@@ -16,6 +16,7 @@ class HomePantallas extends Component
     public $modelo;
     public $numero_servicio;
     public $estatus;
+    // public $estado_tecnico_id;
     public $cliente;
     public $equipo;
     public $telefono;

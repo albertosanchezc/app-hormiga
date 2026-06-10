@@ -18,28 +18,31 @@ class MigratePantallas extends Command
         $this->info('Desactivando comprobación de claves foráneas...');
         DB::statement('SET FOREIGN_KEY_CHECKS=0;');
 
-        $this->info('Limpiando tablas pantallas y estados...');
+        // $this->info('Limpiando tablas pantallas y estados...');
+        // DB::table('pantallas')->truncate();
+        // DB::table('estados')->truncate();
+
+        $this->info('Limpiando tabla pantallas...');
         DB::table('pantallas')->truncate();
-        DB::table('estados')->truncate();
 
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
         $this->info('Claves foráneas activadas nuevamente.');
 
-        $this->info('Migrando estados...');
+        // $this->info('Migrando estados...');
 
-        // Extraer y normalizar estados únicos de la tabla antigua
-        $estatusUnicos = DB::table('ordenes')
-            ->distinct()
-            ->pluck('estatus')
-            ->map(function ($estatus) {
-                return trim(mb_strtoupper((string)$estatus, 'UTF-8'));
-            })
-            ->filter(fn($estatus) => !empty(trim($estatus)))
-            ->unique();
+        // // Extraer y normalizar estados únicos de la tabla antigua
+        // $estatusUnicos = DB::table('ordenes')
+        //     ->distinct()
+        //     ->pluck('estatus')
+        //     ->map(function ($estatus) {
+        //         return trim(mb_strtoupper((string)$estatus, 'UTF-8'));
+        //     })
+        //     ->filter(fn($estatus) => !empty(trim($estatus)))
+        //     ->unique();
 
-        foreach ($estatusUnicos as $estatus) {
-            Estado::create(['nombre' => $estatus]);
-        }
+        // foreach ($estatusUnicos as $estatus) {
+        //     Estado::create(['nombre' => $estatus]);
+        // }
 
         // Obtener estados normalizados en memoria para referencia rápida
         $estados = Estado::all()->keyBy(function ($estado) {

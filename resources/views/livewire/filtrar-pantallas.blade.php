@@ -72,23 +72,37 @@
                 id="estado">
         </div> -->
 
-        <select
-            wire:model="estatus"
-            id="estado"
-            class="border p-2 rounded w-full text-center">
-            <option value="">-- Todos los estados --</option>
+        <div class="block">
+            <label
+                class="block mb-1 text-sm text-gray-700 uppercase font-bold"
+                for="estado">
 
-            <option value="sin_estado">
-                PENDIENTE DE ACTUALIZAR ESTADO
-            </option>
-            @foreach($estados as $estado)
+                Estado
 
-            <option value="{{ $estado->nombre }}">
-                {{ $estado->nombre }}
-            </option>
+            </label>
 
-            @endforeach
-        </select>
+            <select
+                wire:model="estatus"
+                id="estado"
+                class="border p-2 rounded w-full text-center">
+
+                <option value="">
+                    -- Todos los estados --
+                </option>
+
+                <option value="sin_estado">
+                    PENDIENTE DE ACTUALIZAR ESTADO
+                </option>
+
+                @foreach($estados as $estado)
+
+                <option value="{{ $estado->nombre }}">
+                    {{ $estado->nombre }}
+                </option>
+
+                @endforeach
+            </select>
+        </div>
 
         <div class="block">
             <label class="block mb-1 text-sm text-gray-700 uppercase font-bold " for="detectado">Diagnostico

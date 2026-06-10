@@ -178,7 +178,7 @@ class Estado extends Model
             */
 
             'en_espera'
-            => 'bg-rose-100 text-rose-900',
+            => 'bg-rose-300 text-rose-900',
 
             /*
             |--------------------------------------------------------------------------
@@ -265,7 +265,7 @@ class Estado extends Model
             => 'border-t-4 border-amber-400',
 
             'en_espera'
-            => 'border-t-4 border-rose-200',
+            => 'border-t-4 border-rose-500',
 
             'espera_recoleccion'
             => 'border-t-4 border-blue-400',
