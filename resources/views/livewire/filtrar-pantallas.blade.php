@@ -1,5 +1,5 @@
 <div class=" p-8 mb-4">
-    <form wire:submit.prevent="leerDatosFormulario" class="grid grid-cols-3 gap-2">
+    <form wire:submit.prevent="leerDatosFormulario" class="grid grid-cols-4 gap-2">
 
         <div class="block">
             <label class="block mb-1 text-sm text-gray-700 uppercase font-bold " for="orden_servicio">Orden de Servicio
@@ -121,7 +121,7 @@
         <div class="block">
             <label class="block mb-1 text-sm text-gray-700 uppercase font-bold " for="accion_correctiva">Acción Correctiva
             </label>
-            <input type="text" wire:model="accion_correctiva" placeholder="Buscar por Acción Correctiva" class="border p-2 rounded w-full"
+            <input type="text" wire:model="accion_correctiva" placeholder="Buscar por Acción Correctiva" class="border p-2 rounded w-full font-bold"
                 id="accion_correctiva">
         </div>
 
