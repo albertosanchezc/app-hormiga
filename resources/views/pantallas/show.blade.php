@@ -458,9 +458,14 @@
                     </div>
 
                     <div class="estatus-container">
-                        <p>Estado</p>
+                        <p>Estado Administrativo</p>
                         <p class="estatus">{{ $orden->estatus }}</p>
                     </div>
+                </div>
+
+                <div class="estatus-container">
+                    <p>Estado Técnico</p>
+                    <p class="estatus">{{ $pantalla->orden->estadoTecnico?->nombre ?? 'Sin estado técnico' }}</p>
                 </div>
             </div>
 
