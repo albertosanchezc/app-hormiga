@@ -19,6 +19,7 @@ class FiltrarPantallas extends Component
     public $tipo_servicio;
     public $detectado;
     public $recibido_con;
+    public $accion_correctiva;
     public $desde;
     public $hasta;
 
@@ -38,6 +39,7 @@ class FiltrarPantallas extends Component
             $this->tipo_servicio,
             $this->detectado,
             $this->recibido_con,
+            $this->accion_correctiva,
             $this->desde,
             $this->hasta
         );

@@ -5,6 +5,7 @@ namespace App\Livewire;
 use App\Models\User;
 use App\Models\Orden;
 use App\Models\Estado;
+use App\Models\EstadosTecnicos;
 use Livewire\Component;
 use App\Models\Pantalla;
 use App\Notifications\NuevoDiagnostico;
@@ -33,6 +34,7 @@ class PantallaUpdate extends Component
 
 
     public $estadosDisponibles = [];
+    public $estadosTecnicosDisponibles = [];
 
     public function mount(Pantalla $pantalla)
     {
@@ -54,6 +56,12 @@ class PantallaUpdate extends Component
 
         // CARGAR ESTADOS DISPONIBLES
         $this->estadosDisponibles = Estado::select('nombre')
+            ->distinct()
+            ->orderBy('nombre')
+            ->get();
+
+                    // CARGAR ESTADOS DISPONIBLES
+        $this->estadosTecnicosDisponibles = EstadosTecnicos::select('nombre')
             ->distinct()
             ->orderBy('nombre')
             ->get();

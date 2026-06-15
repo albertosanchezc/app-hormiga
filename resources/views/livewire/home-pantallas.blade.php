@@ -111,7 +111,7 @@
                         <div class="flex items-center gap-2 flex-wrap">
 
                             <span class="font-semibold text-gray-700 text-sm">
-                                Estado:
+                                Estado Administrativo:
                             </span>
 
                             <span
@@ -127,19 +127,19 @@
                         </div>
 
                         {{-- Estado técnico --}}
-                        @if ($pantalla->orden?->estado_tecnico)
+                        @if ($pantalla->orden?->estado_tecnico_id)
 
                         <div class="flex items-center gap-2 flex-wrap">
 
                             <span class="font-semibold text-gray-700 text-sm">
-                                Técnico:
+                                Estado Técnico:
                             </span>
 
                             <span
                                 class="px-3 py-1 text-xs font-medium rounded-full
                 bg-indigo-100 text-indigo-900">
 
-                                {{ $pantalla->orden->estado_tecnico_id }}
+                                {{ $pantalla->orden?->estadoTecnico?->nombre ?? 'Sin estado técnico' }}
 
                             </span>
 

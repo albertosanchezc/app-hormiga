@@ -119,6 +119,13 @@
         </div>
 
         <div class="block">
+            <label class="block mb-1 text-sm text-gray-700 uppercase font-bold " for="accion_correctiva">Acción Correctiva
+            </label>
+            <input type="text" wire:model="accion_correctiva" placeholder="Buscar por Acción Correctiva" class="border p-2 rounded w-full"
+                id="accion_correctiva">
+        </div>
+
+        <div class="block">
             <label class="block mb-1 text-sm text-gray-700 uppercase font-bold " for="desde">Desde:
             </label>
             <input type="date" wire:model="desde" class="border p-2 rounded w-full"
