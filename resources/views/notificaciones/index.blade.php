@@ -40,7 +40,21 @@
                                 @endif
 
                                 @if (isset($notificacion->data['estatus']))
-                                    <p>Estado: <span class="font-bold">{{ $notificacion->data['estatus'] }}</span></p>
+                                    <p>
+                                        Estado Administrativo:
+                                        <span class="font-bold">
+                                            {{ $notificacion->data['estatus'] }}
+                                        </span>
+                                    </p>
+                                @endif
+
+                                @if (isset($notificacion->data['estado_tecnico']))
+                                    <p>
+                                        Estado Técnico:
+                                        <span class="font-bold">
+                                            {{ $notificacion->data['estado_tecnico'] }}
+                                        </span>
+                                    </p>
                                 @endif
 
                                 <p class="text-gray-500 text-sm mt-2">
@@ -97,8 +111,23 @@
                                     </p>
                                 @endif
                                 @if (isset($notificacion->data['estatus']))
-                                    <p>Estado: <span class="font-bold">{{ $notificacion->data['estatus'] }}</span></p>
+                                    <p>
+                                        Estado Administrativo:
+                                        <span class="font-bold">
+                                            {{ $notificacion->data['estatus'] }}
+                                        </span>
+                                    </p>
                                 @endif
+
+                                @if (isset($notificacion->data['estado_tecnico']))
+                                    <p>
+                                        Estado Técnico:
+                                        <span class="font-bold">
+                                            {{ $notificacion->data['estado_tecnico'] }}
+                                        </span>
+                                    </p>
+                                @endif
+                                
                                 <p class="text-gray-400 text-sm mt-2">
                                     {{ $notificacion->created_at->diffForHumans() }}
                                 </p>

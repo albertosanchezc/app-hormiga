@@ -41,6 +41,7 @@ class Orden extends Model
         'comprado_por',
         'fecha_compra',
         'estatus',
+        'estado_tecnico_id',
         'observacion_extra',
         'numero_orden',
         'entregado',

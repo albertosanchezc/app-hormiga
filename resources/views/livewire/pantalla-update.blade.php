@@ -146,11 +146,11 @@
                     <div class="estatus-container">
                         <label for="estado_tecnico">Estado Técnico</label>
 
-                        <select id="estado_tecnico" class="text-center" wire:model="estado_tecnico">
+                        <select id="estado_tecnico" class="text-center" wire:model="estado_tecnico_id">
                             <option value="">Seleccione un estado</option>
 
                             @foreach($estadosTecnicosDisponibles as $estadoT)
-                            <option value="{{ $estado->nombre }}">
+                            <option value="{{ $estadoT->id }}">
                                 {{ $estadoT->nombre }}
                             </option>
                             @endforeach

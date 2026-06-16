@@ -26,6 +26,8 @@ class PantallaUpdate extends Component
     public $costo_reparacion;
     // public $estatus;
     public $estatus = '';
+    public $estado_tecnico_id = '';
+
 
     public $detectado;
     public $observacion;
@@ -52,6 +54,7 @@ class PantallaUpdate extends Component
         $this->accion_correctiva = $pantalla->orden->accion_correctiva;
         $this->costo_reparacion = $pantalla->orden->costo_reparacion;
         $this->estatus = $pantalla->orden->estatus;
+        $this->estado_tecnico_id = $pantalla->orden->estado_tecnico_id;
         $this->observacion = $pantalla->orden->observacion;
 
         // CARGAR ESTADOS DISPONIBLES
@@ -60,11 +63,12 @@ class PantallaUpdate extends Component
             ->orderBy('nombre')
             ->get();
 
-                    // CARGAR ESTADOS DISPONIBLES
-        $this->estadosTecnicosDisponibles = EstadosTecnicos::select('nombre')
+        // CARGAR ESTADOS DISPONIBLES
+        $this->estadosTecnicosDisponibles = EstadosTecnicos::select('id','nombre')
             ->distinct()
-            ->orderBy('nombre')
+            ->orderBy('id')
             ->get();
+        // dd($prueba);
     }
 
     public function save()
@@ -90,7 +94,16 @@ class PantallaUpdate extends Component
         $this->entregado = $this->entregado ?: null;
         $this->fecha_revision = $this->fecha_revision ?: null;
         $this->fecha_trabajo = $this->fecha_trabajo ?: null;
+        if (!empty($this->estado_tecnico)) {
 
+            $estadoTecnicoSel = EstadosTecnicos::where('nombre', $this->estado_tecnico)->first();
+
+            if ($estadoTecnicoSel) {
+                $orden->estado_tecnico_id = $estadoTecnicoSel->id;
+            }
+        }
+
+        // dd($this->estado_tecnico_id);
         $orden->update([
             'diagnostico' => $this->diagnostico,
             'entregado' => $this->entregado,
@@ -100,6 +113,7 @@ class PantallaUpdate extends Component
             'accion_correctiva' => $this->accion_correctiva,
             'costo_reparacion' => $this->costo_reparacion,
             'estatus' => $this->estatus,
+            'estado_tecnico_id' => $this->estado_tecnico_id,
             'observacion' => $this->observacion,
         ]);
 

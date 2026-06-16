@@ -5,7 +5,7 @@
     <div class="container contenedor-pantallas">
         <div class="p-5 w-full">
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                 @foreach ($pantallas as $pantalla)
                 <div
                     class="bg-white shadow-md rounded-xl p-4 border {{ $pantalla->estado?->border_clase ?? 'border-t-4 border-red-400' }} ">
