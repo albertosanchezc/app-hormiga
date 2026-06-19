@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Estado;
+use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
 
 class EstadoController extends Controller
@@ -64,9 +65,26 @@ class EstadoController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Estado $estado)
     {
-        //
+
+        $request->merge([
+            'nombre' => strtoupper($request->nombre)
+        ]);
+
+        $request->validate([
+            'nombre' => [
+                'required',
+                'max:255',
+                Rule::unique('estados', 'nombre')->ignore($estado->id),
+            ]
+        ]);
+
+        $estado->update([
+            'nombre' => $request->nombre
+        ]);
+
+        return redirect()->route('estados.index');
     }
 
     /**
