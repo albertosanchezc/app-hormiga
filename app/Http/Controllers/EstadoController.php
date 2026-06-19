@@ -56,9 +56,9 @@ class EstadoController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Estado $estado)
     {
-        //
+        return view('estados.edit', compact('estado'));
     }
 
     /**
