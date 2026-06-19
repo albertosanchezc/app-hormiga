@@ -28,7 +28,6 @@ Route::get('estados/create', [EstadoController::class, 'create'])->middleware(['
 Route::post('/estados', [EstadoController::class, 'store'])->middleware(['auth', 'verified'])->name('estados.store');
 Route::get('/estados/{estado}/edit', [EstadoController::class, 'edit'])->middleware(['auth', 'verified'])->name('estados.edit');
 Route::put('/estados/{estado}', [EstadoController::class, 'update'])->middleware(['auth', 'verified'])->name('estados.update');
-Route::delete('/estados/{estado}', [EstadoController::class, 'destroy'])->middleware(['auth', 'verified'])->name('estados.destroy');
 
 
 

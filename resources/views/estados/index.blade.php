@@ -29,20 +29,6 @@
                         class="bg-yellow-500 hover:bg-yellow-600 text-white px-3 py-1 rounded text-sm">
                         Editar
                     </a>
-
-                    <form action="{{ route('estados.destroy', $estado) }}"
-                        method="POST"
-                        onsubmit="return confirm('¿Eliminar estado?')">
-
-                        @csrf
-                        @method('DELETE')
-
-                        <button
-                            class="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded text-sm">
-                            Eliminar
-                        </button>
-                    </form>
-
                 </div>
             </div>
         @endforeach
