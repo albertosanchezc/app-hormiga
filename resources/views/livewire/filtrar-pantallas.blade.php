@@ -77,7 +77,7 @@
                 class="block mb-1 text-sm text-gray-700 uppercase font-bold"
                 for="estado">
 
-                Estado
+                Estado Administrativo
 
             </label>
 
@@ -112,7 +112,14 @@
         </div>
 
         <div class="block">
-            <label class="block mb-1 text-sm text-gray-700 uppercase font-bold " for="recibido_con">Recido Con
+            <label class="block mb-1 text-sm text-gray-700 uppercase font-bold " for="numero_orden"># De Orden C.S.A.
+            </label>
+            <input type="text" wire:model="numero_orden" placeholder="Ej. Recicle" class="border p-2 rounded w-full font-bold"
+                id="numero_orden">
+        </div>
+
+        <div class="block">
+            <label class="block mb-1 text-sm text-gray-700 uppercase font-bold " for="recibido_con">Observaciones / Recido Con
             </label>
             <input type="text" wire:model="recibido_con" placeholder="Buscar por Recibido Con" class="border p-2 rounded w-full"
                 id="recibido_con">
