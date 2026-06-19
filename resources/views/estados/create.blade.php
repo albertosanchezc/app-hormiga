@@ -1,14 +1,18 @@
-<h1>Nuevo Estado</h1>
+@extends('layouts.app')
 
-<form action="{{ route('estados.store') }}" method="POST">
-    @csrf
+@section('contenido')
+    <div class="container container-principal">
+        {{-- Aquí solo llamamos al componente Livewire --}}
+        <h1>Nuevo Estado</h1>
 
-    <input
-        type="text"
-        name="nombre"
-        placeholder="Nombre del estado">
+        <form action="{{ route('estados.store') }}" method="POST">
+            @csrf
 
-    <button type="submit">
-        Guardar
-    </button>
-</form>
+            <input type="text" name="nombre" placeholder="Nombre del estado">
+
+            <button type="submit">
+                Guardar
+            </button>
+        </form>
+    </div>
+@endsection

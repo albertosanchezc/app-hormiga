@@ -19,6 +19,12 @@
                         {{ __('Equipos') }}
                     </x-nav-link>
 
+                    <x-nav-link :href="route('estados.index')" :active="request()->routeIs('estados')">
+                        {{ __('Estados') }}
+                    </x-nav-link>
+
+
+
                 </div>
             </div>
 
@@ -96,6 +102,14 @@
             <div class="mt-3 space-y-1">
                 <x-responsive-nav-link :href="route('profile.edit')">
                     {{ __('Profile') }}
+                </x-responsive-nav-link>
+
+                <x-responsive-nav-link :href="route('ordenes.create')">
+                    {{ __('Nueva Orden') }}
+                </x-responsive-nav-link>
+
+                <x-responsive-nav-link :href="route('pantallas.index')">
+                    {{ __('Equipos') }}
                 </x-responsive-nav-link>
 
                 <!-- Authentication -->

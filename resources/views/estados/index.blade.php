@@ -1,4 +1,37 @@
-@foreach ($estados as $estado)
-<p>{{ $estado->nombre }}</p>
-    
-@endforeach
+@extends('layouts.app')
+
+@section('contenido')
+    <div class="container container-principal">
+
+        <div class="max-w-7xl mx-auto p-6">
+
+            <div class="flex justify-between items-center mb-6">
+                <h1 class="text-2xl font-bold">
+                    Estados Administrativos
+                </h1>
+
+                <a href="{{ route('estados.create') }}"
+                    class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded">
+                    Nuevo Estado
+                </a>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+
+                @foreach ($estados as $estado)
+                    <div class="bg-white shadow rounded-lg p-4 border">
+
+                        <h2 class="font-semibold text-lg">
+                            {{ $estado->nombre }}
+                        </h2>
+
+                        <div class="mt-4 flex gap-2">
+
+                            <a href="{{ route('estados.edit', $estado) }}"
+                                class="bg-yellow-500 hover:bg-yellow-600 text-white px-3 py-1 rounded text-sm">
+                                Editar
+                            </a>
+
+
+                        </div>
+                    @endsection
