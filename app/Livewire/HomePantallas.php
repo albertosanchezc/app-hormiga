@@ -15,8 +15,8 @@ class HomePantallas extends Component
     public $marca;
     public $modelo;
     public $numero_servicio;
-    public $estado_id = '';
-    public $estado_tecnico_id = '';
+    public $estado_id;
+    public $estado_tecnico_id;
     public $cliente;
     public $equipo;
     public $telefono;
@@ -40,8 +40,8 @@ class HomePantallas extends Component
         $this->marca = $marca;
         $this->modelo = $modelo;
         $this->numero_servicio = $numero_servicio;
-        $this->estado_id = $estado_id ?: '';
-        $this->estado_tecnico_id = $estado_tecnico_id ?: '';
+        $this->estado_id = $estado_id;
+        $this->estado_tecnico_id = $estado_tecnico_id;
         $this->cliente = $cliente;
         $this->equipo = $equipo;
         $this->telefono = $telefono;
@@ -88,31 +88,39 @@ class HomePantallas extends Component
                     $q->where('numero_servicio', 'LIKE', "%" . $this->numero_servicio . "%");
                 });
             })
-            ->when(
-                $this->estado_id !== '' ||
-                    $this->estado_tecnico_id !== '',
-                function ($query) {
+            ->when(true, function ($query) {
+                // dd([
+                //     'estado_id' => $this->estado_id,
+                //     'tipo' => gettype($this->estado_id),
+                //     'estado_tecnico_id' => $this->estado_tecnico_id,
+                //     'tipo' => gettype($this->estado_tecnico_id),
+                // ]);
+                $query->whereHas('orden', function ($q) {
+                    // ADMINISTRATIVO
+                    if ($this->estado_id !== null && $this->estado_id !== '') {
 
-                    $query->whereHas('orden', function ($q) {
+                        if ((string)$this->estado_id === '0' || $this->estado_id === 0) {
 
-                        // 🔵 ESTADO ADMINISTRATIVO
-                        if ($this->estado_id === '0') {
                             $q->whereNull('estado_id');
-                        } elseif ($this->estado_id !== '') {
+                        } else {
                             $q->where('estado_id', $this->estado_id);
                         }
+                    }
 
-                        // 🟣 ESTADO TÉCNICO
-                        if ($this->estado_tecnico_id === '0') {
+                    // TÉCNICO
+                    if ($this->estado_tecnico_id !== null && $this->estado_tecnico_id !== '') {
+
+                        if ((string)$this->estado_tecnico_id === '0' || $this->estado_tecnico_id === 0) {
                             $q->whereNull('estado_tecnico_id');
-                        } elseif ($this->estado_tecnico_id !== '') {
+                        } else {
                             $q->where('estado_tecnico_id', $this->estado_tecnico_id);
                         }
-                    });
-                }
-            )
+                    }
+                });
+            })
 
             ->when($this->cliente, function ($query) {
+
                 $query->whereHas('orden', function ($q) {
                     $q->where('cliente', 'LIKE', "%" . $this->cliente . "%");
                 });
