@@ -35,7 +35,7 @@
 
 
                         <form action="{{ route('estados_tecnicos.destroy', $estado) }}" method="POST"
-                            onsubmit="return confirm('¿Eliminar estado?')">
+                            onsubmit="return confirm('¿Eliminar estado técnico?')">
 
                             @csrf
                             @method('DELETE')

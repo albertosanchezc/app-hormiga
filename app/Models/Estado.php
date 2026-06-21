@@ -289,4 +289,9 @@ class Estado extends Model
             => 'border-t-4 border-gray-300',
         };
     }
+
+    public function ordenes()
+    {
+        return $this->hasMany(Orden::class, 'estado_tecnico_id');
+    }
 }
