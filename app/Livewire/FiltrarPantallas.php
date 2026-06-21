@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use Livewire\Component;
 use App\Models\Estado;
+use App\Models\EstadoTecnico;
 
 class FiltrarPantallas extends Component
 {
@@ -12,6 +13,7 @@ class FiltrarPantallas extends Component
     public $modelo;
     public $numero_servicio;
     public $estado_id;
+    public $estado_tecnico_id;
     public $cliente;
     public $equipo;
     public $telefono;
@@ -33,6 +35,7 @@ class FiltrarPantallas extends Component
             $this->modelo,
             $this->numero_servicio,
             $this->estado_id,
+            $this->estado_tecnico_id,
             $this->cliente,
             $this->equipo,
             $this->telefono,
@@ -49,11 +52,17 @@ class FiltrarPantallas extends Component
 
     public function render()
     {
-        $estados = Estado::select('id','nombre')
+        $estados = Estado::select('id', 'nombre')
             ->distinct()
             ->orderBy('nombre')
             ->get();
 
-        return view('livewire.filtrar-pantallas', compact('estados'));
+
+        $estados_tecnicos = EstadoTecnico::select('id', 'nombre')
+            ->distinct()
+            ->orderBy('nombre')
+            ->get();
+
+        return view('livewire.filtrar-pantallas', compact('estados','estados_tecnicos'));
     }
 }

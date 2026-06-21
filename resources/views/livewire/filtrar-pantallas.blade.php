@@ -98,6 +98,38 @@
             </select>
         </div>
 
+                <div class="block">
+            <label
+                class="block mb-1 text-sm text-gray-700 uppercase font-bold"
+                for="estado_tecnico">
+
+                Estado Técnico
+
+            </label>
+
+            <select
+                wire:model="estado_tecnico_id"
+                id="estado"
+                class="border p-2 rounded w-full text-center">
+
+                <option value="">
+                    -- Todos los estados --
+                </option>
+
+                <option value="0">
+                    PENDIENTE DE ACTUALIZAR ESTADO
+                </option>
+
+                @foreach($estados_tecnicos as $estadoT)
+
+                <option value="{{ $estadoT->id }}">
+                    {{ $estadoT->nombre }}
+                </option>
+
+                @endforeach
+            </select>
+        </div>
+
         <div class="block">
             <label class="block mb-1 text-sm text-gray-700 uppercase font-bold " for="detectado">Diagnostico
             </label>
