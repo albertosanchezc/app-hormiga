@@ -5,7 +5,7 @@ namespace App\Livewire;
 use App\Models\User;
 use App\Models\Orden;
 use App\Models\Estado;
-use App\Models\EstadosTecnicos;
+use App\Models\EstadoTecnico;
 use Livewire\Component;
 use App\Models\Pantalla;
 use App\Notifications\NuevoDiagnostico;
@@ -64,7 +64,7 @@ class PantallaUpdate extends Component
             ->get();
 
         // CARGAR ESTADOS DISPONIBLES
-        $this->estadosTecnicosDisponibles = EstadosTecnicos::select('id','nombre')
+        $this->estadosTecnicosDisponibles = EstadoTecnico::select('id','nombre')
             ->distinct()
             ->orderBy('id')
             ->get();
@@ -96,7 +96,7 @@ class PantallaUpdate extends Component
         $this->fecha_trabajo = $this->fecha_trabajo ?: null;
         if (!empty($this->estado_tecnico)) {
 
-            $estadoTecnicoSel = EstadosTecnicos::where('nombre', $this->estado_tecnico)->first();
+            $estadoTecnicoSel = EstadoTecnico::where('nombre', $this->estado_tecnico)->first();
 
             if ($estadoTecnicoSel) {
                 $orden->estado_tecnico_id = $estadoTecnicoSel->id;

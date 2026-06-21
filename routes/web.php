@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\EstadoController;
+use App\Http\Controllers\EstadoTecnicoController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\NotificacionController;
 use App\Http\Controllers\OrdenController;
@@ -28,6 +29,12 @@ Route::get('estados/create', [EstadoController::class, 'create'])->middleware(['
 Route::post('/estados', [EstadoController::class, 'store'])->middleware(['auth', 'verified'])->name('estados.store');
 Route::get('/estados/{estado}/edit', [EstadoController::class, 'edit'])->middleware(['auth', 'verified'])->name('estados.edit');
 Route::put('/estados/{estado}', [EstadoController::class, 'update'])->middleware(['auth', 'verified'])->name('estados.update');
+
+Route::get('/estados_tecnicos', [EstadoTecnicoController::class, 'index'])->middleware(['auth', 'verified'])->name('estados_tecnicos.index');
+Route::get('estados_tecnicos/create', [EstadoTecnicoController::class, 'create'])->middleware(['auth', 'verified'])->name('estados_tecnicos.create');
+Route::post('/estados_tecnicos', [EstadoTecnicoController::class, 'store'])->middleware(['auth', 'verified'])->name('estados_tecnicos.store');
+Route::get('/estados_tecnicos/{estado_tecnico}/edit', [EstadoTecnicoController::class, 'edit'])->middleware(['auth', 'verified'])->name('estados_tecnicos.edit');
+Route::put('/estados_tecnicos/{estado_tecnico}', [EstadoTecnicoController::class, 'update'])->middleware(['auth', 'verified'])->name('estados_tecnicos.update');
 
 
 

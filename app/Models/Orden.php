@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Models\EstadosTecnicos;
+use App\Models\EstadoTecnico;
 class Orden extends Model
 {
     //
@@ -85,6 +85,6 @@ class Orden extends Model
 
     public function estadoTecnico()
     {
-        return $this->belongsTo(EstadosTecnicos::class, 'estado_tecnico_id');
+        return $this->belongsTo(EstadoTecnico::class, 'estado_tecnico_id');
     }
 }

@@ -4,10 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class EstadosTecnicos extends Model
+class EstadoTecnico extends Model
 {
     //
-    // protected $table = 'estados_tecnicos';
+    protected $table = 'estados_tecnicos';
 
     protected $fillable = [
         'nombre',

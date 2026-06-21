@@ -23,6 +23,10 @@
                         {{ __('Estados') }}
                     </x-nav-link>
 
+                    <x-nav-link :href="route('estados_tecnicos.index')" :active="request()->routeIs('estados_tecnicos')">
+                        {{ __('Estados Técnicos') }}
+                    </x-nav-link>
+
 
 
                 </div>
@@ -111,6 +115,11 @@
                 <x-responsive-nav-link :href="route('pantallas.index')">
                     {{ __('Equipos') }}
                 </x-responsive-nav-link>
+
+                <x-responsive-nav-link :href="route('estados.index')">
+                    {{ __('Estados') }}
+                </x-responsive-nav-link>
+
 
                 <!-- Authentication -->
                 <form method="POST" action="{{ route('logout') }}">
