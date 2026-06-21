@@ -65,12 +65,6 @@
                 class="border p-2 rounded w-full" id="tipo_servicio">
         </div>
 
-        <!-- <div class="block">
-            <label class="block mb-1 text-sm text-gray-700 uppercase font-bold " for="estado">Estado
-            </label>
-            <input type="text" wire:model="estatus" placeholder="Buscar por Estado" class="border p-2 rounded w-full"
-                id="estado">
-        </div> -->
 
         <div class="block">
             <label
@@ -82,7 +76,7 @@
             </label>
 
             <select
-                wire:model="estatus"
+                wire:model="estado_id"
                 id="estado"
                 class="border p-2 rounded w-full text-center">
 
@@ -90,13 +84,13 @@
                     -- Todos los estados --
                 </option>
 
-                <option value="sin_estado">
+                <option value="0">
                     PENDIENTE DE ACTUALIZAR ESTADO
                 </option>
 
                 @foreach($estados as $estado)
 
-                <option value="{{ $estado->nombre }}">
+                <option value="{{ $estado->id }}">
                     {{ $estado->nombre }}
                 </option>
 

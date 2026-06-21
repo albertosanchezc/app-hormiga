@@ -30,10 +30,10 @@ class NuevoDiagnostico extends Notification
             ->greeting('Hola ' . $notifiable->name)
             ->line('El reporte técnico de la orden ha sido actualizado.')
             ->line('Cliente: ' . $this->orden->cliente)
-            ->line('Diagnóstico: ' . $this->orden->diagnostico)
-            ->line('Acción Correctiva: ' . $this->orden->accion_correctiva)
-            ->line('Estado Administrativo: ' . $this->orden->estatus)
-            ->line('Estado Técnico: ' . $this->orden->estadoTecnico?->nombre ?? 'Sin Asignar')
+            ->line('Diagnóstico: ' . $this->orden->diagnostico ??'Sin diagnóstico')
+            ->line('Acción Correctiva: ' . $this->orden->accion_correctiva ??'Sin acción correctiva')
+            ->line('Estado Administrativo: ' . $this->orden->estdo?->nombre ?? 'Sin estado')
+            ->line('Estado Técnico: ' . $this->orden->estadoTecnico?->nombre ?? 'Sin estado técnico')
             ->action('Ver Orden', url('/ordenes/' . $this->orden->orden_servicio . '/show'))
             ->line('Gracias por usar nuestro sistema.');
     }
@@ -47,7 +47,7 @@ class NuevoDiagnostico extends Notification
             'equipo' => $this->orden->equipo,
             'observacion' => $this->orden->observacion,
             'diagnostico' => $this->orden->diagnostico,
-            'estatus' => $this->orden->estatus,
+            'estado_id' => $this->orden->estado_id,
             'estado_tecnico' => $this->orden->estadoTecnico?->nombre,
             'actualizado_en' => now(),
         ];

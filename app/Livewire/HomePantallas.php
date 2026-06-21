@@ -15,7 +15,7 @@ class HomePantallas extends Component
     public $marca;
     public $modelo;
     public $numero_servicio;
-    public $estatus;
+    public $estado_id = '';
     // public $estado_tecnico_id;
     public $cliente;
     public $equipo;
@@ -34,13 +34,13 @@ class HomePantallas extends Component
     protected $listeners = ['terminosBusqueda' => 'buscar']; // Escucha por el evento terminosBusqueda y ejecuta buscar de este componente
 
 
-    public function buscar($orden_servicio, $marca, $modelo, $numero_servicio, $estatus, $cliente, $equipo, $telefono, $domicilio, $tipo_servicio, $detectado, $numero_orden, $recibido_con, $accion_correctiva, $desde, $hasta)
+    public function buscar($orden_servicio, $marca, $modelo, $numero_servicio, $estado_id, $cliente, $equipo, $telefono, $domicilio, $tipo_servicio, $detectado, $numero_orden, $recibido_con, $accion_correctiva, $desde, $hasta)
     {
         $this->orden_servicio = $orden_servicio;
         $this->marca = $marca;
         $this->modelo = $modelo;
         $this->numero_servicio = $numero_servicio;
-        $this->estatus = $estatus;
+        $this->estado_id = $estado_id;
         $this->cliente = $cliente;
         $this->equipo = $equipo;
         $this->telefono = $telefono;
@@ -87,21 +87,17 @@ class HomePantallas extends Component
                     $q->where('numero_servicio', 'LIKE', "%" . $this->numero_servicio . "%");
                 });
             })
-            ->when($this->estatus, function ($query) {
+            ->when($this->estado_id === '0', function ($query) {
 
                 $query->whereHas('orden', function ($q) {
+                    $q->whereNull('estado_id');
+                });
+            })
 
-                    if ($this->estatus === 'sin_estado') {
+            ->when($this->estado_id !== '' && $this->estado_id !== '0', function ($query) {
 
-                        $q->where(function ($sub) {
-
-                            $sub->whereNull('estatus')
-                                ->orWhere('estatus', '');
-                        });
-                    } else {
-
-                        $q->where('estatus', $this->estatus);
-                    }
+                $query->whereHas('orden', function ($q) {
+                    $q->where('estado_id', $this->estado_id);
                 });
             })
 

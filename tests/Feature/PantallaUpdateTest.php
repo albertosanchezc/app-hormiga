@@ -57,7 +57,7 @@ class PantallaUpdateTest extends TestCase
             'pantalla' => $this->pantalla // 🔥 objeto completo
         ])
             ->set('diagnostico', 'Falla en backlight')
-            ->set('estatus', 'reparado')
+            ->set('estado_id', '7')
             ->set('costo_reparacion', 1200)
             ->call('save')
             ->assertRedirect(route('pantallas.index'));
@@ -66,7 +66,7 @@ class PantallaUpdateTest extends TestCase
         $this->assertDatabaseHas('ordenes', [
             'id' => $this->orden->id,
             'diagnostico' => 'Falla en backlight',
-            'estatus' => 'reparado',
+            'estado_id' => '3',
         ]);
 
         // 🔹 PANTALLA

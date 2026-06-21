@@ -11,7 +11,7 @@ class FiltrarPantallas extends Component
     public $marca;
     public $modelo;
     public $numero_servicio;
-    public $estatus;
+    public $estado_id;
     public $cliente;
     public $equipo;
     public $telefono;
@@ -32,7 +32,7 @@ class FiltrarPantallas extends Component
             $this->marca,
             $this->modelo,
             $this->numero_servicio,
-            $this->estatus,
+            $this->estado_id,
             $this->cliente,
             $this->equipo,
             $this->telefono,
@@ -49,7 +49,7 @@ class FiltrarPantallas extends Component
 
     public function render()
     {
-        $estados = Estado::select('nombre')
+        $estados = Estado::select('id','nombre')
             ->distinct()
             ->orderBy('nombre')
             ->get();
