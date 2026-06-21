@@ -95,5 +95,14 @@ class EstadoTecnicoController extends Controller
     public function destroy(string $id)
     {
         //
+        $estado = EstadoTecnico::findOrFail($id);
+
+        if ($estado->ordenes()->exists()) {
+            return back()->with('error', 'No se puede eliminar porque tiene registros asociados.');
+        }
+
+        $estado->delete();
+
+        return back()->with('success', 'Estado eliminado correctamente.');
     }
 }

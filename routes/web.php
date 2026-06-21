@@ -35,6 +35,7 @@ Route::get('estados_tecnicos/create', [EstadoTecnicoController::class, 'create']
 Route::post('/estados_tecnicos', [EstadoTecnicoController::class, 'store'])->middleware(['auth', 'verified'])->name('estados_tecnicos.store');
 Route::get('/estados_tecnicos/{estado_tecnico}/edit', [EstadoTecnicoController::class, 'edit'])->middleware(['auth', 'verified'])->name('estados_tecnicos.edit');
 Route::put('/estados_tecnicos/{estado_tecnico}', [EstadoTecnicoController::class, 'update'])->middleware(['auth', 'verified'])->name('estados_tecnicos.update');
+Route::delete('/estados_tecnicos/{estado_tecnico}', [EstadoTecnicoController::class, 'destroy'])->middleware(['auth', 'verified'])->name('estados_tecnicos.destroy');
 
 
 
