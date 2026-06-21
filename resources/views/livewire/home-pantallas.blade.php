@@ -125,7 +125,6 @@
                             </div>
 
                             {{-- Estado técnico --}}
-                            @if ($pantalla->orden?->estado_tecnico_id)
                                 <div class="flex items-center gap-2 flex-wrap">
 
                                     <span class="font-semibold text-gray-700 text-sm">
@@ -141,7 +140,6 @@
                                     </span>
 
                                 </div>
-                            @endif
 
                         </div>
 
