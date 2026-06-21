@@ -19,14 +19,17 @@
                         {{ __('Equipos') }}
                     </x-nav-link>
 
-                    <x-nav-link :href="route('estados.index')" :active="request()->routeIs('estados')">
-                        {{ __('Estados') }}
-                    </x-nav-link>
+                    @auth
+                        @if (auth()->user()->rol === 4)
+                            <x-nav-link :href="route('estados.index')" :active="request()->routeIs('estados')">
+                                {{ __('Estados') }}
+                            </x-nav-link>
 
-                    <x-nav-link :href="route('estados_tecnicos.index')" :active="request()->routeIs('estados_tecnicos')">
-                        {{ __('Estados Técnicos') }}
-                    </x-nav-link>
-
+                            <x-nav-link :href="route('estados_tecnicos.index')" :active="request()->routeIs('estados_tecnicos')">
+                                {{ __('Estados Técnicos') }}
+                            </x-nav-link>
+                        @endif
+                    @endauth
 
 
                 </div>
@@ -116,10 +119,17 @@
                     {{ __('Equipos') }}
                 </x-responsive-nav-link>
 
-                <x-responsive-nav-link :href="route('estados.index')">
-                    {{ __('Estados') }}
-                </x-responsive-nav-link>
+                @auth
+                    @if (auth()->user()->rol === 4)
+                        <x-responsive-nav-link :href="route('estados.index')">
+                            {{ __('Estados') }}
+                        </x-responsive-nav-link>
 
+                        <x-responsive-nav-link :href="route('estados_tecnicos.index')">
+                            {{ __('Estados Téncicos') }}
+                        </x-responsive-nav-link>
+                    @endif
+                @endauth
 
                 <!-- Authentication -->
                 <form method="POST" action="{{ route('logout') }}">
