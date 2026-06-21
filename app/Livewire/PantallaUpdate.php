@@ -25,7 +25,7 @@ class PantallaUpdate extends Component
     public $accion_correctiva;
     public $costo_reparacion;
     // public $estatus;
-    public $estatus = '';
+    public $estado_id = '';
     public $estado_tecnico_id = '';
 
 
@@ -53,15 +53,12 @@ class PantallaUpdate extends Component
         $this->notas = $pantalla->notas;
         $this->accion_correctiva = $pantalla->orden->accion_correctiva;
         $this->costo_reparacion = $pantalla->orden->costo_reparacion;
-        $this->estatus = $pantalla->orden->estatus;
+        $this->estado_id = $pantalla->orden->estado_id;
         $this->estado_tecnico_id = $pantalla->orden->estado_tecnico_id;
         $this->observacion = $pantalla->orden->observacion;
 
         // CARGAR ESTADOS DISPONIBLES
-        $this->estadosDisponibles = Estado::select('nombre')
-            ->distinct()
-            ->orderBy('nombre')
-            ->get();
+        $this->estadosDisponibles = Estado::orderBy('nombre')->get();
 
         // CARGAR ESTADOS DISPONIBLES
         $this->estadosTecnicosDisponibles = EstadoTecnico::select('id','nombre')
@@ -87,7 +84,7 @@ class PantallaUpdate extends Component
             'tecnico' => 'nullable|string|max:255',
             'accion_correctiva' => 'nullable|string|max:500',
             'costo_reparacion' => 'nullable|numeric',
-            'estatus' => 'nullable|string|max:100',
+            'estado_id' => 'nullable|string|max:100',
         ]);
 
         // Convertir cadenas vacías en null
@@ -112,7 +109,7 @@ class PantallaUpdate extends Component
             'tecnico' => $this->tecnico,
             'accion_correctiva' => $this->accion_correctiva,
             'costo_reparacion' => $this->costo_reparacion,
-            'estatus' => $this->estatus,
+            'estado_id' => $this->estado_id,
             'estado_tecnico_id' => $this->estado_tecnico_id,
             'observacion' => $this->observacion,
         ]);
@@ -127,14 +124,7 @@ class PantallaUpdate extends Component
         //     $pantalla->estado_id = $estado->id;
         // }
 
-        if (!empty($this->estatus)) {
-
-            $estado = Estado::where('nombre', $this->estatus)->first();
-
-            if ($estado) {
-                $pantalla->estado_id = $estado->id;
-            }
-        }
+        $pantalla->estado_id = $this->estado_id;
 
         $pantalla->update([
             'detectado' => $this->diagnostico,
@@ -143,7 +133,7 @@ class PantallaUpdate extends Component
             'tecnico' => $this->tecnico,
             'accion_correctiva' => $this->accion_correctiva,
             'costo_reparacion' => $this->costo_reparacion,
-            'estatus' => $this->estatus,
+            'estado_id' => $this->estado_id,
             'observacion' => $this->observacion,
             'notas' => $this->accion_correctiva,
         ]);

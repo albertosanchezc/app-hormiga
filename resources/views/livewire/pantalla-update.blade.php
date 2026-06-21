@@ -132,11 +132,11 @@
                     <div class="estatus-container">
                         <label for="estatus">Estado Administrativo</label>
 
-                        <select id="estatus" class="text-center" wire:model="estatus">
+                        <select id="estatus" class="text-center" wire:model="estado_id">
                             <option value="">Seleccione un estado</option>
 
                             @foreach($estadosDisponibles as $estado)
-                            <option value="{{ $estado->nombre }}">
+                            <option value="{{ $estado->id }}">
                                 {{ $estado->nombre }}
                             </option>
                             @endforeach

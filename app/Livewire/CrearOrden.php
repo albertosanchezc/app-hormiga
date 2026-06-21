@@ -2,14 +2,16 @@
 
 namespace App\Livewire;
 
-use Carbon\Carbon;
-use App\Models\User;
+use App\Models\Estado;
+use App\Models\EstadoTecnico;
 use App\Models\Orden;
-use Livewire\Component;
 use App\Models\Pantalla;
+use App\Models\User;
 use App\Notifications\OrdenCreadaNotification;
-use Illuminate\Support\Facades\Notification;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Notification;
+use Livewire\Component;
 
 class CrearOrden extends Component
 {
@@ -42,7 +44,7 @@ class CrearOrden extends Component
         'numero_servicio' => 'required|string|max:100',
         'tipo_servicio' => 'required|string|max:100',
         'comprado_por' => 'nullable|string|max:100',
-        'fecha_compra' => 'nullable|date_format:Y-m-d',
+        'fecha_compra' => 'nullable|date',
         'lugar_compra' => 'nullable|string|max:100',
         'observacion' => 'required|string',
     ];
@@ -111,8 +113,8 @@ class CrearOrden extends Component
         ]);
 
         // Normalizar fecha_compra
-        $fechaCompra = $this->fecha_compra
-            ? Carbon::parse($this->fecha_compra)->format('Y-m-d')
+        $fechaCompra = !empty($this->fecha_compra)
+            ? date('Y-m-d', strtotime($this->fecha_compra))
             : null;
 
         // Fecha y hora actual (consistente)
@@ -156,8 +158,10 @@ class CrearOrden extends Component
         // ]);
         try {
 
-            $orden = DB::transaction(function () use ($fechaCompra, $now) {
+            $estadoInicial = Estado::where('nombre', 'EN ESPERA')->first();
+            $estadoTecnicoInicial = EstadoTecnico::where('nombre', 'PENDIENTE DE REVISIÓN')->first();
 
+            $orden = DB::transaction(function () use ($fechaCompra, $now,$estadoInicial,$estadoTecnicoInicial) {
                 $orden = Orden::create([
                     'orden_servicio' => $this->folio,
                     'fecha_entrada'  => $now,
@@ -175,13 +179,17 @@ class CrearOrden extends Component
                     'lugar_compra'   => $this->lugar_compra,
                     'observacion'    => $this->observacion,
                     // 'estatus' => 'PENDIENTE DE REVISIÓN',
+                    'estado_id' => $estadoInicial?->id,
+                    'estado_tecnico_id' => $estadoTecnicoInicial?->id,
+
+
                 ]);
 
                 \Log::info('Intentando crear pantalla', [
                     'orden_servicio' => $this->folio,
                     'marca'          => $this->marca,
                     'pulgadas'       => $this->modelo,
-                    'estado_id'      => 8, // anteriormente 153 por eso marcaba error
+                    'estado_id'      => $estadoInicial?->id, // anteriormente 153 por eso marcaba error (En espera)
                     'recibido_con'   => $this->observacion,
                 ]);
 
@@ -189,7 +197,7 @@ class CrearOrden extends Component
                     'orden_servicio' => $this->folio,
                     'marca'          => $this->marca,
                     'pulgadas'       => $this->modelo,
-                    'estado_id'      => 8, //anteriormente 153
+                    'estado_id'      => $estadoInicial?->id, //anteriormente 153
                     'recibido_con'   => $this->observacion,
                     'detectado'      => null,
                     'fecha_registro' => now(),
@@ -203,11 +211,11 @@ class CrearOrden extends Component
 
             \Log::error('Error creando orden/pantalla', [
                 'message' => $e->getMessage(),
-                'file'    => $e->getFile(),
-                'line'    => $e->getLine(),
-                'trace'   => $e->getTraceAsString(),
+                'file' => $e->getFile(),
+                'line' => $e->getLine(),
             ]);
 
+            dd($e->getMessage());
             session()->flash('error', 'Ocurrió un error al crear la orden.');
 
             return;

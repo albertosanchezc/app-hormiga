@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Models\EstadoTecnico;
+
 class Orden extends Model
 {
     //
@@ -41,6 +42,7 @@ class Orden extends Model
         'comprado_por',
         'fecha_compra',
         'estatus',
+        'estado_id',
         'estado_tecnico_id',
         'observacion_extra',
         'numero_orden',
@@ -86,5 +88,10 @@ class Orden extends Model
     public function estadoTecnico()
     {
         return $this->belongsTo(EstadoTecnico::class, 'estado_tecnico_id');
+    }
+    
+    public function estado()
+    {
+        return $this->belongsTo(Estado::class, 'estado_id');
     }
 }

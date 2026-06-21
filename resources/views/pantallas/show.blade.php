@@ -459,7 +459,7 @@
 
                     <div class="estatus-container">
                         <p>Estado Administrativo</p>
-                        <p class="estatus">{{ $orden->estatus }}</p>
+                        <p class="estatus">{{ $orden->estado?->nombre }}</p>
                     </div>
                 </div>
 
