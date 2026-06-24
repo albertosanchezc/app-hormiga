@@ -11,9 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('ordenes', function (Blueprint $table) {
-            //
-            $table->foreignId('estado_id')->nullable()->constrained('estados');
+        Schema::create('tipo_servicios', function (Blueprint $table) {
+            $table->id();
+            $table->string('nombre')->unique();
+            $table->boolean('activo')->default(true);
+            $table->timestamps();
         });
     }
 
@@ -22,9 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('ordenes', function (Blueprint $table) {
-            //
-            
-        });
+        Schema::dropIfExists('tipo_servicios');
     }
 };
