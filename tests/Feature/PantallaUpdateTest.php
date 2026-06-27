@@ -40,6 +40,8 @@ class PantallaUpdateTest extends TestCase
             'modelo' => 'ABC123',
             'numero_servicio' => 'NS123',
             'tipo_servicio' => 'CARGO A CLIENTE',
+            'tipo_servicio_id' => '78',
+
             'observacion' => 'Observación inicial',
         ]);
 

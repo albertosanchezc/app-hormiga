@@ -35,6 +35,8 @@ class OrdenUpdateTest extends TestCase
             'modelo' => '55H6B',
             'numero_servicio' => '55G151278H00112',
             'tipo_servicio' => 'CARGO A CLIENTE',
+            'tipo_servicio_id' => '78',
+
             'comprado_por' => 'Cliente',
             'fecha_compra' => null,
             'lugar_compra' => null,
