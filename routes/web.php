@@ -8,6 +8,7 @@ use App\Http\Controllers\OrdenController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PantallaController;
 use App\Http\Controllers\TipoServicioController;
+use App\Http\Controllers\UserController;
 
 Route::get('/', function () {
     return view('pantallas.index'); // o la vista que uses para index
@@ -46,6 +47,16 @@ Route::post('/tipos_servicios', [TipoServicioController::class, 'store'])->middl
 Route::get('/tipos_servicios/{tipo_servicio}/edit', [TipoServicioController::class, 'edit'])->middleware(['auth', 'verified', 'rol.admin'])->name('tipos_servicios.edit');
 Route::put('/tipos_servicios/{tipo_servicio}', [TipoServicioController::class, 'update'])->middleware(['auth', 'verified', 'rol.admin'])->name('tipos_servicios.update');
 Route::delete('/tipos_servicios/{tipo_servicio}', [TipoServicioController::class, 'destroy'])->middleware(['auth', 'verified', 'rol.admin'])->name('tipos_servicios.destroy');
+
+
+Route::get('/usuarios', [UserController::class, 'index'])->middleware(['auth', 'verified', 'rol.admin'])->name('usuarios.index');
+Route::get('/usuarios/create', [UserController::class, 'create'])->middleware(['auth', 'verified', 'rol.admin'])->name('usuarios.create');
+Route::post('/usuarios', [UserController::class, 'store'])->middleware(['auth', 'verified', 'rol.admin'])->name('usuarios.store');
+Route::get('/usuarios/{usuario}/edit', [UserController::class, 'edit'])->middleware(['auth', 'verified', 'rol.admin'])->name('usuarios.edit');
+Route::put('/usuarios/{usuario}', [UserController::class, 'update'])->middleware(['auth', 'verified', 'rol.admin'])->name('usuarios.update');
+Route::delete('/usuarios/{usuario}', [UserController::class, 'destroy'])->middleware(['auth', 'verified', 'rol.admin'])->name('usuarios.destroy');
+
+
 
 
 

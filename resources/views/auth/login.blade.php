@@ -39,9 +39,9 @@
                 Olvidaste tu Password?
             </x-link>
 
-            <x-link :href="route('register')">
+            {{-- <x-link :href="route('register')">
                 Crear Cuenta
-            </x-link>
+            </x-link> --}}
         </div>
 
         <x-primary-button class="ms-3">
