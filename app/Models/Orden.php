@@ -89,9 +89,14 @@ class Orden extends Model
     {
         return $this->belongsTo(EstadoTecnico::class, 'estado_tecnico_id');
     }
-    
+
     public function estado()
     {
         return $this->belongsTo(Estado::class, 'estado_id');
+    }
+
+    public function tipoServicio()
+    {
+        return $this->belongsTo(TipoServicio::class, 'tipo_servicio_id');
     }
 }

@@ -82,7 +82,8 @@ class TipoServicioController extends Controller
         ]);
 
         $tipo_servicio->update([
-            'nombre' => $request->nombre
+            'nombre' => $request->nombre,
+            'activo' => $request->activo ?? 0,
         ]);
 
         return redirect()->route('tipos_servicios.index');

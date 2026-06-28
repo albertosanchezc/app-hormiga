@@ -51,17 +51,23 @@
             </div>
             <div class="numero_servicio-container">
                 <label for="numero_servicio">Núm. De Serie</label>
-                <input id="numero_servicio" type="text" name="numero_servicio" class="numero_servicio" wire:model="numero_servicio">
+                <input id="numero_servicio" type="text" name="numero_servicio" class="numero_servicio"
+                    wire:model="numero_servicio">
                 @error('numero_servicio')
                     <span class="error">{{ $message }}</span>
                 @enderror
             </div>
             <div class="tipo_servicio-container">
                 <label for="tipo_servicio">Tipo de Servicio</label>
-                <input id="tipo_servicio" type="text" name="tipo_servicio" class="tipo_servicio" wire:model="tipo_servicio">
-                @error('tipo_servicio')
-                    <span class="error">{{ $message }}</span>
-                @enderror
+                <select id="tipo_servicio" class="text-center" wire:model="tipo_servicio_id">
+                    <option value="">Seleccione un tipo de servicio</option>
+
+                    @foreach ($tiposServiciosDisponibles as $tipo_servicio)
+                        <option value="{{ $tipo_servicio->id }}">
+                            {{ $tipo_servicio->nombre }}
+                        </option>
+                    @endforeach
+                </select>
 
             </div>
         </div>
@@ -69,7 +75,8 @@
         <div class="datos-compra-container">
             <div class="comprado_por-container">
                 <label for="comprado_por">Comprado Por</label>
-                <input id="comprado_por" type="text" name="comprado_por" class="comprado_por" wire:model="comprado_por">
+                <input id="comprado_por" type="text" name="comprado_por" class="comprado_por"
+                    wire:model="comprado_por">
                 @error('comprado_por')
                     <span class="error">{{ $message }}</span>
                 @enderror
@@ -77,7 +84,8 @@
 
             <div class="fecha_compra-container">
                 <label for="fecha_compra">Fecha de Compra</label>
-                <input id="fecha_compra" type="date" name="fecha_compra" class="fecha_compra" wire:model="fecha_compra">
+                <input id="fecha_compra" type="date" name="fecha_compra" class="fecha_compra"
+                    wire:model="fecha_compra">
                 @error('fecha_compra')
                     <span class="error">{{ $message }}</span>
                 @enderror
@@ -85,7 +93,8 @@
 
             <div class="lugar_compra-container">
                 <label for="lugar_compra">Lugar de Compra</label>
-                <input id="lugar_compra" type="text" name="lugar_compra" class="lugar_compra" wire:model="lugar_compra">
+                <input id="lugar_compra" type="text" name="lugar_compra" class="lugar_compra"
+                    wire:model="lugar_compra">
                 @error('lugar_compra')
                     <span class="error">{{ $message }}</span>
                 @enderror

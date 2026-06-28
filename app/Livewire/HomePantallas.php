@@ -17,6 +17,7 @@ class HomePantallas extends Component
     public $numero_servicio;
     public $estado_id;
     public $estado_tecnico_id;
+    public $tipo_servicio_id;
     public $cliente;
     public $equipo;
     public $telefono;
@@ -34,7 +35,7 @@ class HomePantallas extends Component
     protected $listeners = ['terminosBusqueda' => 'buscar']; // Escucha por el evento terminosBusqueda y ejecuta buscar de este componente
 
 
-    public function buscar($orden_servicio, $marca, $modelo, $numero_servicio, $estado_id, $estado_tecnico_id, $cliente, $equipo, $telefono, $domicilio, $tipo_servicio, $detectado, $numero_orden, $recibido_con, $accion_correctiva, $desde, $hasta)
+    public function buscar($orden_servicio, $marca, $modelo, $numero_servicio, $estado_id, $estado_tecnico_id, $tipo_servicio_id, $cliente, $equipo, $telefono, $domicilio, $tipo_servicio, $detectado, $numero_orden, $recibido_con, $accion_correctiva, $desde, $hasta)
     {
         $this->orden_servicio = $orden_servicio;
         $this->marca = $marca;
@@ -42,6 +43,7 @@ class HomePantallas extends Component
         $this->numero_servicio = $numero_servicio;
         $this->estado_id = $estado_id;
         $this->estado_tecnico_id = $estado_tecnico_id;
+        $this->tipo_servicio_id = $tipo_servicio_id;
         $this->cliente = $cliente;
         $this->equipo = $equipo;
         $this->telefono = $telefono;
@@ -114,6 +116,27 @@ class HomePantallas extends Component
                             $q->whereNull('estado_tecnico_id');
                         } else {
                             $q->where('estado_tecnico_id', $this->estado_tecnico_id);
+                        }
+                    }
+                });
+            })
+
+                        ->when(true, function ($query) {
+                // dd([
+                //     'estado_id' => $this->estado_id,
+                //     'tipo' => gettype($this->estado_id),
+                //     'estado_tecnico_id' => $this->estado_tecnico_id,
+                //     'tipo' => gettype($this->estado_tecnico_id),
+                // ]);
+                $query->whereHas('orden', function ($q) {
+                    // ADMINISTRATIVO
+                    if ($this->tipo_servicio_id !== null && $this->tipo_servicio_id !== '') {
+
+                        if ((string)$this->tipo_servicio_id === '0' || $this->tipo_servicio_id === 0) {
+
+                            $q->whereNull('tipo_servicio_id');
+                        } else {
+                            $q->where('tipo_servicio_id', $this->tipo_servicio_id);
                         }
                     }
                 });

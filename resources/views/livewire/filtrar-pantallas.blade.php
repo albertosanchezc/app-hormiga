@@ -58,27 +58,47 @@
                 class="border p-2 rounded w-full" id="numero_servicio">
         </div>
 
-        <div class="block">
+        {{-- <div class="block">
             <label class="block mb-1 text-sm text-gray-700 uppercase font-bold " for="tipo_servicio">Tipo de Servicio
             </label>
             <input type="text" wire:model="tipo_servicio" placeholder="Buscar por Tipo de Servicio"
                 class="border p-2 rounded w-full" id="tipo_servicio">
+        </div> --}}
+
+        <div class="block">
+            <label class="block mb-1 text-sm text-gray-700 uppercase font-bold" for="tipo_servicio">
+
+                Tipo de Servicio
+
+            </label>
+
+            <select wire:model="tipo_servicio_id" id="tipo_servicio" class="border p-2 rounded w-full text-center">
+
+                <option value="">
+                    -- Todos los tipos --
+                </option>
+
+                <option value="0">
+                    PENDIENTE DE ACTUALIZAR Tipo de Servicio
+                </option>
+
+                @foreach ($tipos_servicios as $tipo_servicio)
+                    <option value="{{ $tipo_servicio->id }}">
+                        {{ $tipo_servicio->nombre }}
+                    </option>
+                @endforeach
+            </select>
         </div>
 
 
         <div class="block">
-            <label
-                class="block mb-1 text-sm text-gray-700 uppercase font-bold"
-                for="estado">
+            <label class="block mb-1 text-sm text-gray-700 uppercase font-bold" for="estado">
 
                 Estado Administrativo
 
             </label>
 
-            <select
-                wire:model="estado_id"
-                id="estado"
-                class="border p-2 rounded w-full text-center">
+            <select wire:model="estado_id" id="estado" class="border p-2 rounded w-full text-center">
 
                 <option value="">
                     -- Todos los estados --
@@ -88,29 +108,22 @@
                     PENDIENTE DE ACTUALIZAR ESTADO
                 </option>
 
-                @foreach($estados as $estado)
-
-                <option value="{{ $estado->id }}">
-                    {{ $estado->nombre }}
-                </option>
-
+                @foreach ($estados as $estado)
+                    <option value="{{ $estado->id }}">
+                        {{ $estado->nombre }}
+                    </option>
                 @endforeach
             </select>
         </div>
 
-                <div class="block">
-            <label
-                class="block mb-1 text-sm text-gray-700 uppercase font-bold"
-                for="estado_tecnico">
+        <div class="block">
+            <label class="block mb-1 text-sm text-gray-700 uppercase font-bold" for="estado_tecnico">
 
                 Estado Técnico
 
             </label>
 
-            <select
-                wire:model="estado_tecnico_id"
-                id="estado"
-                class="border p-2 rounded w-full text-center">
+            <select wire:model="estado_tecnico_id" id="estado" class="border p-2 rounded w-full text-center">
 
                 <option value="">
                     -- Todos los estados --
@@ -120,12 +133,10 @@
                     PENDIENTE DE ACTUALIZAR ESTADO
                 </option>
 
-                @foreach($estados_tecnicos as $estadoT)
-
-                <option value="{{ $estadoT->id }}">
-                    {{ $estadoT->nombre }}
-                </option>
-
+                @foreach ($estados_tecnicos as $estadoT)
+                    <option value="{{ $estadoT->id }}">
+                        {{ $estadoT->nombre }}
+                    </option>
                 @endforeach
             </select>
         </div>
@@ -133,43 +144,43 @@
         <div class="block">
             <label class="block mb-1 text-sm text-gray-700 uppercase font-bold " for="detectado">Diagnostico
             </label>
-            <input type="text" wire:model="detectado" placeholder="Buscar por Diagnostico" class="border p-2 rounded w-full"
-                id="detectado">
+            <input type="text" wire:model="detectado" placeholder="Buscar por Diagnostico"
+                class="border p-2 rounded w-full" id="detectado">
         </div>
 
         <div class="block">
             <label class="block mb-1 text-sm text-gray-700 uppercase font-bold " for="numero_orden"># De Orden C.S.A.
             </label>
-            <input type="text" wire:model="numero_orden" placeholder="Ej. Recicle" class="border p-2 rounded w-full font-bold"
-                id="numero_orden">
+            <input type="text" wire:model="numero_orden" placeholder="Ej. Recicle"
+                class="border p-2 rounded w-full font-bold" id="numero_orden">
         </div>
 
         <div class="block">
-            <label class="block mb-1 text-sm text-gray-700 uppercase font-bold " for="recibido_con">Observaciones / Recido Con
+            <label class="block mb-1 text-sm text-gray-700 uppercase font-bold " for="recibido_con">Observaciones /
+                Recido Con
             </label>
-            <input type="text" wire:model="recibido_con" placeholder="Buscar por Recibido Con" class="border p-2 rounded w-full"
-                id="recibido_con">
+            <input type="text" wire:model="recibido_con" placeholder="Buscar por Recibido Con"
+                class="border p-2 rounded w-full" id="recibido_con">
         </div>
 
         <div class="block">
-            <label class="block mb-1 text-sm text-gray-700 uppercase font-bold " for="accion_correctiva">Acción Correctiva
+            <label class="block mb-1 text-sm text-gray-700 uppercase font-bold " for="accion_correctiva">Acción
+                Correctiva
             </label>
-            <input type="text" wire:model="accion_correctiva" placeholder="Buscar por Acción Correctiva" class="border p-2 rounded w-full font-bold"
-                id="accion_correctiva">
+            <input type="text" wire:model="accion_correctiva" placeholder="Buscar por Acción Correctiva"
+                class="border p-2 rounded w-full font-bold" id="accion_correctiva">
         </div>
 
         <div class="block">
             <label class="block mb-1 text-sm text-gray-700 uppercase font-bold " for="desde">Desde:
             </label>
-            <input type="date" wire:model="desde" class="border p-2 rounded w-full"
-                id="desde">
+            <input type="date" wire:model="desde" class="border p-2 rounded w-full" id="desde">
         </div>
 
         <div class="block">
             <label class="block mb-1 text-sm text-gray-700 uppercase font-bold " for="hasta">Hasta:
             </label>
-            <input type="date" wire:model="hasta" class="border p-2 rounded w-full"
-                id="hasta">
+            <input type="date" wire:model="hasta" class="border p-2 rounded w-full" id="hasta">
         </div>
 
 

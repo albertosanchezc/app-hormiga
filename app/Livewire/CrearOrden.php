@@ -6,6 +6,7 @@ use App\Models\Estado;
 use App\Models\EstadoTecnico;
 use App\Models\Orden;
 use App\Models\Pantalla;
+use App\Models\TipoServicio;
 use App\Models\User;
 use App\Notifications\OrdenCreadaNotification;
 use Carbon\Carbon;
@@ -28,6 +29,7 @@ class CrearOrden extends Component
     public $modelo;
     public $numero_servicio;
     public $tipo_servicio;
+    public $tipo_servicio_id;
     public $comprado_por;
     public $fecha_compra;
     public $lugar_compra;
@@ -43,13 +45,14 @@ class CrearOrden extends Component
         'modelo' => 'required|string|max:100',
         'numero_servicio' => 'required|string|max:100',
         'tipo_servicio' => 'required|string|max:100',
+        'tipo_servicio_id' => 'required|integer|exists:tipo_servicios,id',
         'comprado_por' => 'nullable|string|max:100',
         'fecha_compra' => 'nullable|date',
         'lugar_compra' => 'nullable|string|max:100',
         'observacion' => 'required|string',
     ];
 
-
+    public $tiposServiciosDisponibles = [];
     public function mount()
     {
         $lastOrden = Orden::latest('id')->first();
@@ -62,6 +65,11 @@ class CrearOrden extends Component
         // =========================================
         // REINCIDENCIA / DUPLICAR DATOS
         // =========================================
+
+        $this->tiposServiciosDisponibles = TipoServicio::activos()
+            ->select('id', 'nombre')
+            ->orderBy('nombre')
+            ->get();
 
         if (request()->has('duplicar')) {
 
@@ -161,7 +169,7 @@ class CrearOrden extends Component
             $estadoInicial = Estado::where('nombre', 'EN ESPERA')->first();
             $estadoTecnicoInicial = EstadoTecnico::where('nombre', 'PENDIENTE DE REVISIÓN')->first();
 
-            $orden = DB::transaction(function () use ($fechaCompra, $now,$estadoInicial,$estadoTecnicoInicial) {
+            $orden = DB::transaction(function () use ($fechaCompra, $now, $estadoInicial, $estadoTecnicoInicial) {
                 $orden = Orden::create([
                     'orden_servicio' => $this->folio,
                     'fecha_entrada'  => $now,
