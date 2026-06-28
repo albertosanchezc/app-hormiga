@@ -7,6 +7,7 @@ use App\Http\Controllers\NotificacionController;
 use App\Http\Controllers\OrdenController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PantallaController;
+use App\Http\Controllers\TipoServicioController;
 
 Route::get('/', function () {
     return view('pantallas.index'); // o la vista que uses para index
@@ -39,6 +40,12 @@ Route::get('/estados_tecnicos/{estado_tecnico}/edit', [EstadoTecnicoController::
 Route::put('/estados_tecnicos/{estado_tecnico}', [EstadoTecnicoController::class, 'update'])->middleware(['auth', 'verified', 'rol.admin'])->name('estados_tecnicos.update');
 Route::delete('/estados_tecnicos/{estado_tecnico}', [EstadoTecnicoController::class, 'destroy'])->middleware(['auth', 'verified', 'rol.admin'])->name('estados_tecnicos.destroy');
 
+Route::get('/tipos_servicios', [TipoServicioController::class, 'index'])->middleware(['auth', 'verified', 'rol.admin'])->name('tipos_servicios.index');
+Route::get('tipos_servicios/create', [TipoServicioController::class, 'create'])->middleware(['auth', 'verified', 'rol.admin'])->name('tipos_servicios.create');
+Route::post('/tipos_servicios', [TipoServicioController::class, 'store'])->middleware(['auth', 'verified', 'rol.admin'])->name('tipos_servicios.store');
+Route::get('/tipos_servicios/{tipo_servicio}/edit', [TipoServicioController::class, 'edit'])->middleware(['auth', 'verified', 'rol.admin'])->name('tipos_servicios.edit');
+Route::put('/tipos_servicios/{tipo_servicio}', [TipoServicioController::class, 'update'])->middleware(['auth', 'verified', 'rol.admin'])->name('tipos_servicios.update');
+Route::delete('/tipos_servicios/{tipo_servicio}', [TipoServicioController::class, 'destroy'])->middleware(['auth', 'verified', 'rol.admin'])->name('tipos_servicios.destroy');
 
 
 

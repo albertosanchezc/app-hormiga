@@ -28,6 +28,10 @@
                             <x-nav-link :href="route('estados_tecnicos.index')" :active="request()->routeIs('estados_tecnicos')">
                                 {{ __('Estados Técnicos') }}
                             </x-nav-link>
+
+                            <x-nav-link :href="route('tipos_servicios.index')" :active="request()->routeIs('tipos_servicios')">
+                                {{ __('Tipos de Servicios') }}
+                            </x-nav-link>
                         @endif
                     @endauth
 
@@ -128,8 +132,14 @@
                         <x-responsive-nav-link :href="route('estados_tecnicos.index')">
                             {{ __('Estados Téncicos') }}
                         </x-responsive-nav-link>
+
+                        <x-responsive-nav-link :href="route('tipos_servicios.index')">
+                            {{ __('Tipos de Servicios') }}
+                        </x-responsive-nav-link>
                     @endif
                 @endauth
+
+
 
                 <!-- Authentication -->
                 <form method="POST" action="{{ route('logout') }}">
