@@ -53,7 +53,8 @@ class Orden extends Model
         'lugar_compra',
         'costo_adicional',
         'created_at',
-        'updated_at'
+        'updated_at',
+        'tipo_servicio_id'
     ];
 
     public function ingresosPrevios()

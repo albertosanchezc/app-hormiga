@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use Carbon\Carbon;
 use App\Models\Orden;
+use App\Models\TipoServicio;
 use Livewire\Component;
 
 class OrdenUpdate extends Component
@@ -17,12 +18,15 @@ class OrdenUpdate extends Component
     public $marca;
     public $modelo;
     public $numero_servicio;
-    public $tipo_servicio;
     public $comprado_por;
     public $fecha_compra;
     public $lugar_compra;
     public $observacion;
     public $hora;
+
+
+    public $tipo_servicio_id;
+    public $tiposServiciosDisponibles = [];
 
     public function mount($orden)
     {
@@ -31,7 +35,6 @@ class OrdenUpdate extends Component
             $orden = Orden::findOrFail($orden);
         }
         $this->orden = $orden;
-
         // Inicializar propiedades individuales
         foreach (
             [
@@ -42,16 +45,21 @@ class OrdenUpdate extends Component
                 'marca',
                 'modelo',
                 'numero_servicio',
-                'tipo_servicio',
                 'comprado_por',
                 'fecha_compra',
                 'lugar_compra',
                 'observacion',
-                'hora'
+                'hora',
+                'tipo_servicio_id'
             ] as $prop
         ) {
             $this->$prop = $orden->$prop;
         }
+
+        $this->tiposServiciosDisponibles = TipoServicio::where('activo', true)
+            ->orWhere('id', $this->tipo_servicio_id)
+            ->orderBy('nombre')
+            ->get();
     }
 
     public function save()
@@ -64,7 +72,7 @@ class OrdenUpdate extends Component
             'marca' => 'required|string|max:100',
             'modelo' => 'required|string|max:100',
             'numero_servicio' => 'required|string|max:100',
-            'tipo_servicio' => 'required|string|max:100',
+            'tipo_servicio_id' => 'required|exists:tipo_servicios,id',
             'comprado_por' => 'nullable|string|max:100',
             'fecha_compra' => 'nullable|date',
             'lugar_compra' => 'nullable|string|max:100',
@@ -77,7 +85,7 @@ class OrdenUpdate extends Component
         }
 
         $validated = $this->validate($rules);
-
+        $tipo_servicio = TipoServicio::findOrFail($this->tipo_servicio_id);
         $this->orden->update([
             'cliente' => $validated['cliente'],
             'telefono' => $validated['telefono'],
@@ -86,7 +94,6 @@ class OrdenUpdate extends Component
             'marca' => $validated['marca'],
             'modelo' => $validated['modelo'],
             'numero_servicio' => $validated['numero_servicio'],
-            'tipo_servicio' => $validated['tipo_servicio'],
             'comprado_por' => $validated['comprado_por'] ?? null,
             'fecha_compra' => $validated['fecha_compra'] ?? null,
             'lugar_compra' => $validated['lugar_compra'] ?? null,
@@ -94,6 +101,8 @@ class OrdenUpdate extends Component
 
             // 🔥 importante
             'hora' => $this->hora,
+            'tipo_servicio_id' => $tipo_servicio->id,
+            'tipo_servicio' => $tipo_servicio->nombre,
         ]);
         // return redirect()->route('pantallas.index');
     }

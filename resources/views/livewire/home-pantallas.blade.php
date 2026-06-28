@@ -155,7 +155,7 @@
 
                             <div>
                                 <span class="font-semibold text-gray-700">Tipo de Servicio:</span>
-                                {{ $pantalla->orden?->tipo_servicio ?? 'N/A' }}
+                                {{ $pantalla->orden->tipoServicio?->nombre ?? 'N/A' }}
                             </div>
 
                             <div>

@@ -324,7 +324,7 @@
             </div>
             <div class="tipo_servicio-container">
                 <p>Tipo de Servicio:</p>
-                <p class="tipo_servicio">{{ $orden->tipo_servicio }}</p>
+                <p class="tipo_servicio">{{ $orden->tipoServicio?->nombre }}</p>
             </div>
         </div>
 

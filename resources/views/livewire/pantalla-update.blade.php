@@ -43,7 +43,7 @@
         <div class="datos-equipo-container">
             <div class="tipo_servicio-container">
                 <label for="tipo_servicio">Tipo de Servicio</label>
-                <input id="tipo_servicio" type="text" value="{{ $pantalla->orden->tipo_servicio }}" readonly disabled>
+                <input id="tipo_servicio" type="text" value="{{ $pantalla->orden->tipoServicio->nombre }}" readonly disabled>
             </div>
             <div class="equipo-container">
                 <label for="equipo">Equipo</label>

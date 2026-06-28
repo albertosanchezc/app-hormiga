@@ -44,8 +44,7 @@ class CrearOrden extends Component
         'marca' => 'required|string|max:100',
         'modelo' => 'required|string|max:100',
         'numero_servicio' => 'required|string|max:100',
-        'tipo_servicio' => 'required|string|max:100',
-        'tipo_servicio_id' => 'required|integer|exists:tipo_servicios,id',
+        'tipo_servicio_id' => 'required|exists:tipo_servicios,id',
         'comprado_por' => 'nullable|string|max:100',
         'fecha_compra' => 'nullable|date',
         'lugar_compra' => 'nullable|string|max:100',
@@ -66,10 +65,7 @@ class CrearOrden extends Component
         // REINCIDENCIA / DUPLICAR DATOS
         // =========================================
 
-        $this->tiposServiciosDisponibles = TipoServicio::activos()
-            ->select('id', 'nombre')
-            ->orderBy('nombre')
-            ->get();
+
 
         if (request()->has('duplicar')) {
 
@@ -88,6 +84,7 @@ class CrearOrden extends Component
                 $this->modelo = $ordenOriginal->modelo;
                 $this->numero_servicio = $ordenOriginal->numero_servicio;
                 $this->tipo_servicio = $ordenOriginal->tipo_servicio;
+                $this->tipo_servicio_id = $ordenOriginal->tipo_servicio_id;
                 $this->comprado_por = $ordenOriginal->comprado_por;
                 $this->fecha_compra = $ordenOriginal->fecha_compra;
                 $this->lugar_compra = $ordenOriginal->lugar_compra;
@@ -98,6 +95,17 @@ class CrearOrden extends Component
                     $ordenOriginal->orden_servicio;
             }
         }
+
+        // <-- Cargar el catálogo AL FINAL
+        $this->tiposServiciosDisponibles = TipoServicio::where(function ($query) {
+            $query->where('activo', true);
+
+            if ($this->tipo_servicio_id) {
+                $query->orWhere('id', $this->tipo_servicio_id);
+            }
+        })
+            ->orderBy('nombre')
+            ->get();
     }
 
 
@@ -170,6 +178,7 @@ class CrearOrden extends Component
             $estadoTecnicoInicial = EstadoTecnico::where('nombre', 'PENDIENTE DE REVISIÓN')->first();
 
             $orden = DB::transaction(function () use ($fechaCompra, $now, $estadoInicial, $estadoTecnicoInicial) {
+                $tipoServicio = TipoServicio::findOrFail($this->tipo_servicio_id);
                 $orden = Orden::create([
                     'orden_servicio' => $this->folio,
                     'fecha_entrada'  => $now,
@@ -181,7 +190,8 @@ class CrearOrden extends Component
                     'marca'          => $this->marca,
                     'modelo'         => $this->modelo,
                     'numero_servicio' => $this->numero_servicio,
-                    'tipo_servicio'  => $this->tipo_servicio,
+                    'tipo_servicio_id' => $tipoServicio->id,
+                    'tipo_servicio'    => $tipoServicio->nombre,
                     'comprado_por'   => $this->comprado_por,
                     'fecha_compra'   => $fechaCompra,
                     'lugar_compra'   => $this->lugar_compra,

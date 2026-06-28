@@ -72,8 +72,20 @@
                 <input type="text" wire:model="numero_servicio" class="numero_servicio">
             </div>
             <div class="tipo_servicio-container">
-                <p>Tipo de Servicio:</p>
-                <input type="text" wire:model="tipo_servicio" class="tipo_servicio">
+                <label for="tipo_servicio">Tipo de Servicio:</label>
+                {{-- <p>Tipo de Servicio:</p> --}}
+                <select id="tipo_servicio" wire:model="tipo_servicio_id">
+                    <option value="">Seleccione un tipo de servicio</option>
+
+                    @foreach ($tiposServiciosDisponibles as $tipoServicio)
+                        <option value="{{ $tipoServicio->id }}">
+                            {{ $tipoServicio->nombre }}
+                            @unless ($tipoServicio->activo)
+                                (Inactivo)
+                            @endunless
+                        </option>
+                    @endforeach
+                </select>
             </div>
         </div>
 
