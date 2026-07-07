@@ -120,7 +120,8 @@ class CrearOrden extends Component
             'marca' => 'required|string|max:100',
             'modelo' => 'required|string|max:100',
             'numero_servicio' => 'required|string|max:100',
-            'tipo_servicio' => 'required|string|max:100',
+            // 'tipo_servicio' => 'required|string|max:100',
+            'tipo_servicio_id' => 'required|exists:tipo_servicios,id',
             'comprado_por' => 'nullable|string|max:100',
             'fecha_compra' => 'nullable|date_format:Y-m-d', // 🔥 clave
             'lugar_compra' => 'nullable|string|max:100',
