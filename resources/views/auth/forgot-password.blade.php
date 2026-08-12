@@ -22,9 +22,6 @@
                 Iniciar Sesión
             </x-link>
 
-            <x-link :href="route('register')">
-                Crear Cuenta
-            </x-link>
         </div>
 
 

@@ -488,11 +488,12 @@
             </p>
 
             <div class="footer-logos">
-                <img src="{{ asset('img/logo-samsung.jpg') }}" alt="Samsung">
-                <img src="{{ asset('img/logo-daewoo.png') }}" alt="Daewoo">
-                <img src="{{ asset('img/logo-hisense.png') }}" alt="Hisense">
-                <img src="{{ asset('img/logo-elektra.png') }}" alt="Elektra">
-
+                <img src="{{ $esPdf ? public_path('img/logo-hisense.png') : asset('img/logo-hisense.png') }}" alt="Logo Hisense">
+                <img src="{{ $esPdf ? public_path('img/logo-winia.png') : asset('img/logo-winia.png') }} " alt="Logo Winia">
+                <img src="{{ $esPdf ? public_path('img/logo-oster.png') : asset('img/logo-oster.png') }} " alt="Logo Oster">
+                <img src="{{ $esPdf ? public_path('img/logo-elektra.png') : asset('img/logo-elektra.png') }}" alt="Logo Elektra">
+                <img src="{{ $esPdf ? public_path('img/logo-garanplus.png') : asset('img/logo-garanplus.png') }} " alt="Logo Garanplus">
+                <img src="{{ $esPdf ? public_path('img/logo-tcl.png') : asset('img/logo-tcl.png') }} " alt="Logo TCL">
             </div>
         </div>
     </div>

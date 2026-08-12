@@ -157,7 +157,7 @@
         .fecha_compra,
         .lugar_compra,
         .domicilio-container .domicilio,
-        .telefono-container .telefono{
+        .telefono-container .telefono {
             border: 2px solid;
             padding: 0.5rem 1rem;
         }
@@ -234,7 +234,8 @@
 
         .datosLaHormiga {
             font-size: 15px;
-            .titulo-header{
+
+            .titulo-header {
                 font-size: 2rem;
             }
         }
@@ -254,7 +255,7 @@
 
             <div class="header-center">
                 <p class="datosLaHormiga">
-                    <span class="titulo-header">Hoja de Entrada</span><br>
+                    <span class="titulo-header">Recepción de Equipo</span><br>
                     <span>Prol. Tecnológico No. 96-A esq. Orlando Col. La Florida CP. 76150</span><br>
                     <span>Santiago de Querétaro, Qro.</span><br>
                     <span>Tels: (442) 215-95-99 y (442) 419 -27-45</span><br>
@@ -364,14 +365,12 @@
             <p class="parrafo-footer">-No nos hacemos responsables por pérdida de información en su equipo electrónico
                 favor de realizar su respaldo correspondiente antes de que ingrese a servicio su equipo</p>
             <div class="footer-logos">
-                <img src="{{ $esPdf ? public_path('img/logo-samsung.jpg') : asset('img/logo-samsung.jpg') }}"
-                    alt="Logo">
-                <img src="{{ $esPdf ? public_path('img/logo-daewoo.png') : asset('img/logo-daewoo.png') }}"
-                    alt="Logo">
-                <img src="{{ $esPdf ? public_path('img/logo-hisense.png') : asset('img/logo-hisense.png') }}"
-                    alt="Logo">
-                <img src="{{ $esPdf ? public_path('img/logo-elektra.png') : asset('img/logo-elektra.png') }}"
-                    alt="Logo">
+                <img src="{{ $esPdf ? public_path('img/logo-hisense.png') : asset('img/logo-hisense.png') }}" alt="Logo Hisense">
+                <img src="{{ $esPdf ? public_path('img/logo-winia.png') : asset('img/logo-winia.png') }} " alt="Logo Winia">
+                <img src="{{ $esPdf ? public_path('img/logo-oster.png') : asset('img/logo-oster.png') }} " alt="Logo Oster">
+                <img src="{{ $esPdf ? public_path('img/logo-elektra.png') : asset('img/logo-elektra.png') }}" alt="Logo Elektra">
+                <img src="{{ $esPdf ? public_path('img/logo-garanplus.png') : asset('img/logo-garanplus.png') }} " alt="Logo Garanplus">
+                <img src="{{ $esPdf ? public_path('img/logo-tcl.png') : asset('img/logo-tcl.png') }} " alt="Logo TCL">
 
             </div>
         </div>
