@@ -432,16 +432,21 @@
                 <p class="tecnico">{{ $pantalla->tecnico }}</p>
             </div>
 
+            @if(!empty($orden->comprado_por))
             <div class="comprado_por-container">
                 <p>Comprado Por</p>
                 <p class="comprado_por">{{ $orden->comprado_por }}</p>
             </div>
+            @endif
 
+            @if(!empty($orden->fecha_compra))
             <div class="fecha_compra-container">
                 <p>Fecha de Compra</p>
-                <p class="fecha_compra">{{ $orden->fecha_compra?->translatedFormat('l d \\d\\e F \\d\\e Y') ?? '' }}
+                <p class="fecha_compra">
+                    {{ $orden->fecha_compra->translatedFormat('l d \\d\\e F \\d\\e Y') }}
                 </p>
             </div>
+            @endif
         </div>
 
         <div class="entrega-container">
