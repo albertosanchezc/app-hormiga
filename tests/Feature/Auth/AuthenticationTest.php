@@ -8,6 +8,15 @@ test('login screen can be rendered', function () {
     $response->assertStatus(200);
 });
 
+test('rendering the login screen again keeps the current csrf token', function () {
+    $this->get('/login')->assertOk();
+    $token = session()->token();
+
+    $this->get('/login')->assertOk();
+
+    expect(session()->token())->toBe($token);
+});
+
 test('users can authenticate using the login screen', function () {
     $user = User::factory()->create();
 

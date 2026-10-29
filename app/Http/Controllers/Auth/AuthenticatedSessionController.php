@@ -22,8 +22,6 @@ class AuthenticatedSessionController extends Controller
             return redirect()->route('pantallas.index');
         }
 
-        request()->session()->regenerateToken();
-
             return response()
         ->view('auth.login')
         ->header('Cache-Control', 'no-cache, no-store, must-revalidate')
