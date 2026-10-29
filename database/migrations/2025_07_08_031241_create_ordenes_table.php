@@ -26,7 +26,7 @@ return new class extends Migration
             $table->string('cliente', 99)->nullable();
             $table->string('equipo', 50)->nullable();
             $table->string('marca', 21)->nullable();
-            $table->string('modelo', 25)->nullable();
+            $table->string('modelo', 50)->nullable();
             $table->string('tipo_servicio', 23)->nullable();
             $table->string('observacion', 254)->nullable();
 

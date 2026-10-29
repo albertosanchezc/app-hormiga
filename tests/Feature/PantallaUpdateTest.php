@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Orden;
 use App\Models\Pantalla;
 use App\Models\Estado;
+use App\Models\TipoServicio;
 
 class PantallaUpdateTest extends TestCase
 {
@@ -27,6 +28,11 @@ class PantallaUpdateTest extends TestCase
             'nombre' => 'PENDIENTE'
         ]);
 
+        $tipoServicio = TipoServicio::create([
+            'nombre' => 'CARGO A CLIENTE',
+            'activo' => true,
+        ]);
+
         // Orden
         $this->orden = Orden::create([
             'orden_servicio' => 12345,
@@ -40,7 +46,7 @@ class PantallaUpdateTest extends TestCase
             'modelo' => 'ABC123',
             'numero_servicio' => 'NS123',
             'tipo_servicio' => 'CARGO A CLIENTE',
-            'tipo_servicio_id' => '78',
+            'tipo_servicio_id' => $tipoServicio->id,
 
             'observacion' => 'Observación inicial',
         ]);
@@ -118,6 +124,24 @@ class PantallaUpdateTest extends TestCase
             'entregado' => null,
             'fecha_reparacion' => null,
             'fecha_trabajo' => null,
+        ]);
+    }
+
+    public function test_actualiza_fecha_entregado_sin_cambiar_estado()
+    {
+        $this->orden->update(['estado_id' => 1]);
+
+        Livewire::test(\App\Livewire\PantallaUpdate::class, [
+            'pantalla' => $this->pantalla,
+        ])
+            ->set('entregado', '2025-10-29')
+            ->call('save')
+            ->assertHasNoErrors()
+            ->assertRedirect(route('pantallas.index'));
+
+        $this->assertDatabaseHas('ordenes', [
+            'id' => $this->orden->id,
+            'entregado' => '2025-10-29 00:00:00',
         ]);
     }
 }

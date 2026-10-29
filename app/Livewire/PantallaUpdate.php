@@ -84,7 +84,7 @@ class PantallaUpdate extends Component
             'tecnico' => 'nullable|string|max:255',
             'accion_correctiva' => 'nullable|string|max:500',
             'costo_reparacion' => 'nullable|numeric',
-            'estado_id' => 'nullable|string|max:100',
+            'estado_id' => 'nullable|integer',
         ]);
 
         // Convertir cadenas vacías en null
